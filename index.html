@@ -726,21 +726,24 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, doc, setDoc, getDoc, addDoc, deleteDoc, serverTimestamp, getDocs, onSnapshot, query, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { getAuth, signInAnonymously, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getFirestore, collection, doc, setDoc, getDoc, addDoc, deleteDoc, serverTimestamp, getDocs, onSnapshot, query, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyBM0B_u9LOMJIWUcwjRq3IlQHhkkp",
-            authDomain: "doctor-915f7.firebaseapp.com",
-            projectId: "doctor-915f7",
-            storageBucket: "doctor-915f7.firebasestorage.app",
-            messagingSenderId: "197555106104",
-            appId: "1:197555106104:web:4e30f661b0672999d291cd"
-        };
+    apiKey: "AIzaSyBM0B_u9LOMJIWUcwjRq3IlQHhkkp-8Wlg",
+    authDomain: "doctor-915f7.firebaseapp.com",
+    projectId: "doctor-915f7",
+    storageBucket: "doctor-915f7.firebasestorage.app",
+    messagingSenderId: "197555106104",
+    appId: "1:197555106104:web:4e30f661b0672999d291cd",
+    measurementId: "G-42WF4REB7V"
+};
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const db = getFirestore(app);
         const ADMIN_EMAIL = 'mslmalmyaly223@gmail.com';
         
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'doctor-app';
