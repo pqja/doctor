@@ -115,7 +115,6 @@
         .loader-spin { border-top-color: #6366f1; animation: spinner 1s linear infinite; }
         @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        /* Admin square buttons grid - 3 per row, all same size */
         .admin-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -136,7 +135,6 @@
             font-weight: 900; font-size: 0.72rem; line-height: 1.15;
         }
         
-        /* Doctors grid: 3 per row */
         .doctors-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -149,7 +147,6 @@
             border-radius: 1.25rem;
         }
         
-        /* Services grid: 4 per row */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -165,7 +162,6 @@
             font-size: 0.65rem; line-height: 1.1;
         }
         
-        /* Admin free-page header - smaller */
         .admin-header {
             padding-top: 1.1rem; padding-bottom: 1rem;
             padding-left: 1rem; padding-right: 1rem;
@@ -177,7 +173,6 @@
             border-radius: 9999px;
         }
         
-        /* Responsive for laptops/desktops */
         @media (min-width: 900px) {
             #app-container { max-width: 900px; }
         }
@@ -191,7 +186,7 @@
 </head>
 <body class="text-slate-800 antialiased">
 
-    <!-- شاشة البداية المتحركة -->
+    <!-- Loader -->
     <div id="loader" class="fixed inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-900 dark:to-slate-800 z-[999] flex flex-col items-center justify-center transition-opacity duration-700">
         <div class="relative w-32 h-32 mb-6 animate-float">
             <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-3xl rotate-12 opacity-20 blur-xl"></div>
@@ -204,7 +199,7 @@
         <div class="mt-8 w-12 h-12 rounded-full border-4 border-indigo-100 dark:border-slate-700 loader-spin"></div>
     </div>
 
-    <!-- شاشة الترحيب وتسجيل الدخول للمرضى -->
+    <!-- Welcome -->
     <div id="welcome-screen" class="fixed inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 z-[100] hidden flex-col items-center justify-center p-6 text-white">
         <div class="glass-card bg-white/10 border-white/20 rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl backdrop-blur-xl">
             <div class="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner animate-float">
@@ -219,7 +214,7 @@
         </div>
     </div>
 
-    <!-- الحاوية الرئيسية للتطبيق -->
+    <!-- Main App -->
     <div id="app-container" class="hidden">
         <header class="pt-5 pb-3 px-6 flex justify-between items-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl sticky top-0 z-40 border-b border-gray-200/50 dark:border-slate-800 shadow-sm">
             <div>
@@ -233,25 +228,19 @@
 
         <main id="main-content" class="p-6 relative">
             
-            <!-- Tab 1: حجز موعد (رحلة المريض) -->
+            <!-- Tab Book -->
             <div id="tab-book" class="page-transition">
-                
-                <!-- الخطوة 0: اختيار الدكتور -->
                 <div id="step-0-doctors" class="page-transition">
                     <h3 class="text-lg font-black mb-4 dark:text-white flex items-center gap-2"><i class="fa-solid fa-user-doctor text-indigo-500"></i> قائمة الأطباء</h3>
-                    <div id="patient-doctors-list" class="doctors-grid">
-                        <!-- تملأ برمجياً -->
-                    </div>
+                    <div id="patient-doctors-list" class="doctors-grid"></div>
                 </div>
 
-                <!-- الخطوات 1 و 2: الخدمات والأوقات -->
                 <div id="step-1-and-2" class="hidden page-transition">
                     <button id="btn-back-to-doctors" class="mb-4 text-sm font-bold text-indigo-500 flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/20 px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-arrow-right"></i> عودة للأطباء</button>
                     
                     <h3 class="text-lg font-black mb-3 dark:text-white">الخدمات المتاحة</h3>
                     <div id="services-grid" class="services-grid mb-4"></div>
                     
-                    <!-- زر نتائج عمل الدكتور -->
                     <button onclick="openDoctorGallery()" id="btn-view-results" class="w-full mb-6 glass-card border border-purple-200 dark:border-purple-900 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-slate-800 dark:to-slate-800 p-4 rounded-2xl flex justify-between items-center active:scale-95 transition-transform shadow-sm">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center text-purple-600"><i class="fa-solid fa-images"></i></div>
@@ -278,11 +267,11 @@
                     </button>
                 </div>
 
-                <!-- الخطوة 2.5: تحديد السن المصاب -->
+                <!-- Tooth -->
                 <div id="step-tooth" class="hidden page-transition mt-2">
                     <button id="btn-back-step2" class="mb-4 text-sm font-bold text-indigo-500 flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/20 px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-arrow-right"></i> عودة للوقت</button>
                     <h3 class="text-lg font-black mb-2 dark:text-white">تحديد السن المصاب</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 font-bold mb-4">يرجى النظر للصورة وكتابة اسم/رقم السن المراد علاجه</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 font-bold mb-4">يرجى النظر للصورة وكتابة رمز السن واختيار الفك</p>
                     
                     <div class="bg-white dark:bg-slate-800 p-2 rounded-3xl shadow-sm border border-gray-200 dark:border-slate-700 mb-6">
                         <img id="global-tooth-img" src="" alt="خريطة الأسنان" class="w-full h-auto rounded-2xl hidden">
@@ -292,15 +281,21 @@
                         </div>
                     </div>
                     
-                    <label class="block text-sm font-black text-slate-700 dark:text-gray-200 mb-2">اسم أو رقم السن (اختياري)</label>
-                    <input type="text" id="patient-tooth-name" class="w-full p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-indigo-500 outline-none transition-all font-bold" placeholder="مثال: الضرس العلوي الأيمن / رقم 6">
+                    <label class="block text-sm font-black text-slate-700 dark:text-gray-200 mb-2">رمز أو اسم السن</label>
+                    <input type="text" id="patient-tooth-name" class="w-full p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-indigo-500 outline-none transition-all font-bold mb-4" placeholder="مثال: L1 أو R6">
+
+                    <label class="block text-sm font-black text-slate-700 dark:text-gray-200 mb-2">الفك</label>
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <button type="button" onclick="selectJaw('علوي')" id="jaw-upper" class="jaw-btn p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 font-black dark:text-white active:scale-95 transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-arrow-up"></i> الفك العلوي</button>
+                        <button type="button" onclick="selectJaw('سفلي')" id="jaw-lower" class="jaw-btn p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 font-black dark:text-white active:scale-95 transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-arrow-down"></i> الفك السفلي</button>
+                    </div>
                     
-                    <button id="btn-next-step4" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-black py-4 rounded-2xl mt-8 shadow-lg active:scale-95 transition-all">
-                        التالي (بيانات المريض)
+                    <button id="btn-next-step4" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-black py-4 rounded-2xl mt-4 shadow-lg active:scale-95 transition-all">
+                        تحديد والمتابعة
                     </button>
                 </div>
 
-                <!-- الخطوة 3: بيانات المريض وتأكيد الحجز -->
+                <!-- Patient Data -->
                 <div id="step-3" class="hidden page-transition mt-2">
                     <button id="btn-back-tooth" class="mb-4 text-sm font-bold text-indigo-500 flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/20 px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-arrow-right"></i> عودة</button>
                     
@@ -333,14 +328,12 @@
                 </div>
             </div>
 
-            <!-- Tab 2: الحجوزات -->
+            <!-- My Bookings -->
             <div id="tab-bookings" class="hidden page-transition">
-                <div id="my-bookings-container" class="space-y-4">
-                    <!-- تملأ برمجياً -->
-                </div>
+                <div id="my-bookings-container" class="space-y-4"></div>
             </div>
 
-            <!-- Tab 3: الإعدادات -->
+            <!-- Settings -->
             <div id="tab-settings" class="hidden page-transition">
                 <div class="space-y-4">
                     <button id="btn-toggle-theme" class="w-full flex items-center justify-between p-4 glass-card rounded-2xl active:scale-95 transition-transform">
@@ -356,7 +349,7 @@
                     <button id="btn-admin-panel" onclick="openFreePage('page-admin')" class="hidden w-full flex items-center justify-between p-4 glass-card rounded-2xl bg-gradient-to-r from-slate-800 to-slate-900 text-white shadow-xl active:scale-95 transition-transform mt-8 border-none">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-xl backdrop-blur-sm"><i class="fa-solid fa-crown text-yellow-400"></i></div>
-                            <span class="font-black text-lg">لوحة الإدارة الشاملة</span>
+                            <span class="font-black text-lg" id="admin-panel-label">لوحة الإدارة الشاملة</span>
                         </div>
                         <i class="fa-solid fa-chevron-left opacity-50"></i>
                     </button>
@@ -379,7 +372,6 @@
             </div>
         </main>
 
-        <!-- Navigation Bottom -->
         <nav class="bottom-nav pb-6 pt-3 px-8 flex justify-between items-center rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
             <button class="nav-item flex-1 flex flex-col items-center justify-center gap-1.5 text-indigo-600 transition-colors" data-target="tab-book">
                 <i class="fa-solid fa-house-medical text-2xl mb-1"></i>
@@ -396,7 +388,7 @@
         </nav>
     </div>
 
-    <!-- Modal: Success Booking -->
+    <!-- Success Modal -->
     <div id="modal-booking-success" class="fixed inset-0 bg-slate-900/60 z-[300] hidden flex-col items-center justify-center p-6 backdrop-blur-md transition-opacity duration-300 opacity-0">
         <div class="bg-white dark:bg-slate-800 p-8 rounded-[2rem] max-w-sm w-full text-center shadow-2xl transform scale-95 transition-transform duration-300 border border-white/20" id="modal-booking-content">
             <div class="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-green-50 dark:border-slate-700 animate-float">
@@ -414,7 +406,7 @@
         </div>
     </div>
 
-    <!-- Modal: Rating -->
+    <!-- Rating Modal -->
     <div id="modal-rating" class="fixed inset-0 bg-slate-900/80 z-[400] hidden items-center justify-center p-6 backdrop-blur-md">
         <div class="bg-white dark:bg-slate-800 p-8 rounded-[2rem] max-w-sm w-full text-center shadow-2xl relative border border-white/10">
             <button onclick="closeRatingModal()" class="absolute top-4 left-4 w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center dark:text-white hover:bg-gray-200 transition-colors"><i class="fa-solid fa-times"></i></button>
@@ -435,18 +427,16 @@
         </div>
     </div>
 
-    <!-- Modal: Doctor Gallery (Before & After) -->
+    <!-- Gallery Modal -->
     <div id="modal-gallery" class="fixed inset-0 bg-slate-900/90 z-[300] hidden flex-col p-6 backdrop-blur-xl overflow-y-auto">
         <div class="max-w-md w-full mx-auto relative min-h-full flex flex-col pt-10 pb-10">
             <button onclick="closeDoctorGallery()" class="absolute top-0 right-0 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white backdrop-blur-md active:scale-95"><i class="fa-solid fa-times text-xl"></i></button>
             <h3 class="text-2xl font-black text-white mb-6 text-center">نتائج عمل الدكتور</h3>
-            <div id="gallery-container" class="space-y-6 flex-1">
-                <!-- صور قبل وبعد تملأ برمجياً -->
-            </div>
+            <div id="gallery-container" class="space-y-6 flex-1"></div>
         </div>
     </div>
 
-    <!-- Modal: Admin Login -->
+    <!-- Admin Login Modal -->
     <div id="modal-admin-login" class="fixed inset-0 bg-slate-900/80 z-[500] hidden items-center justify-center p-6 backdrop-blur-md">
         <div class="bg-white dark:bg-slate-800 p-8 rounded-[2rem] max-w-sm w-full shadow-2xl relative border border-white/10">
             <button onclick="closeAdminLogin()" class="absolute top-4 left-4 w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center dark:text-white hover:bg-gray-200"><i class="fa-solid fa-times"></i></button>
@@ -458,22 +448,20 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
+    <!-- Toast -->
     <div id="toast" class="fixed top-10 left-1/2 transform -translate-x-1/2 bg-slate-800 dark:bg-white text-white dark:text-slate-800 px-6 py-4 rounded-2xl shadow-2xl z-[9999] opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-3 font-bold border border-slate-700 dark:border-gray-200 min-w-[250px] justify-center">
         <span id="toast-icon" class="text-xl"></span>
         <span id="toast-text"></span>
     </div>
 
-    <!-- ============================================== -->
-    <!-- لوحة تحكم الإدارة (صفحات متفرعة) -->
-    <!-- ============================================== -->
+    <!-- ============ ADMIN PAGES ============ -->
     
-    <!-- القائمة الرئيسية للإدارة -->
+    <!-- Admin Main Panel -->
     <div id="page-admin" class="free-page">
         <header class="admin-header flex items-center justify-between bg-slate-900 text-white rounded-b-2xl shadow-xl">
             <div class="flex items-center gap-3">
                 <button onclick="closeFreePage('page-admin')" class="back-btn bg-white/10 active:scale-95 backdrop-blur-sm"><i class="fa-solid fa-arrow-right"></i></button>
-                <h2 class="tracking-wide">لوحة الإدارة</h2>
+                <h2 class="tracking-wide" id="admin-panel-title">لوحة الإدارة</h2>
             </div>
             <i class="fa-solid fa-chart-line text-lg opacity-50"></i>
         </header>
@@ -489,7 +477,7 @@
                     <span class="label dark:text-white">المرضى الدائمين</span>
                 </button>
                 
-                <button onclick="openFreePage('admin-doctors')" class="admin-tile glass-card active:scale-95 transition-transform">
+                <button onclick="openFreePage('admin-doctors')" id="tile-doctors" class="admin-tile glass-card active:scale-95 transition-transform">
                     <div class="icon-box bg-blue-100 dark:bg-blue-900/30 text-blue-600"><i class="fa-solid fa-user-doctor"></i></div>
                     <span class="label dark:text-white">الأطباء</span>
                 </button>
@@ -519,6 +507,16 @@
                     <span class="label dark:text-white">التقييمات</span>
                 </button>
                 
+                <button onclick="openFreePage('admin-finance')" class="admin-tile glass-card active:scale-95 transition-transform">
+                    <div class="icon-box bg-green-100 dark:bg-green-900/30 text-green-600"><i class="fa-solid fa-money-bill-wave"></i></div>
+                    <span class="label dark:text-white">المالية</span>
+                </button>
+
+                <button onclick="openFreePage('admin-managers')" id="tile-managers" class="admin-tile glass-card active:scale-95 transition-transform">
+                    <div class="icon-box bg-orange-100 dark:bg-orange-900/30 text-orange-600"><i class="fa-solid fa-user-shield"></i></div>
+                    <span class="label dark:text-white">رفع مشرفين</span>
+                </button>
+                
                 <button onclick="openFreePage('admin-stats')" class="admin-tile glass-card active:scale-95 transition-transform">
                     <div class="icon-box bg-pink-100 dark:bg-pink-900/30 text-pink-600"><i class="fa-solid fa-chart-pie"></i></div>
                     <span class="label dark:text-white">الإحصائيات</span>
@@ -532,7 +530,30 @@
         </div>
     </div>
 
-    <!-- إضافة أطباء -->
+    <!-- Managers (Owner only) -->
+    <div id="admin-managers" class="free-page">
+        <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
+            <button onclick="closeFreePage('admin-managers')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
+            <h2>رفع مشرفين (أطباء)</h2>
+        </header>
+        <div class="p-6 flex-1 overflow-y-auto">
+            <div class="glass-card p-5 rounded-3xl mb-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-black mb-2 dark:text-white">اختر الطبيب:</label>
+                    <select id="manager-doctor-select" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-orange-500"></select>
+                </div>
+                <div>
+                    <label class="block text-sm font-black mb-2 dark:text-white">البريد الإلكتروني للدخول:</label>
+                    <input type="email" id="manager-email-input" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-orange-500 dir-ltr text-left" placeholder="doctor@example.com">
+                </div>
+                <button id="btn-save-manager" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-all">حفظ المشرف</button>
+            </div>
+            <h3 class="font-black mb-3 dark:text-white text-lg">المشرفين الحاليين:</h3>
+            <div id="managers-list" class="space-y-3"></div>
+        </div>
+    </div>
+
+    <!-- Doctors Admin -->
     <div id="admin-doctors" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
             <button onclick="closeFreePage('admin-doctors')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
@@ -549,27 +570,58 @@
         </div>
     </div>
 
-    <!-- الإحصائيات المتقدمة -->
+    <!-- Finance -->
+    <div id="admin-finance" class="free-page">
+        <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
+            <button onclick="closeFreePage('admin-finance')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
+            <h2>المالية اليومية</h2>
+        </header>
+        <div class="p-6 flex-1 overflow-y-auto">
+            <div id="finance-owner-filter" class="mb-4">
+                <label class="block text-sm font-black mb-2 dark:text-white">اختر الطبيب:</label>
+                <select id="finance-doctor-select" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-green-500"></select>
+            </div>
+            <div id="finance-date-box" class="mb-6">
+                <label class="block text-sm font-black mb-2 dark:text-white">التاريخ:</label>
+                <input type="date" id="finance-date" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none">
+            </div>
+
+            <div class="bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl p-6 text-white shadow-xl mb-6 relative overflow-hidden">
+                <i class="fa-solid fa-money-bill-wave absolute -left-4 -bottom-4 text-8xl opacity-10"></i>
+                <h3 class="font-bold text-green-100 mb-1">إجمالي المبلغ</h3>
+                <div class="text-4xl font-black tracking-wider" id="finance-total">0</div>
+                <div class="text-xs font-bold text-green-100 mt-2" id="finance-count">0 حجز</div>
+            </div>
+
+            <h3 class="font-black mb-3 dark:text-white text-lg">تفاصيل الحجوزات:</h3>
+            <div id="finance-list" class="space-y-3"></div>
+        </div>
+    </div>
+
+    <!-- Stats -->
     <div id="admin-stats" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
             <button onclick="closeFreePage('admin-stats')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
-            <h2>الإحصائيات المتقدمة</h2>
+            <h2>الإحصائيات</h2>
         </header>
         <div class="p-6 flex-1 overflow-y-auto space-y-6">
             <div class="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
                 <i class="fa-solid fa-users absolute -left-4 -bottom-4 text-8xl opacity-10"></i>
-                <h3 class="font-bold text-indigo-100 mb-1">إجمالي المرضى (المستخدمين)</h3>
+                <h3 class="font-bold text-indigo-100 mb-1">إجمالي المرضى</h3>
                 <div class="text-5xl font-black tracking-wider" id="stat-total-users">0</div>
             </div>
-            
-            <h3 class="font-black text-lg dark:text-white border-b border-gray-200 dark:border-slate-700 pb-2">إجمالي الحجوزات لكل طبيب</h3>
-            <div id="stat-doctors-list" class="space-y-4">
-                <!-- تملأ برمجياً -->
+            <div class="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+                <i class="fa-solid fa-calendar-check absolute -left-4 -bottom-4 text-8xl opacity-10"></i>
+                <h3 class="font-bold text-emerald-100 mb-1">إجمالي الحجوزات</h3>
+                <div class="text-5xl font-black tracking-wider" id="stat-total-bookings">0</div>
             </div>
+            
+            <h3 class="font-black text-lg dark:text-white border-b border-gray-200 dark:border-slate-700 pb-2">الحجوزات لكل طبيب</h3>
+            <div id="stat-doctors-list" class="space-y-4"></div>
         </div>
     </div>
 
-    <!-- عنوان وموقع العيادة -->
+    <!-- Address -->
     <div id="admin-address" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
             <button onclick="closeFreePage('admin-address')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
@@ -582,37 +634,35 @@
                     <textarea id="setting-address-text" rows="2" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500 resize-none" placeholder="مثال: بغداد، المنصور، شارع 14 رمضان..."></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-black mb-2 dark:text-white text-teal-600 flex items-center gap-2"><i class="fa-solid fa-link"></i> رابط خرائط جوجل (عالي الدقة):</label>
-                    <p class="text-xs text-gray-500 mb-2 font-bold leading-relaxed">اذهب لخرائط جوجل، حدد موقع العيادة بدقة، اضغط مشاركة ثم انسخ الرابط وضعه هنا.</p>
+                    <label class="block text-sm font-black mb-2 dark:text-white text-teal-600 flex items-center gap-2"><i class="fa-solid fa-link"></i> رابط خرائط جوجل:</label>
                     <input type="url" id="setting-address-url" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-teal-500 dir-ltr text-left" placeholder="https://maps.app.goo.gl/...">
                 </div>
-                <button id="btn-save-address" class="w-full bg-teal-500 hover:bg-teal-600 text-white font-black py-4 rounded-2xl shadow-[0_10px_25px_rgba(20,184,166,0.3)] mt-4 active:scale-95 transition-all">حفظ الموقع</button>
+                <button id="btn-save-address" class="w-full bg-teal-500 hover:bg-teal-600 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-all">حفظ الموقع</button>
                 <button id="btn-delete-address" class="w-full bg-red-50 dark:bg-red-900/20 text-red-500 font-black py-4 rounded-2xl active:scale-95 transition-all border border-red-100 dark:border-red-900/30">حذف الموقع</button>
             </div>
         </div>
     </div>
 
-    <!-- نشر الصور (معرض + أسنان) -->
+    <!-- Gallery -->
     <div id="admin-gallery" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
             <button onclick="closeFreePage('admin-gallery')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
             <h2>نشر الصور</h2>
         </header>
         <div class="p-6 flex-1 overflow-y-auto">
-            <!-- Tabs -->
             <div class="flex bg-gray-200 dark:bg-slate-800 rounded-2xl p-1 mb-6">
                 <button id="tab-btn-results" class="flex-1 py-3 text-sm font-black rounded-xl bg-white dark:bg-slate-700 text-indigo-600 dark:text-white shadow-sm transition-all">نتائج المرضى (قبل وبعد)</button>
                 <button id="tab-btn-tooth" class="flex-1 py-3 text-sm font-black rounded-xl text-gray-500 dark:text-gray-400 transition-all">صورة أسماء الأسنان</button>
             </div>
 
-            <!-- Tab Content: Before & After -->
             <div id="gallery-results-tab" class="space-y-6">
                 <div class="glass-card p-5 rounded-3xl">
-                    <label class="block text-sm font-black mb-3 dark:text-white">اختر الطبيب:</label>
-                    <select id="gallery-doctor-select" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500 mb-5"></select>
+                    <div id="gallery-doctor-wrapper">
+                        <label class="block text-sm font-black mb-3 dark:text-white">اختر الطبيب:</label>
+                        <select id="gallery-doctor-select" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500 mb-5"></select>
+                    </div>
                     
                     <div class="grid grid-cols-2 gap-4 mb-5">
-                        <!-- Before -->
                         <div>
                             <label class="block text-[11px] font-black mb-2 text-center text-gray-500 dark:text-gray-400">صورة (قبل)</label>
                             <label class="cursor-pointer block w-full aspect-square bg-gray-50 dark:bg-slate-900 border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-2xl flex flex-col items-center justify-center hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors overflow-hidden">
@@ -621,40 +671,37 @@
                                 <div id="placeholder-before" class="text-gray-400 flex flex-col items-center"><i class="fa-solid fa-camera text-2xl mb-1"></i><span class="text-[10px] font-bold">رفع</span></div>
                             </label>
                         </div>
-                        <!-- After -->
                         <div>
                             <label class="block text-[11px] font-black mb-2 text-center text-gray-500 dark:text-gray-400">صورة (بعد)</label>
                             <label class="cursor-pointer block w-full aspect-square bg-gray-50 dark:bg-slate-900 border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-2xl flex flex-col items-center justify-center hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors overflow-hidden">
                                 <input type="file" id="upload-after" accept="image/*" class="hidden">
-                                <img id="preview-after" src="" class="hidden w-full h-full object-cover">
+                                <img id="preview-after" src="" hidden class="hidden w-full h-full object-cover">
                                 <div id="placeholder-after" class="text-indigo-400 flex flex-col items-center"><i class="fa-solid fa-camera text-2xl mb-1"></i><span class="text-[10px] font-bold">رفع</span></div>
                             </label>
                         </div>
                     </div>
-                    <button id="btn-save-gallery" class="w-full bg-slate-900 dark:bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-transform flex justify-center items-center gap-2">نشر الحالة</button>
+                    <button id="btn-save-gallery" class="w-full bg-slate-900 dark:bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-transform">نشر الحالة</button>
                 </div>
-                <h3 class="font-black dark:text-white border-b border-gray-200 dark:border-slate-700 pb-2">الحالات المنشورة (للطبيب المحدد)</h3>
+                <h3 class="font-black dark:text-white border-b border-gray-200 dark:border-slate-700 pb-2">الحالات المنشورة:</h3>
                 <div id="admin-gallery-list" class="space-y-4"></div>
             </div>
 
-            <!-- Tab Content: Tooth Image -->
             <div id="gallery-tooth-tab" class="hidden space-y-6">
                 <div class="glass-card p-5 rounded-3xl text-center">
-                    <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">ارفع صورة عالية الدقة توضح أسماء أو أرقام الأسنان. ستظهر هذه الصورة لجميع المرضى عند خطوة تحديد السن المصاب.</p>
-                    
+                    <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">ارفع صورة عالية الدقة توضح أسماء أو أرقام الأسنان.</p>
                     <label class="cursor-pointer block w-full max-w-xs mx-auto aspect-square bg-gray-50 dark:bg-slate-900 border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-3xl flex flex-col items-center justify-center hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors overflow-hidden mb-6">
                         <input type="file" id="upload-tooth-img" accept="image/*" class="hidden">
                         <img id="preview-tooth-img" src="" class="hidden w-full h-full object-contain p-2">
                         <div id="placeholder-tooth-img" class="text-gray-400 flex flex-col items-center"><i class="fa-solid fa-cloud-arrow-up text-4xl mb-2"></i><span class="text-sm font-bold">اضغط لرفع الصورة</span></div>
                     </label>
-                    <button id="btn-save-tooth-img" class="w-full bg-teal-500 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-transform">اعتماد الصورة للجميع</button>
+                    <button id="btn-save-tooth-img" class="w-full bg-teal-500 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-transform">اعتماد الصورة</button>
                     <button id="btn-delete-tooth-img" class="w-full bg-red-50 dark:bg-red-900/20 text-red-500 font-black py-4 rounded-2xl active:scale-95 transition-all border border-red-100 dark:border-red-900/30 mt-3">حذف الصورة</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- حجوزات اليوم -->
+    <!-- Today Bookings -->
     <div id="admin-today" class="free-page">
         <header class="admin-header flex items-center justify-between bg-slate-900 text-white rounded-b-2xl shadow-md z-10 sticky top-0">
             <div class="flex items-center gap-3">
@@ -664,12 +711,18 @@
             <div class="text-[10px] font-bold text-indigo-200 bg-white/10 px-2 py-1 rounded-lg border border-white/10" id="today-date-display"></div>
         </header>
         <div class="p-6 flex-1 overflow-y-auto bg-gray-50 dark:bg-slate-900">
-            <select id="filter-today-doctor" class="w-full p-4 rounded-2xl border-2 border-indigo-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500 mb-6 shadow-sm"></select>
+            <div id="today-doctor-filter-wrapper">
+                <select id="filter-today-doctor" class="w-full p-4 rounded-2xl border-2 border-indigo-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500 mb-4 shadow-sm"></select>
+            </div>
+            <div class="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-4 text-white shadow-lg mb-4 flex justify-between items-center">
+                <span class="font-bold text-sm">المجموع اليومي</span>
+                <span class="font-black text-xl" id="today-total-money">0</span>
+            </div>
             <div id="admin-today-list" class="space-y-4"></div>
         </div>
     </div>
 
-    <!-- الحجوزات الدائمية (جميع المرضى) -->
+    <!-- All Patients -->
     <div id="admin-all-patients" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10 sticky top-0">
             <button onclick="closeFreePage('admin-all-patients')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
@@ -677,7 +730,9 @@
         </header>
         <div class="p-4 flex-1 overflow-y-auto bg-gray-50 dark:bg-slate-900">
             <div class="sticky top-0 z-10 bg-gray-50 dark:bg-slate-900 pb-4 pt-2">
-                <select id="filter-all-doctor" class="w-full p-4 rounded-2xl border-2 border-emerald-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none mb-3 shadow-sm"></select>
+                <div id="all-doctor-filter-wrapper">
+                    <select id="filter-all-doctor" class="w-full p-4 rounded-2xl border-2 border-emerald-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none mb-3 shadow-sm"></select>
+                </div>
                 <div class="relative">
                     <i class="fa-solid fa-search absolute right-4 top-4 text-gray-400"></i>
                     <input type="text" id="search-patient" class="w-full p-4 pr-12 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-emerald-500 shadow-sm" placeholder="ابحث باسم المريض...">
@@ -690,7 +745,7 @@
         </div>
     </div>
 
-    <!-- الخدمات -->
+    <!-- Services -->
     <div id="admin-services" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
             <button onclick="closeFreePage('admin-services')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
@@ -698,21 +753,25 @@
         </header>
         <div class="p-6 flex-1 overflow-y-auto">
             <div class="glass-card p-5 rounded-3xl mb-6">
-                <label class="block text-sm font-black mb-2 dark:text-white">اختر الطبيب:</label>
-                <select id="service-doctor-select" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500 mb-4"></select>
-                
-                <label class="block text-sm font-black mb-2 dark:text-white mt-2">اسم الخدمة الجديدة:</label>
-                <div class="flex gap-2">
-                    <input type="text" id="new-service-input" class="flex-1 p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500" placeholder="مثال: حشوة جذر">
-                    <button id="btn-add-service" class="bg-indigo-600 text-white px-6 rounded-2xl font-black shadow-md active:scale-95"><i class="fa-solid fa-plus"></i></button>
+                <div id="service-doctor-wrapper">
+                    <label class="block text-sm font-black mb-2 dark:text-white">اختر الطبيب:</label>
+                    <select id="service-doctor-select" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500 mb-4"></select>
                 </div>
+                
+                <label class="block text-sm font-black mb-2 dark:text-white mt-2">اسم الخدمة:</label>
+                <input type="text" id="new-service-input" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500 mb-3" placeholder="مثال: حشوة جذر">
+
+                <label class="block text-sm font-black mb-2 dark:text-white">السعر (دينار):</label>
+                <input type="number" id="new-service-price" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500 mb-4" placeholder="مثال: 25000" min="0">
+                
+                <button id="btn-add-service" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black shadow-md active:scale-95 flex items-center justify-center gap-2"><i class="fa-solid fa-plus"></i> إضافة خدمة</button>
             </div>
-            <h3 class="font-black mb-4 dark:text-white text-lg">الخدمات المتوفرة للطبيب المختار</h3>
+            <h3 class="font-black mb-4 dark:text-white text-lg">الخدمات المتوفرة</h3>
             <div id="admin-services-list" class="grid gap-3"></div>
         </div>
     </div>
 
-    <!-- أوقات الدوام -->
+    <!-- Times -->
     <div id="admin-times" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
             <button onclick="closeFreePage('admin-times')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
@@ -720,7 +779,7 @@
         </header>
         <div class="p-6 flex-1 overflow-y-auto">
             <div class="glass-card p-6 rounded-3xl space-y-5">
-                <div>
+                <div id="time-doctor-wrapper">
                     <label class="block text-sm font-black mb-2 dark:text-white">اختر الطبيب للتعديل:</label>
                     <select id="time-doctor-select" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500"></select>
                 </div>
@@ -728,7 +787,7 @@
                 <div>
                     <label class="block text-sm font-black mb-2 dark:text-white">يبدأ الحجز الساعة:</label>
                     <div class="flex gap-2">
-                        <input type="number" id="setting-start-time" min="1" max="12" class="w-2/3 p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white outline-none font-bold text-center" placeholder="مثال: 4">
+                        <input type="number" id="setting-start-time" min="1" max="12" class="w-2/3 p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white outline-none font-bold text-center">
                         <select id="setting-start-ampm" class="w-1/3 p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white outline-none font-black text-center">
                             <option value="AM">ص</option><option value="PM" selected>م</option>
                         </select>
@@ -737,7 +796,7 @@
                 <div>
                     <label class="block text-sm font-black mb-2 dark:text-white">ينتهي الحجز الساعة:</label>
                     <div class="flex gap-2">
-                        <input type="number" id="setting-end-time" min="1" max="12" class="w-2/3 p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white outline-none font-bold text-center" placeholder="مثال: 9">
+                        <input type="number" id="setting-end-time" min="1" max="12" class="w-2/3 p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white outline-none font-bold text-center">
                         <select id="setting-end-ampm" class="w-1/3 p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white outline-none font-black text-center">
                             <option value="AM">ص</option><option value="PM" selected>م</option>
                         </select>
@@ -745,22 +804,22 @@
                 </div>
                 <div>
                     <label class="block text-sm font-black mb-2 dark:text-white">الحد الأقصى للمرضى (لكل ساعة):</label>
-                    <input type="number" id="setting-max-per-slot" min="1" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold text-center outline-none focus:border-amber-500" placeholder="مثال: 6">
+                    <input type="number" id="setting-max-per-slot" min="1" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold text-center outline-none focus:border-amber-500">
                 </div>
-                <button id="btn-save-times" class="w-full bg-amber-500 text-white font-black py-4 rounded-2xl shadow-lg mt-4 active:scale-95 transition-all text-lg">حفظ أوقات الطبيب</button>
+                <button id="btn-save-times" class="w-full bg-amber-500 text-white font-black py-4 rounded-2xl shadow-lg mt-4 active:scale-95 transition-all text-lg">حفظ</button>
             </div>
         </div>
     </div>
 
-    <!-- العطل -->
+    <!-- Holidays -->
     <div id="admin-holidays" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
             <button onclick="closeFreePage('admin-holidays')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
-            <h2>أيام العطل (لكل طبيب)</h2>
+            <h2>أيام العطل</h2>
         </header>
         <div class="p-6 flex-1 overflow-y-auto">
             <div class="glass-card p-5 rounded-3xl mb-6 space-y-4">
-                <div>
+                <div id="holiday-doctor-wrapper">
                     <label class="block text-sm font-black mb-2 dark:text-white">اختر الطبيب:</label>
                     <select id="holiday-doctor-select" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-indigo-500"></select>
                 </div>
@@ -769,28 +828,30 @@
                     <input type="date" id="holiday-date" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none">
                 </div>
                 <div>
-                    <label class="block text-sm font-black mb-2 dark:text-white">ملاحظة (سبب العطلة):</label>
+                    <label class="block text-sm font-black mb-2 dark:text-white">ملاحظة:</label>
                     <input type="text" id="holiday-note" placeholder="مثال: عطلة رسمية" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none">
                 </div>
-                <button id="btn-add-holiday" class="w-full bg-red-500 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-all">حفظ العطلة للطبيب</button>
+                <button id="btn-add-holiday" class="w-full bg-red-500 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-all">حفظ العطلة</button>
             </div>
-            <h3 class="font-black mb-3 dark:text-white text-lg">أيام العطل المسجلة للطبيب:</h3>
+            <h3 class="font-black mb-3 dark:text-white text-lg">أيام العطل المسجلة:</h3>
             <div id="holidays-list" class="space-y-3"></div>
         </div>
     </div>
 
-    <!-- التقييمات -->
+    <!-- Ratings -->
     <div id="admin-ratings" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10 sticky top-0">
             <button onclick="closeFreePage('admin-ratings')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
             <h2>تقييمات المرضى</h2>
         </header>
         <div class="p-6 flex-1 overflow-y-auto">
-            <select id="filter-rating-doctor" class="w-full p-4 rounded-2xl border-2 border-yellow-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none mb-6 shadow-sm"></select>
+            <div id="rating-doctor-wrapper">
+                <select id="filter-rating-doctor" class="w-full p-4 rounded-2xl border-2 border-yellow-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none mb-6 shadow-sm"></select>
+            </div>
             
             <div class="text-center mb-6 bg-yellow-50 dark:bg-yellow-900/20 py-8 rounded-[2rem] border border-yellow-100 dark:border-yellow-900/50 shadow-inner">
                 <div class="text-5xl font-black text-yellow-500 mb-2" id="avg-rating-text">0.0</div>
-                <div class="text-sm font-bold text-gray-500 dark:text-gray-400">متوسط تقييم الطبيب</div>
+                <div class="text-sm font-bold text-gray-500 dark:text-gray-400">متوسط التقييم</div>
             </div>
             
             <div id="ratings-list" class="space-y-4"></div>
@@ -800,7 +861,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, doc, setDoc, getDoc, addDoc, deleteDoc, serverTimestamp, onSnapshot, query, where, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, doc, setDoc, getDoc, addDoc, deleteDoc, serverTimestamp, onSnapshot, query, where, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         
         const firebaseConfig = {
             apiKey: "AIzaSyBM0B_u9LOMJIWUcwjRq3IlQHhkkp-8Wlg",
@@ -814,12 +875,13 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
         
-        const ADMIN_EMAIL = 'mslmalmyaly223@gmail.com';
+        const OWNER_EMAIL = 'mslmalmyaly223@gmail.com';
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'doctor-app-v2';
         
-        // --- Global State ---
         let currentUser = null;
-        let isAdmin = false;
+        let isOwner = false;
+        let isManager = false; // doctor with email registered
+        let currentManagerDoctorId = null; // doctor id linked to logged-in manager
         let unsubscribes = []; 
         let globalState = {
             doctors: [],
@@ -828,13 +890,14 @@
             bookings: [],
             ratings: [],
             gallery: [],
+            managers: [], // {doctorId, email}
             settings: { addressText: '', addressUrl: '', toothImageBase64: '' },
             doctorSettings: {}
         };
         
-        let newBooking = { doctorId: null, service: null, date: null, time: null, toothName: null };
+        let newBooking = { doctorId: null, service: null, servicePrice: 0, date: null, time: null, toothName: null, jaw: null };
+        let tempBefore = null, tempAfter = null, tempTooth = null;
         
-        // --- UI Elements ---
         const ui = {
             loader: document.getElementById('loader'),
             welcome: document.getElementById('welcome-screen'),
@@ -849,7 +912,7 @@
             }
         };
 
-        // --- Theme (persisted) ---
+        // ---- THEME ----
         const applyTheme = (isDark) => {
             const html = document.documentElement;
             if (isDark) html.classList.add('dark'); else html.classList.remove('dark');
@@ -865,15 +928,14 @@
                 bg.classList.remove('bg-indigo-600'); bg.classList.add('bg-gray-200');
             }
         };
-        const savedTheme = localStorage.getItem('theme');
-        applyTheme(savedTheme === 'dark');
+        applyTheme(localStorage.getItem('theme') === 'dark');
         document.getElementById('btn-toggle-theme').addEventListener('click', () => {
             const isDark = !document.documentElement.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             applyTheme(isDark);
         });
 
-        // --- Helper Functions ---
+        // ---- HELPERS ----
         const showToast = (msg, isSuccess = true) => {
             const toast = document.getElementById('toast');
             document.getElementById('toast-text').innerText = msg;
@@ -904,8 +966,27 @@
             const modal = document.getElementById('modal-gallery');
             modal.style.display = 'none'; modal.classList.add('hidden');
         };
+        window.selectJaw = (jaw) => {
+            newBooking.jaw = jaw;
+            document.querySelectorAll('.jaw-btn').forEach(b => {
+                b.classList.remove('selected');
+                b.classList.remove('bg-indigo-500', 'text-white', 'border-transparent');
+            });
+            const btn = jaw === 'علوي' ? document.getElementById('jaw-upper') : document.getElementById('jaw-lower');
+            btn.classList.add('selected', 'bg-indigo-500', 'text-white', 'border-transparent');
+        };
 
-        // --- Auth Logic ---
+        const formatPrice = (n) => {
+            const num = parseInt(n || 0);
+            return num.toLocaleString('en-US') + ' د.ع';
+        };
+        const formatTime = (t) => {
+            if(!t) return '';
+            const hour = parseInt(t.split(':')[0]);
+            return hour > 12 ? `${hour-12}:00 م` : (hour === 12 ? `12:00 م` : `${hour}:00 ص`);
+        };
+
+        // ---- AUTH ----
         document.getElementById('btn-patient-login').onclick = async () => {
             const btn = document.getElementById('btn-patient-login');
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الدخول...';
@@ -913,7 +994,6 @@
             catch (error) { showToast("خطأ في الاتصال", false); btn.innerHTML = 'الدخول للحجز <i class="fa-solid fa-arrow-left"></i>'; }
         };
 
-        // Hidden admin login: 5 taps on logo
         let logoTaps = 0; let logoTimer = null;
         document.getElementById('logo-trigger').addEventListener('click', () => {
             logoTaps++;
@@ -926,10 +1006,18 @@
         });
 
         document.getElementById('btn-admin-signin').onclick = async () => {
-            const email = document.getElementById('admin-email').value.trim();
+            const email = document.getElementById('admin-email').value.trim().toLowerCase();
             const pass = document.getElementById('admin-password').value;
-            if (email !== ADMIN_EMAIL) return showToast("هذا البريد غير مصرح له كمالك", false);
             const btn = document.getElementById('btn-admin-signin');
+            
+            // Check allowed
+            const isOwnerEmail = email === OWNER_EMAIL.toLowerCase();
+            const isManagerEmail = globalState.managers.some(m => m.email && m.email.toLowerCase() === email);
+            
+            if (!isOwnerEmail && !isManagerEmail) {
+                return showToast("هذا البريد غير مصرح له بالدخول", false);
+            }
+            
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
@@ -946,30 +1034,65 @@
             ui.loader.style.opacity = '0';
             setTimeout(() => ui.loader.style.display = 'none', 700);
             
+            unsubscribes.forEach(unsub => unsub()); unsubscribes = [];
+            
             if (user) {
                 currentUser = user;
-                isAdmin = (user.email === ADMIN_EMAIL);
+                isOwner = (user.email && user.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
+                isManager = false;
+                currentManagerDoctorId = null;
+                
+                // First listen for managers to know if this is a manager
+                const managersUnsub = onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'managers'), (snap) => {
+                    globalState.managers = snap.docs.map(d => ({id: d.id, ...d.data()}));
+                    if (user.email) {
+                        const found = globalState.managers.find(m => m.email && m.email.toLowerCase() === user.email.toLowerCase());
+                        if (found) {
+                            isManager = true;
+                            currentManagerDoctorId = found.doctorId;
+                        } else {
+                            isManager = false;
+                            currentManagerDoctorId = null;
+                        }
+                    }
+                    updateAdminAccessUI();
+                    renderManagersList();
+                });
+                unsubscribes.push(managersUnsub);
+                
                 ui.welcome.style.display = 'none';
                 ui.appContainer.style.display = 'flex';
-                document.getElementById('btn-admin-panel').style.display = isAdmin ? 'flex' : 'none';
-                
                 initRealtimeListeners();
+                updateAdminAccessUI();
             } else {
-                currentUser = null; isAdmin = false;
+                currentUser = null; isOwner = false; isManager = false; currentManagerDoctorId = null;
                 ui.welcome.style.display = 'flex';
                 ui.appContainer.style.display = 'none';
-                unsubscribes.forEach(unsub => unsub()); unsubscribes = [];
             }
         });
 
-        // --- Realtime Data Fetching ---
+        function updateAdminAccessUI() {
+            const canAccessAdmin = isOwner || isManager;
+            document.getElementById('btn-admin-panel').style.display = canAccessAdmin ? 'flex' : 'none';
+            document.getElementById('admin-panel-label').innerText = isOwner ? 'لوحة الإدارة الشاملة' : 'لوحة تحكم الطبيب';
+            document.getElementById('admin-panel-title').innerText = isOwner ? 'لوحة الإدارة' : 'لوحة الطبيب';
+            
+            // Hide owner-only tiles from managers
+            document.getElementById('tile-managers').style.display = isOwner ? 'flex' : 'none';
+            document.getElementById('tile-doctors').style.display = isOwner ? 'flex' : 'none';
+            
+            // Toggle wrappers for manager
+            const wrappers = ['gallery-doctor-wrapper', 'service-doctor-wrapper', 'time-doctor-wrapper', 'holiday-doctor-wrapper', 'rating-doctor-wrapper', 'today-doctor-filter-wrapper', 'all-doctor-filter-wrapper', 'finance-owner-filter'];
+            wrappers.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = isOwner ? 'block' : 'none';
+            });
+        }
+
+        // ---- REALTIME LISTENERS ----
         function initRealtimeListeners() {
             unsubscribes.push(onSnapshot(doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'general'), (docSnap) => {
-                if(docSnap.exists()) {
-                    globalState.settings = docSnap.data();
-                } else {
-                    globalState.settings = { addressText: '', addressUrl: '', toothImageBase64: '' };
-                }
+                globalState.settings = docSnap.exists() ? docSnap.data() : { addressText: '', addressUrl: '', toothImageBase64: '' };
                 updateGlobalSettingsUI();
             }));
 
@@ -978,17 +1101,18 @@
                 renderDoctorsList();
                 renderAdminDoctorsList();
                 updateAdminSelects();
+                renderManagersList();
             }));
 
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'services'), (snapshot) => {
                 globalState.services = snapshot.docs.map(d => ({id: d.id, ...d.data()}));
                 if(newBooking.doctorId) renderPatientServices();
-                if(isAdmin) renderAdminServicesList();
+                if(isOwner || isManager) renderAdminServicesList();
             }));
 
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'holidays'), (snapshot) => {
                 globalState.holidays = snapshot.docs.map(d => ({id: d.id, ...d.data()}));
-                if(isAdmin) renderAdminHolidaysList();
+                if(isOwner || isManager) renderAdminHolidaysList();
                 if(newBooking.date) renderTimes();
             }));
 
@@ -997,27 +1121,33 @@
                 if(newBooking.date) renderTimes();
             }));
 
-            let bQuery = isAdmin ? collection(db, 'artifacts', appId, 'public', 'data', 'bookings') 
-                                 : query(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), where("userId", "==", currentUser.uid));
+            // Bookings: owner sees all, manager sees own doctor, patient sees own
+            let bQuery;
+            if (isOwner) {
+                bQuery = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
+            } else if (isManager && currentManagerDoctorId) {
+                bQuery = query(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), where("doctorId", "==", currentManagerDoctorId));
+            } else {
+                bQuery = query(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), where("userId", "==", currentUser.uid));
+            }
             unsubscribes.push(onSnapshot(bQuery, (snapshot) => {
                 globalState.bookings = snapshot.docs.map(d => ({id: d.id, ...d.data(), createdAt: d.data().createdAt || {seconds: Date.now()/1000}}));
                 renderMyBookings();
                 if(newBooking.date) renderTimes();
-                if(isAdmin) { renderAdminTodayBookings(); renderAdminAllPatients(); updateAdminStats(); }
+                if(isOwner || isManager) { renderAdminTodayBookings(); renderAdminAllPatients(); updateAdminStats(); renderFinance(); }
             }));
 
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'ratings'), (snap) => {
                 globalState.ratings = snap.docs.map(d => ({id: d.id, ...d.data()}));
-                if(isAdmin) renderAdminRatingsList();
+                if(isOwner || isManager) renderAdminRatingsList();
             }));
 
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'gallery'), (snap) => {
                 globalState.gallery = snap.docs.map(d => ({id: d.id, ...d.data()}));
-                if(isAdmin) renderAdminGalleryList();
+                if(isOwner || isManager) renderAdminGalleryList();
             }));
         }
 
-        // --- Core UI Updates ---
         function updateGlobalSettingsUI() {
             if(globalState.settings.addressText) {
                 document.getElementById('clinic-address-text').innerText = globalState.settings.addressText;
@@ -1034,20 +1164,17 @@
             const placeholder = document.getElementById('global-tooth-placeholder');
             if(globalState.settings.toothImageBase64) {
                 img.src = globalState.settings.toothImageBase64;
-                img.classList.remove('hidden');
-                placeholder.classList.add('hidden');
+                img.classList.remove('hidden'); placeholder.classList.add('hidden');
             } else {
-                img.classList.add('hidden');
-                placeholder.classList.remove('hidden');
+                img.classList.add('hidden'); placeholder.classList.remove('hidden');
             }
-            // Admin settings fields
-            if(isAdmin) {
+            if(isOwner) {
                 document.getElementById('setting-address-text').value = globalState.settings.addressText || '';
                 document.getElementById('setting-address-url').value = globalState.settings.addressUrl || '';
             }
         }
 
-        // --- App Navigation (Tabs) ---
+        // ---- TABS ----
         ui.tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 ui.tabs.forEach(t => {
@@ -1076,7 +1203,7 @@
             });
         });
 
-        // --- Step 0: Render Doctors (3 per row) ---
+        // ---- DOCTORS LIST ----
         function renderDoctorsList() {
             const list = document.getElementById('patient-doctors-list');
             list.innerHTML = '';
@@ -1107,10 +1234,10 @@
             document.getElementById('step-1-and-2').classList.add('hidden');
             document.getElementById('step-0-doctors').classList.remove('hidden');
             ui.headerTitle.innerText = 'الأطباء'; ui.headerSubtitle.innerText = 'اختر طبيبك المفضل';
-            newBooking = { doctorId: null, service: null, date: null, time: null, toothName: null };
+            newBooking = { doctorId: null, service: null, servicePrice: 0, date: null, time: null, toothName: null, jaw: null };
         };
 
-        // --- Step 1: Services (4 per row, smaller) ---
+        // ---- SERVICES (patient view with prices) ----
         function renderPatientServices() {
             const grid = document.getElementById('services-grid');
             grid.innerHTML = '';
@@ -1121,18 +1248,19 @@
             docServices.forEach(srv => {
                 const btn = document.createElement('button');
                 btn.className = 'btn-select service-tile border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold active:scale-95 transition-all';
-                btn.innerHTML = `<i class="fa-solid fa-tooth text-base text-indigo-400"></i><span class="dark:text-white">${srv.name}</span>`;
+                btn.innerHTML = `<i class="fa-solid fa-tooth text-base text-indigo-400"></i><span class="dark:text-white">${srv.name}</span><span class="text-[9px] text-green-600 font-black">${formatPrice(srv.price)}</span>`;
                 btn.onclick = () => {
                     document.querySelectorAll('#services-grid .btn-select').forEach(b => b.classList.remove('selected'));
                     btn.classList.add('selected');
                     newBooking.service = srv.name;
+                    newBooking.servicePrice = parseInt(srv.price || 0);
                     checkSelectionComplete(); 
                 };
                 grid.appendChild(btn);
             });
         }
 
-        // --- Step 2: Dates & Times ---
+        // ---- DATES ----
         function renderDates() {
             const container = document.getElementById('dates-container');
             container.innerHTML = '';
@@ -1177,7 +1305,7 @@
             
             for(let i = parseInt(docSet.startTime); i <= parseInt(docSet.endTime); i++) {
                 const timeStr = `${i}:00`;
-                const displayTime = i > 12 ? `${i-12}:00 م` : (i === 12 ? `12:00 م` : `${i}:00 ص`);
+                const displayTime = formatTime(timeStr);
                 const bookedCount = globalState.bookings.filter(b => b.doctorId === newBooking.doctorId && b.date === newBooking.date && b.time === timeStr).length;
                 const isFull = bookedCount >= parseInt(docSet.maxPerSlot);
                 if(!isFull) allBooked = false;
@@ -1215,13 +1343,19 @@
         document.getElementById('btn-next-step3').onclick = () => {
             document.getElementById('step-1-and-2').classList.add('hidden');
             document.getElementById('step-tooth').classList.remove('hidden');
+            // Reset jaw buttons
+            document.querySelectorAll('.jaw-btn').forEach(b => { b.classList.remove('selected', 'bg-indigo-500', 'text-white', 'border-transparent'); });
+            newBooking.jaw = null;
         };
         document.getElementById('btn-back-step2').onclick = () => {
             document.getElementById('step-tooth').classList.add('hidden');
             document.getElementById('step-1-and-2').classList.remove('hidden');
         };
         document.getElementById('btn-next-step4').onclick = () => {
-            newBooking.toothName = document.getElementById('patient-tooth-name').value.trim() || 'لم يتم التحديد';
+            const toothCode = document.getElementById('patient-tooth-name').value.trim();
+            if(!toothCode) return showToast("يرجى كتابة رمز السن", false);
+            if(!newBooking.jaw) return showToast("يرجى اختيار الفك", false);
+            newBooking.toothName = `${toothCode} - ${newBooking.jaw}`;
             document.getElementById('step-tooth').classList.add('hidden');
             document.getElementById('step-3').classList.remove('hidden');
         };
@@ -1230,6 +1364,7 @@
             document.getElementById('step-tooth').classList.remove('hidden');
         };
 
+        // ---- CONFIRM BOOKING ----
         document.getElementById('btn-confirm-book').onclick = async () => {
             const name = document.getElementById('patient-name').value.trim();
             const phone = document.getElementById('patient-phone').value.trim();
@@ -1244,6 +1379,7 @@
                     userId: currentUser.uid,
                     doctorId: newBooking.doctorId,
                     service: newBooking.service,
+                    servicePrice: newBooking.servicePrice,
                     date: newBooking.date,
                     time: newBooking.time,
                     toothName: newBooking.toothName,
@@ -1257,7 +1393,7 @@
                 document.getElementById('patient-name').value = '';
                 document.getElementById('patient-phone').value = '';
                 document.getElementById('patient-tooth-name').value = '';
-                newBooking = { doctorId: null, service: null, date: null, time: null, toothName: null };
+                newBooking = { doctorId: null, service: null, servicePrice: 0, date: null, time: null, toothName: null, jaw: null };
                 document.getElementById('step-3').classList.add('hidden');
                 document.getElementById('step-0-doctors').classList.remove('hidden');
                 ui.headerTitle.innerText = 'الأطباء'; ui.headerSubtitle.innerText = 'اختر طبيبك المفضل';
@@ -1270,6 +1406,7 @@
             finally { btn.innerHTML = '<span>تأكيد الحجز النهائي (دفع نقدي)</span><i class="fa-solid fa-check-circle"></i>'; btn.disabled = false; }
         };
 
+        // ---- MY BOOKINGS ----
         function renderMyBookings() {
             if(!currentUser) return;
             const container = document.getElementById('my-bookings-container');
@@ -1282,10 +1419,7 @@
             }
             container.innerHTML = '';
             myB.forEach(b => {
-                const hour = parseInt(b.time.split(':')[0]);
-                const displayTime = hour > 12 ? `${hour-12}:00 م` : (hour === 12 ? `12:00 م` : `${hour}:00 ص`);
                 const docName = globalState.doctors.find(d => d.id === b.doctorId)?.name || 'طبيب محذوف';
-                
                 const card = document.createElement('div');
                 card.className = 'glass-card p-5 rounded-3xl relative overflow-hidden';
                 card.innerHTML = `
@@ -1293,10 +1427,11 @@
                     <div class="flex justify-between items-start mb-4 pl-2 pr-3">
                         <div>
                             <h4 class="font-black text-lg dark:text-white text-indigo-700 mb-1">${b.service}</h4>
+                            <p class="text-xs font-bold text-green-600 dark:text-green-400 mb-1"><i class="fa-solid fa-money-bill ml-1"></i> ${formatPrice(b.servicePrice)}</p>
                             <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-1"><i class="fa-solid fa-user-doctor ml-1 text-indigo-400"></i> ${docName}</p>
-                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400"><i class="fa-regular fa-clock ml-1 text-indigo-400"></i> ${b.date} - ${displayTime}</p>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400"><i class="fa-regular fa-clock ml-1 text-indigo-400"></i> ${b.date} - ${formatTime(b.time)}</p>
                         </div>
-                        <div class="bg-indigo-50 dark:bg-slate-800 px-3 py-1 rounded-lg border border-indigo-100 dark:border-slate-700 text-[10px] font-black text-indigo-500 text-center leading-tight">
+                        <div class="bg-indigo-50 dark:bg-slate-800 px-3 py-1 rounded-lg border border-indigo-100 dark:border-slate-700 text-[10px] font-black text-indigo-500 text-center leading-tight max-w-[90px]">
                             السن<br>${b.toothName}
                         </div>
                     </div>
@@ -1324,25 +1459,23 @@
             catch(e) { showToast("خطأ", false); }
         };
 
+        // ---- RATING ----
         let currentRatingDocId = null;
         let currentRatingVal = 0;
         
         setInterval(() => {
             if(!currentUser || globalState.bookings.length === 0) return;
             const now = new Date();
-            
             globalState.bookings.filter(b => b.userId === currentUser.uid).forEach(b => {
                 if(localStorage.getItem(`rated_${b.id}`)) return;
                 const [hours, minutes] = b.time.split(':');
                 const bookDate = new Date(b.date);
                 bookDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
                 bookDate.setHours(bookDate.getHours() + 1);
-                
                 if (now >= bookDate) {
                     const docName = globalState.doctors.find(d => d.id === b.doctorId)?.name || 'الطبيب';
                     document.getElementById('rating-doctor-name').innerText = `تقييم ${docName}`;
                     currentRatingDocId = b.doctorId;
-                    
                     const modal = document.getElementById('modal-rating');
                     modal.style.display = 'flex'; modal.classList.remove('hidden');
                     localStorage.setItem(`rated_${b.id}`, 'true'); 
@@ -1374,6 +1507,7 @@
             } catch(e) { showToast("خطأ", false); }
         };
 
+        // ---- GALLERY VIEW ----
         function renderGalleryView() {
             const container = document.getElementById('gallery-container');
             container.innerHTML = '';
@@ -1400,9 +1534,9 @@
             });
         }
 
+        // ---- ADMIN SELECTS ----
         function updateAdminSelects() {
-            if(!isAdmin) return;
-            const selects = ['filter-today-doctor', 'filter-all-doctor', 'service-doctor-select', 'time-doctor-select', 'holiday-doctor-select', 'filter-rating-doctor', 'gallery-doctor-select'];
+            const selects = ['filter-today-doctor', 'filter-all-doctor', 'service-doctor-select', 'time-doctor-select', 'holiday-doctor-select', 'filter-rating-doctor', 'gallery-doctor-select', 'manager-doctor-select', 'finance-doctor-select'];
             selects.forEach(id => {
                 const el = document.getElementById(id);
                 if(el) {
@@ -1414,9 +1548,64 @@
                     if(currentVal && globalState.doctors.find(d=>d.id===currentVal)) el.value = currentVal;
                 }
             });
+            // For manager: pre-select their doctor
+            if(isManager && currentManagerDoctorId) {
+                ['service-doctor-select', 'time-doctor-select', 'holiday-doctor-select', 'gallery-doctor-select'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) el.value = currentManagerDoctorId;
+                });
+            }
         }
 
-        // --- Admin: Doctors list (with delete) ---
+        // ---- MANAGERS ----
+        function renderManagersList() {
+            const list = document.getElementById('managers-list');
+            if(!list) return;
+            list.innerHTML = '';
+            if(globalState.managers.length === 0) {
+                list.innerHTML = '<div class="text-center text-gray-400 font-bold py-6">لا يوجد مشرفين.</div>'; return;
+            }
+            globalState.managers.forEach(m => {
+                const docName = globalState.doctors.find(d => d.id === m.doctorId)?.name || 'طبيب محذوف';
+                list.innerHTML += `
+                    <div class="flex justify-between items-center p-4 glass-card rounded-2xl">
+                        <div class="flex flex-col">
+                            <span class="font-black dark:text-white">${docName}</span>
+                            <span class="text-xs font-bold text-gray-500 dark:text-gray-400 dir-ltr text-left">${m.email}</span>
+                        </div>
+                        <button onclick="deleteManager('${m.id}')" class="text-red-500 bg-red-50 dark:bg-red-900/20 w-9 h-9 rounded-full flex items-center justify-center active:scale-95"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+        }
+
+        document.getElementById('btn-save-manager').onclick = async () => {
+            const docId = document.getElementById('manager-doctor-select').value;
+            const email = document.getElementById('manager-email-input').value.trim().toLowerCase();
+            if(!docId) return showToast("اختر الطبيب", false);
+            if(!email) return showToast("اكتب البريد الإلكتروني", false);
+            
+            // Check duplicate
+            const exists = globalState.managers.find(m => m.email && m.email.toLowerCase() === email);
+            if(exists) return showToast("هذا البريد مستخدم بالفعل", false);
+            
+            // Check not owner
+            if(email === OWNER_EMAIL.toLowerCase()) return showToast("لا يمكن استخدام بريد المالك", false);
+            
+            try {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'managers'), { doctorId: docId, email: email, createdAt: serverTimestamp() });
+                document.getElementById('manager-email-input').value = '';
+                showToast("تم رفع المشرف");
+            } catch(e) { showToast("خطأ", false); }
+        };
+
+        window.deleteManager = async (id) => {
+            if(!confirm("حذف المشرف؟")) return;
+            try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'managers', id)); showToast("تم الحذف"); }
+            catch(e) { showToast("خطأ", false); }
+        };
+
+        // ---- DOCTORS ADMIN ----
         function renderAdminDoctorsList() {
             const list = document.getElementById('admin-doctors-list');
             if(!list) return;
@@ -1447,13 +1636,12 @@
         };
         
         window.deleteDoctor = async (id) => {
-            if(confirm("هل أنت متأكد من حذف الطبيب؟")) {
-                try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'doctors', id)); showToast("تم الحذف"); }
-                catch(e){ showToast("خطأ", false); }
-            }
+            if(!confirm("حذف الطبيب؟")) return;
+            try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'doctors', id)); showToast("تم الحذف"); }
+            catch(e){ showToast("خطأ", false); }
         };
 
-        // --- Admin: Address ---
+        // ---- ADDRESS ----
         document.getElementById('btn-save-address').onclick = async () => {
             const txt = document.getElementById('setting-address-text').value;
             const url = document.getElementById('setting-address-url').value;
@@ -1463,46 +1651,54 @@
             } catch(e) { showToast("خطأ", false); }
         };
         document.getElementById('btn-delete-address').onclick = async () => {
-            if(!confirm("هل أنت متأكد من حذف الموقع؟")) return;
+            if(!confirm("حذف الموقع؟")) return;
             try {
                 await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'general'), { addressText: '', addressUrl: '' }, { merge: true });
                 document.getElementById('setting-address-text').value = '';
                 document.getElementById('setting-address-url').value = '';
-                showToast("تم حذف الموقع");
+                showToast("تم الحذف");
             } catch(e) { showToast("خطأ", false); }
         };
 
-        // --- Admin Stats ---
+        // ---- STATS ----
         function updateAdminStats() {
-            if(!isAdmin) return;
             const uniqueUsers = new Set(globalState.bookings.map(b => b.userId)).size;
             document.getElementById('stat-total-users').innerText = uniqueUsers;
+            document.getElementById('stat-total-bookings').innerText = globalState.bookings.length;
             
             const list = document.getElementById('stat-doctors-list');
             list.innerHTML = '';
-            globalState.doctors.forEach(d => {
+            const doctorsToShow = isOwner ? globalState.doctors : globalState.doctors.filter(d => d.id === currentManagerDoctorId);
+            doctorsToShow.forEach(d => {
                 const count = globalState.bookings.filter(b => b.doctorId === d.id).length;
+                const total = globalState.bookings.filter(b => b.doctorId === d.id).reduce((s, b) => s + parseInt(b.servicePrice || 0), 0);
                 list.innerHTML += `
-                    <div class="glass-card p-4 rounded-2xl flex justify-between items-center border-l-4 border-l-purple-500">
-                        <span class="font-black dark:text-white">${d.name}</span>
-                        <span class="bg-purple-100 text-purple-700 font-black px-3 py-1 rounded-lg text-lg">${count} حجز</span>
+                    <div class="glass-card p-4 rounded-2xl border-l-4 border-l-purple-500">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-black dark:text-white">${d.name}</span>
+                            <span class="bg-purple-100 text-purple-700 font-black px-3 py-1 rounded-lg text-sm">${count} حجز</span>
+                        </div>
+                        <div class="text-xs font-bold text-green-600">إجمالي: ${formatPrice(total)}</div>
                     </div>
                 `;
             });
         }
 
-        // --- Today's Bookings ---
+        // ---- TODAY BOOKINGS ----
         document.getElementById('filter-today-doctor').onchange = renderAdminTodayBookings;
         function renderAdminTodayBookings() {
-            if(!isAdmin) return;
             const docId = document.getElementById('filter-today-doctor').value;
             const list = document.getElementById('admin-today-list');
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('today-date-display').innerText = today;
             
             let filtered = globalState.bookings.filter(b => b.date === today);
-            if(docId) filtered = filtered.filter(b => b.doctorId === docId);
+            if(isManager && currentManagerDoctorId) filtered = filtered.filter(b => b.doctorId === currentManagerDoctorId);
+            else if(docId) filtered = filtered.filter(b => b.doctorId === docId);
             filtered.sort((a,b) => b.createdAt.seconds - a.createdAt.seconds);
+            
+            const totalMoney = filtered.reduce((s, b) => s + parseInt(b.servicePrice || 0), 0);
+            document.getElementById('today-total-money').innerText = formatPrice(totalMoney);
             
             if(filtered.length === 0) { list.innerHTML = '<div class="text-center py-10 font-bold text-gray-400">لا توجد حجوزات.</div>'; return; }
             
@@ -1511,7 +1707,7 @@
                 const docName = globalState.doctors.find(d => d.id === b.doctorId)?.name || 'غير معروف';
                 list.innerHTML += `
                     <div class="glass-card p-5 rounded-3xl border-2 border-indigo-50 dark:border-slate-700 relative overflow-hidden">
-                        ${b.status === 'arrived' ? '<div class="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-black px-4 py-1 rounded-bl-xl shadow-sm">متواجد حالياً</div>' : ''}
+                        ${b.status === 'arrived' ? '<div class="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-black px-4 py-1 rounded-bl-xl shadow-sm">متواجد</div>' : ''}
                         <div class="flex justify-between items-start mb-3 mt-2">
                             <div>
                                 <h4 class="font-black text-lg text-indigo-700 dark:text-indigo-400 mb-1">${b.name}</h4>
@@ -1522,11 +1718,12 @@
                                 <div class="text-[9px] font-bold text-gray-400">الوقت</div>
                             </div>
                         </div>
-                        <div class="bg-indigo-50 dark:bg-indigo-900/20 p-3 rounded-2xl flex justify-between items-center text-sm font-bold border border-indigo-100 dark:border-indigo-900/50">
+                        <div class="bg-indigo-50 dark:bg-indigo-900/20 p-3 rounded-2xl flex justify-between items-center text-sm font-bold border border-indigo-100 dark:border-indigo-900/50 mb-2">
                             <span class="text-indigo-600 dark:text-indigo-300">${b.service}</span>
-                            <span class="text-[10px] bg-white dark:bg-slate-800 px-2 py-1 rounded-md text-indigo-500">السن: ${b.toothName}</span>
+                            <span class="text-green-600">${formatPrice(b.servicePrice)}</span>
                         </div>
-                        ${!docId ? `<div class="mt-2 text-[10px] text-gray-400 font-bold text-center"><i class="fa-solid fa-user-doctor"></i> ${docName}</div>` : ''}
+                        <div class="text-[10px] bg-white dark:bg-slate-800 px-2 py-1 rounded-md text-indigo-500 inline-block mb-2">السن: ${b.toothName}</div>
+                        ${(!docId && isOwner) ? `<div class="mt-2 text-[10px] text-gray-400 font-bold text-center"><i class="fa-solid fa-user-doctor"></i> ${docName}</div>` : ''}
                         <div class="mt-3 flex justify-end">
                             <button onclick="deleteBooking('${b.id}')" class="text-red-500 bg-red-50 dark:bg-red-900/20 text-xs font-black px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-trash ml-1"></i> حذف</button>
                         </div>
@@ -1535,23 +1732,23 @@
             });
         }
         window.deleteBooking = async (id) => {
-            if(!confirm("هل أنت متأكد من حذف هذا الحجز؟")) return;
+            if(!confirm("حذف هذا الحجز؟")) return;
             try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', id)); showToast("تم الحذف"); }
             catch(e){ showToast("خطأ", false); }
         };
 
-        // --- All Patients ---
+        // ---- ALL PATIENTS ----
         document.getElementById('filter-all-doctor').onchange = renderAdminAllPatients;
         document.getElementById('search-patient').onkeyup = renderAdminAllPatients;
         
         function renderAdminAllPatients() {
-            if(!isAdmin) return;
             const docId = document.getElementById('filter-all-doctor').value;
             const search = document.getElementById('search-patient').value.toLowerCase();
             const list = document.getElementById('admin-all-patients-list');
             
             let filtered = [...globalState.bookings];
-            if(docId) filtered = filtered.filter(b => b.doctorId === docId);
+            if(isManager && currentManagerDoctorId) filtered = filtered.filter(b => b.doctorId === currentManagerDoctorId);
+            else if(docId) filtered = filtered.filter(b => b.doctorId === docId);
             if(search) filtered = filtered.filter(b => b.name.toLowerCase().includes(search) || b.phone.includes(search));
             
             filtered.sort((a,b) => b.createdAt.seconds - a.createdAt.seconds);
@@ -1570,8 +1767,10 @@
                         </div>
                         <div class="grid grid-cols-2 gap-2 text-xs font-bold text-gray-600 dark:text-gray-300">
                             <div><i class="fa-solid fa-phone text-gray-400 ml-1"></i> <span class="dir-ltr inline-block">${b.phone}</span></div>
-                            <div><i class="fa-solid fa-tooth text-gray-400 ml-1"></i> ${b.service} (${b.toothName})</div>
-                            <div class="col-span-2 mt-1"><i class="fa-solid fa-user-doctor text-gray-400 ml-1"></i> الطبيب: ${docName}</div>
+                            <div><i class="fa-solid fa-tooth text-gray-400 ml-1"></i> ${b.service}</div>
+                            <div class="col-span-2"><i class="fa-solid fa-teeth text-gray-400 ml-1"></i> السن: ${b.toothName}</div>
+                            <div class="col-span-2 text-green-600"><i class="fa-solid fa-money-bill text-green-400 ml-1"></i> السعر: ${formatPrice(b.servicePrice)}</div>
+                            <div class="col-span-2"><i class="fa-solid fa-user-doctor text-gray-400 ml-1"></i> الطبيب: ${docName}</div>
                         </div>
                         <div class="mt-2 flex justify-end">
                             <button onclick="deleteBooking('${b.id}')" class="text-red-500 bg-red-50 dark:bg-red-900/20 text-xs font-black px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-trash ml-1"></i> حذف</button>
@@ -1581,33 +1780,108 @@
             });
         }
 
-        // --- Services Admin ---
+        // ---- FINANCE ----
+        document.getElementById('finance-doctor-select').onchange = renderFinance;
+        document.getElementById('finance-date').onchange = renderFinance;
+        document.getElementById('finance-date').value = new Date().toISOString().split('T')[0];
+        
+        function renderFinance() {
+            if(!isOwner && !isManager) return;
+            const dateVal = document.getElementById('finance-date').value || new Date().toISOString().split('T')[0];
+            let docId = document.getElementById('finance-doctor-select').value;
+            
+            if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
+            
+            let filtered = globalState.bookings.filter(b => b.date === dateVal);
+            if(docId) filtered = filtered.filter(b => b.doctorId === docId);
+            
+            const total = filtered.reduce((s, b) => s + parseInt(b.servicePrice || 0), 0);
+            document.getElementById('finance-total').innerText = formatPrice(total);
+            document.getElementById('finance-count').innerText = filtered.length + ' حجز';
+            
+            const list = document.getElementById('finance-list');
+            if(filtered.length === 0) { list.innerHTML = '<div class="text-center py-10 font-bold text-gray-400">لا توجد حجوزات.</div>'; return; }
+            
+            filtered.sort((a,b) => b.createdAt.seconds - a.createdAt.seconds);
+            list.innerHTML = '';
+            filtered.forEach(b => {
+                const docName = globalState.doctors.find(d => d.id === b.doctorId)?.name || '';
+                list.innerHTML += `
+                    <div class="glass-card p-4 rounded-2xl flex justify-between items-center">
+                        <div>
+                            <div class="font-black dark:text-white">${b.name}</div>
+                            <div class="text-xs font-bold text-gray-500 mt-1">${b.service}</div>
+                            ${isOwner ? `<div class="text-[10px] font-bold text-indigo-500 mt-1">${docName}</div>` : ''}
+                        </div>
+                        <div class="text-green-600 font-black">${formatPrice(b.servicePrice)}</div>
+                    </div>
+                `;
+            });
+        }
+
+        // ---- SERVICES ADMIN ----
         document.getElementById('service-doctor-select').onchange = renderAdminServicesList;
         function renderAdminServicesList() {
-            const docId = document.getElementById('service-doctor-select').value;
+            let docId = document.getElementById('service-doctor-select').value;
+            if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
             const list = document.getElementById('admin-services-list');
             if(!docId) { list.innerHTML = ''; return; }
             const docSrv = globalState.services.filter(s => s.doctorId === docId);
             list.innerHTML = '';
             if(docSrv.length === 0) { list.innerHTML = '<div class="text-center text-gray-400 font-bold py-6">لا توجد خدمات.</div>'; return; }
             docSrv.forEach(s => {
-                list.innerHTML += `<div class="flex justify-between items-center p-4 glass-card rounded-2xl"><span class="font-black dark:text-white">${s.name}</span><button onclick="deleteService('${s.id}')" class="text-red-500 bg-red-50 dark:bg-red-900/20 w-9 h-9 rounded-full flex items-center justify-center active:scale-95"><i class="fa-solid fa-trash"></i></button></div>`;
+                list.innerHTML += `
+                    <div class="glass-card p-4 rounded-2xl">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-black dark:text-white">${s.name}</span>
+                            <span class="text-green-600 font-black text-sm">${formatPrice(s.price)}</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="editService('${s.id}')" class="flex-1 text-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 text-xs font-black py-2 rounded-lg active:scale-95"><i class="fa-solid fa-pen ml-1"></i> تعديل</button>
+                            <button onclick="deleteService('${s.id}')" class="flex-1 text-red-500 bg-red-50 dark:bg-red-900/20 text-xs font-black py-2 rounded-lg active:scale-95"><i class="fa-solid fa-trash ml-1"></i> حذف</button>
+                        </div>
+                    </div>
+                `;
             });
         }
         
         document.getElementById('btn-add-service').onclick = async () => {
-            const docId = document.getElementById('service-doctor-select').value;
+            let docId = document.getElementById('service-doctor-select').value;
+            if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
             const name = document.getElementById('new-service-input').value.trim();
+            const price = parseInt(document.getElementById('new-service-price').value || 0);
             if(!docId || !name) return showToast("اختر الطبيب واكتب اسم الخدمة", false);
-            try { await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'services'), { doctorId: docId, name }); document.getElementById('new-service-input').value = ''; showToast("تم الإضافة");} 
+            if(!price || price < 0) return showToast("اكتب سعر صحيح", false);
+            try { 
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'services'), { doctorId: docId, name, price }); 
+                document.getElementById('new-service-input').value = '';
+                document.getElementById('new-service-price').value = '';
+                showToast("تم الإضافة");
+            } 
             catch(e) {showToast("خطأ", false);}
         };
+        
+        window.editService = async (id) => {
+            const srv = globalState.services.find(s => s.id === id);
+            if(!srv) return;
+            const newName = prompt("اسم الخدمة الجديد:", srv.name);
+            if(newName === null) return;
+            const newPrice = prompt("السعر الجديد:", srv.price);
+            if(newPrice === null) return;
+            const priceNum = parseInt(newPrice || 0);
+            if(!newName.trim() || isNaN(priceNum)) return showToast("بيانات غير صحيحة", false);
+            try {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'services', id), { name: newName.trim(), price: priceNum, doctorId: srv.doctorId }, { merge: true });
+                showToast("تم التعديل");
+            } catch(e) { showToast("خطأ", false); }
+        };
+        
         window.deleteService = async (id) => { 
             if(!confirm("حذف الخدمة؟")) return;
             try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'services', id)); showToast("تم الحذف"); } catch(e){ showToast("خطأ", false); }
         };
 
-        // --- Times Admin ---
+        // ---- TIMES ADMIN ----
         document.getElementById('time-doctor-select').onchange = () => {
             const docId = document.getElementById('time-doctor-select').value;
             if(!docId) return;
@@ -1620,7 +1894,8 @@
         };
         
         document.getElementById('btn-save-times').onclick = async () => {
-            const docId = document.getElementById('time-doctor-select').value;
+            let docId = document.getElementById('time-doctor-select').value;
+            if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
             if(!docId) return showToast("اختر الطبيب", false);
             let sVal = parseInt(document.getElementById('setting-start-time').value), sAP = document.getElementById('setting-start-ampm').value;
             let eVal = parseInt(document.getElementById('setting-end-time').value), eAP = document.getElementById('setting-end-ampm').value;
@@ -1631,14 +1906,15 @@
             
             try {
                 await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'doctorSettings', docId), { startTime: start, endTime: end, maxPerSlot: max });
-                showToast("تم حفظ الأوقات للطبيب");
+                showToast("تم الحفظ");
             } catch(e) {showToast("خطأ", false);}
         };
 
-        // --- Holidays Admin ---
+        // ---- HOLIDAYS ADMIN ----
         document.getElementById('holiday-doctor-select').onchange = renderAdminHolidaysList;
         function renderAdminHolidaysList() {
-            const docId = document.getElementById('holiday-doctor-select').value;
+            let docId = document.getElementById('holiday-doctor-select').value;
+            if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
             const list = document.getElementById('holidays-list');
             if(!docId) { list.innerHTML = ''; return; }
             const docHol = globalState.holidays.filter(h => h.doctorId === docId).sort((a,b) => a.date.localeCompare(b.date));
@@ -1649,7 +1925,8 @@
             });
         }
         document.getElementById('btn-add-holiday').onclick = async () => {
-            const docId = document.getElementById('holiday-doctor-select').value;
+            let docId = document.getElementById('holiday-doctor-select').value;
+            if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
             const date = document.getElementById('holiday-date').value;
             const note = document.getElementById('holiday-note').value.trim() || 'عطلة';
             if(!docId || !date) return showToast("اختر الطبيب والتاريخ", false);
@@ -1660,14 +1937,15 @@
             try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'holidays', id)); showToast("تم الحذف"); } catch(e){ showToast("خطأ", false); }
         };
 
-        // --- Ratings Admin ---
+        // ---- RATINGS ADMIN ----
         document.getElementById('filter-rating-doctor').onchange = renderAdminRatingsList;
         function renderAdminRatingsList() {
-            if(!isAdmin) return;
-            const docId = document.getElementById('filter-rating-doctor').value;
+            let docId = document.getElementById('filter-rating-doctor').value;
+            if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
             const list = document.getElementById('ratings-list');
             let filtered = globalState.ratings;
             if(docId) filtered = filtered.filter(r => r.doctorId === docId);
+            else if(isManager) filtered = filtered.filter(r => r.doctorId === currentManagerDoctorId);
             filtered.sort((a,b) => b.createdAt?.seconds - a.createdAt?.seconds);
             
             if(filtered.length === 0) {
@@ -1692,7 +1970,7 @@
             document.getElementById('avg-rating-text').innerText = (sum / filtered.length).toFixed(1);
         }
 
-        // --- Image Compression ---
+        // ---- IMAGE COMPRESS ----
         function compressImage(file, callback, maxWidth = 800) {
             if(!file) return;
             const reader = new FileReader();
@@ -1712,7 +1990,7 @@
             reader.readAsDataURL(file);
         }
 
-        // Gallery Admin
+        // ---- GALLERY ADMIN ----
         document.getElementById('tab-btn-results').onclick = () => {
             document.getElementById('gallery-results-tab').classList.remove('hidden');
             document.getElementById('gallery-tooth-tab').classList.add('hidden');
@@ -1720,6 +1998,7 @@
             document.getElementById('tab-btn-tooth').className = "flex-1 py-3 text-sm font-black rounded-xl text-gray-500 dark:text-gray-400 transition-all";
         };
         document.getElementById('tab-btn-tooth').onclick = () => {
+            if(isManager) return showToast("هذا الخيار للمالك فقط", false);
             document.getElementById('gallery-results-tab').classList.add('hidden');
             document.getElementById('gallery-tooth-tab').classList.remove('hidden');
             document.getElementById('tab-btn-tooth').className = "flex-1 py-3 text-sm font-black rounded-xl bg-white dark:bg-slate-700 text-indigo-600 dark:text-white shadow-sm transition-all";
@@ -1732,8 +2011,6 @@
             }
         };
 
-        let tempBefore = null, tempAfter = null, tempTooth = null;
-        
         ['before', 'after'].forEach(type => {
             document.getElementById(`upload-${type}`).onchange = (e) => {
                 compressImage(e.target.files[0], (base64) => {
@@ -1746,32 +2023,34 @@
         });
 
         document.getElementById('btn-save-gallery').onclick = async () => {
-            const docId = document.getElementById('gallery-doctor-select').value;
+            let docId = document.getElementById('gallery-doctor-select').value;
+            if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
             if(!docId) return showToast("اختر الطبيب", false);
-            if(!tempBefore || !tempAfter) return showToast("يرجى رفع الصورتين (قبل وبعد)", false);
+            if(!tempBefore || !tempAfter) return showToast("يرجى رفع الصورتين", false);
             
             const btn = document.getElementById('btn-save-gallery');
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري النشر...';
             try {
                 await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'gallery'), { doctorId: docId, beforeImgBase64: tempBefore, afterImgBase64: tempAfter, createdAt: serverTimestamp() });
-                showToast("تم النشر بنجاح");
+                showToast("تم النشر");
                 tempBefore = null; tempAfter = null;
                 ['before', 'after'].forEach(t => {
                     document.getElementById(`preview-${t}`).classList.add('hidden');
                     document.getElementById(`placeholder-${t}`).classList.remove('hidden');
                 });
-            } catch(e) { showToast("حدث خطأ", false); }
+            } catch(e) { showToast("خطأ", false); }
             finally { btn.innerHTML = 'نشر الحالة'; }
         };
 
         document.getElementById('gallery-doctor-select').onchange = renderAdminGalleryList;
         function renderAdminGalleryList() {
-            const docId = document.getElementById('gallery-doctor-select').value;
+            let docId = document.getElementById('gallery-doctor-select').value;
+            if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
             const list = document.getElementById('admin-gallery-list');
             if(!docId) { list.innerHTML = ''; return; }
             const docGal = globalState.gallery.filter(g => g.doctorId === docId).sort((a,b) => b.createdAt?.seconds - a.createdAt?.seconds);
             list.innerHTML = '';
-            if(docGal.length === 0) { list.innerHTML = '<div class="text-center text-gray-400 font-bold py-6">لا توجد صور منشورة.</div>'; return; }
+            if(docGal.length === 0) { list.innerHTML = '<div class="text-center text-gray-400 font-bold py-6">لا توجد صور.</div>'; return; }
             docGal.forEach(g => {
                 list.innerHTML += `
                     <div class="glass-card p-3 rounded-2xl relative">
@@ -1789,7 +2068,7 @@
             try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'gallery', id)); showToast("تم الحذف"); } catch(e){ showToast("خطأ", false); }
         };
 
-        // Tooth Image Admin
+        // ---- TOOTH IMAGE ----
         document.getElementById('upload-tooth-img').onchange = (e) => {
             compressImage(e.target.files[0], (base64) => {
                 tempTooth = base64;
@@ -1800,14 +2079,14 @@
         };
 
         document.getElementById('btn-save-tooth-img').onclick = async () => {
-            if(!tempTooth) return showToast("يرجى رفع الصورة أولاً", false);
+            if(!tempTooth) return showToast("ارفع الصورة أولاً", false);
             const btn = document.getElementById('btn-save-tooth-img');
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الرفع...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
             try {
                 await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'general'), { toothImageBase64: tempTooth }, { merge: true });
-                showToast("تم اعتماد الصورة للجميع");
-            } catch(e) { showToast("حدث خطأ", false); }
-            finally { btn.innerHTML = 'اعتماد الصورة للجميع'; }
+                showToast("تم الاعتماد");
+            } catch(e) { showToast("خطأ", false); }
+            finally { btn.innerHTML = 'اعتماد الصورة'; }
         };
 
         document.getElementById('btn-delete-tooth-img').onclick = async () => {
