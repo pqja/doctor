@@ -180,6 +180,7 @@
         <p class="text-sm font-bold text-gray-500 dark:text-gray-400">نبتسم لتبتسم</p>
         <div class="mt-8 w-12 h-12 rounded-full border-4 border-indigo-100 dark:border-slate-700 loader-spin"></div>
     </div>
+
     <!-- Welcome -->
     <div id="welcome-screen" class="fixed inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 z-[100] hidden flex-col items-center justify-center p-6 text-white">
         <div class="glass-card bg-white/10 border-white/20 rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl backdrop-blur-xl">
@@ -194,6 +195,7 @@
             </button>
         </div>
     </div>
+
     <!-- Main App -->
     <div id="app-container" class="hidden">
         <header class="pt-5 pb-3 px-6 flex justify-between items-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl sticky top-0 z-40 border-b border-gray-200/50 dark:border-slate-800 shadow-sm">
@@ -205,6 +207,7 @@
                 <i class="fa-solid fa-tooth text-xl"></i>
             </div>
         </header>
+
         <main id="main-content" class="p-6 relative">
             <!-- Tab Book -->
             <div id="tab-book" class="page-transition">
@@ -212,6 +215,7 @@
                     <h3 class="text-lg font-black mb-4 dark:text-white flex items-center gap-2"><i class="fa-solid fa-user-doctor text-indigo-500"></i> قائمة الأطباء</h3>
                     <div id="patient-doctors-list" class="doctors-grid"></div>
                 </div>
+
                 <div id="step-1-and-2" class="hidden page-transition">
                     <button id="btn-back-to-doctors" class="mb-4 text-sm font-bold text-indigo-500 flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/20 px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-arrow-right"></i> عودة للأطباء</button>
                     <h3 class="text-lg font-black mb-3 dark:text-white">الخدمات المتاحة</h3>
@@ -237,6 +241,7 @@
                         التالي (تحديد السن)
                     </button>
                 </div>
+
                 <!-- Tooth -->
                 <div id="step-tooth" class="hidden page-transition mt-2">
                     <button id="btn-back-step2" class="mb-4 text-sm font-bold text-indigo-500 flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/20 px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-arrow-right"></i> عودة للوقت</button>
@@ -260,6 +265,7 @@
                         تحديد والمتابعة
                     </button>
                 </div>
+
                 <!-- Patient Data -->
                 <div id="step-3" class="hidden page-transition mt-2">
                     <button id="btn-back-tooth" class="mb-4 text-sm font-bold text-indigo-500 flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/20 px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-arrow-right"></i> عودة</button>
@@ -297,10 +303,12 @@
                     </button>
                 </div>
             </div>
+
             <!-- My Bookings -->
             <div id="tab-bookings" class="hidden page-transition">
                 <div id="my-bookings-container" class="space-y-4"></div>
             </div>
+
             <!-- Settings -->
             <div id="tab-settings" class="hidden page-transition">
                 <div class="space-y-4">
@@ -336,6 +344,7 @@
                 </div>
             </div>
         </main>
+
         <nav class="bottom-nav pb-8 pt-4 px-10 flex justify-between items-center rounded-t-[2.5rem] bg-white/95 dark:bg-slate-900/95 shadow-[0_-15px_40px_rgba(0,0,0,0.06)] border-t border-gray-100 dark:border-slate-800 z-50">
             <button class="nav-item flex-1 flex flex-col items-center justify-center text-indigo-600 transition-all transform hover:scale-105" data-target="tab-book">
                 <i class="fa-solid fa-house-medical text-[20px] mb-1.5"></i>
@@ -351,6 +360,7 @@
             </button>
         </nav>
     </div>
+
     <!-- Success Modal -->
     <div id="modal-booking-success" class="fixed inset-0 bg-slate-900/60 z-[300] hidden flex-col items-center justify-center p-6 backdrop-blur-md transition-opacity duration-300 opacity-0">
         <div class="bg-white dark:bg-slate-800 p-8 rounded-[2rem] max-w-sm w-full text-center shadow-2xl transform scale-95 transition-transform duration-300 border border-white/20" id="modal-booking-content">
@@ -368,6 +378,7 @@
             <button onclick="closeSuccessModal()" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-black py-4 rounded-2xl active:scale-95 transition-transform shadow-lg">حسناً، فهمت</button>
         </div>
     </div>
+
     <!-- Rating Modal -->
     <div id="modal-rating" class="fixed inset-0 bg-slate-900/80 z-[400] hidden items-center justify-center p-6 backdrop-blur-md">
         <div class="bg-white dark:bg-slate-800 p-8 rounded-[2rem] max-w-sm w-full text-center shadow-2xl relative border border-white/10">
@@ -388,6 +399,7 @@
             <button id="btn-submit-rating" class="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-black py-4 rounded-2xl shadow-[0_10px_25px_rgba(250,204,21,0.3)] active:scale-95 transition-transform">إرسال التقييم</button>
         </div>
     </div>
+
     <!-- Gallery Modal -->
     <div id="modal-gallery" class="fixed inset-0 bg-slate-900/90 z-[300] hidden flex-col p-6 backdrop-blur-xl overflow-y-auto">
         <div class="max-w-md w-full mx-auto relative min-h-full flex flex-col pt-10 pb-10">
@@ -396,6 +408,7 @@
             <div id="gallery-container" class="space-y-6 flex-1"></div>
         </div>
     </div>
+
     <!-- Admin Login Modal -->
     <div id="modal-admin-login" class="fixed inset-0 bg-slate-900/80 z-[500] hidden items-center justify-center p-6 backdrop-blur-md">
         <div class="bg-white dark:bg-slate-800 p-8 rounded-[2rem] max-w-sm w-full shadow-2xl relative border border-white/10">
@@ -407,11 +420,13 @@
             <button id="btn-admin-signin" class="w-full bg-slate-900 dark:bg-indigo-600 text-white font-black py-4 rounded-2xl transition-all shadow-xl active:scale-95 text-lg">دخول</button>
         </div>
     </div>
+
     <!-- Toast -->
     <div id="toast" class="fixed top-10 left-1/2 transform -translate-x-1/2 bg-slate-800 dark:bg-white text-white dark:text-slate-800 px-6 py-4 rounded-2xl shadow-2xl z-[9999] opacity-0 transition-opacity duration-300 pointer-events-none flex items-center gap-3 font-bold border border-slate-700 dark:border-gray-200 min-w-[250px] justify-center">
         <span id="toast-icon" class="text-xl"></span>
         <span id="toast-text"></span>
     </div>
+
     <!-- ============ ADMIN PAGES ============ -->
     <!-- Admin Main Panel -->
     <div id="page-admin" class="free-page">
@@ -475,6 +490,7 @@
             </div>
         </div>
     </div>
+
     <!-- Managers (Owner only) -->
     <div id="admin-managers" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
@@ -497,6 +513,7 @@
             <div id="managers-list" class="space-y-3"></div>
         </div>
     </div>
+
     <!-- Doctors Admin -->
     <div id="admin-doctors" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
@@ -513,6 +530,7 @@
             <div id="admin-doctors-list" class="grid gap-3"></div>
         </div>
     </div>
+
     <!-- Finance -->
     <div id="admin-finance" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
@@ -538,6 +556,7 @@
             <div id="finance-list" class="space-y-3"></div>
         </div>
     </div>
+
     <!-- Stats -->
     <div id="admin-stats" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
@@ -559,6 +578,7 @@
             <div id="stat-doctors-list" class="space-y-4"></div>
         </div>
     </div>
+
     <!-- Address -->
     <div id="admin-address" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
@@ -580,6 +600,7 @@
             </div>
         </div>
     </div>
+
     <!-- Gallery -->
     <div id="admin-gallery" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
@@ -634,6 +655,7 @@
             </div>
         </div>
     </div>
+
     <!-- Today Bookings -->
     <div id="admin-today" class="free-page">
         <header class="admin-header flex items-center justify-between bg-slate-900 text-white rounded-b-2xl shadow-md z-10 sticky top-0">
@@ -654,6 +676,7 @@
             <div id="admin-today-list" class="space-y-4"></div>
         </div>
     </div>
+
     <!-- All Patients -->
     <div id="admin-all-patients" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10 sticky top-0">
@@ -676,6 +699,7 @@
             <div id="admin-all-patients-list" class="space-y-4"></div>
         </div>
     </div>
+
     <!-- Services -->
     <div id="admin-services" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
@@ -698,6 +722,7 @@
             <div id="admin-services-list" class="grid gap-3"></div>
         </div>
     </div>
+
     <!-- Times -->
     <div id="admin-times" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
@@ -737,6 +762,7 @@
             </div>
         </div>
     </div>
+
     <!-- Holidays -->
     <div id="admin-holidays" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10">
@@ -763,6 +789,7 @@
             <div id="holidays-list" class="space-y-3"></div>
         </div>
     </div>
+
     <!-- Ratings -->
     <div id="admin-ratings" class="free-page">
         <header class="admin-header flex items-center gap-3 bg-slate-900 text-white rounded-b-2xl shadow-md z-10 sticky top-0">
@@ -780,7 +807,9 @@
             <div id="ratings-list" class="space-y-4"></div>
         </div>
     </div>
-    <!-- Admin Action Modals -->
+
+    <!-- ============ ADMIN ACTION MODALS ============ -->
+    <!-- Tooth Modal (Supports Adding Multiple Teeth) -->
     <div id="modal-admin-tooth" class="fixed inset-0 bg-slate-900/80 z-[600] hidden items-center justify-center p-6 backdrop-blur-md">
         <div class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] w-full max-w-sm shadow-2xl relative border border-white/10 max-h-[90vh] overflow-y-auto hide-scrollbar">
             <button onclick="closeAdminModal('modal-admin-tooth')" class="absolute top-4 left-4 w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center dark:text-white"><i class="fa-solid fa-times"></i></button>
@@ -789,14 +818,20 @@
                 <img id="admin-global-tooth-img" src="" class="w-full h-auto rounded-2xl hidden">
                 <div id="admin-global-tooth-placeholder" class="w-full h-32 bg-gray-50 dark:bg-slate-700 rounded-2xl flex items-center justify-center text-gray-400 text-xs font-bold">لا توجد صورة</div>
             </div>
-            <input type="text" id="admin-tooth-name" class="w-full p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white outline-none font-bold mb-4" placeholder="رمز السن...">
-            <div class="grid grid-cols-2 gap-3 mb-4">
-                <button type="button" onclick="selectAdminJaw('علوي')" id="admin-jaw-upper" class="admin-jaw-btn p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 font-black dark:text-white active:scale-95 transition-all"><i class="fa-solid fa-arrow-up"></i> علوي</button>
-                <button type="button" onclick="selectAdminJaw('سفلي')" id="admin-jaw-lower" class="admin-jaw-btn p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 font-black dark:text-white active:scale-95 transition-all"><i class="fa-solid fa-arrow-down"></i> سفلي</button>
-            </div>
+
+            <!-- Dynamic Teeth Container -->
+            <div id="admin-teeth-list-container" class="space-y-4 mb-4"></div>
+
+            <!-- Add Another Tooth Button -->
+            <button type="button" id="btn-add-another-tooth" class="w-full py-3.5 rounded-2xl border-2 border-dashed border-indigo-400 dark:border-indigo-500 bg-indigo-50/50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-300 font-black mb-4 active:scale-95 transition-all flex items-center justify-center gap-2 text-sm">
+                <i class="fa-solid fa-plus-circle"></i> إضافة سن آخر
+            </button>
+
             <button id="btn-save-admin-tooth" class="w-full bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95">حفظ السن</button>
         </div>
     </div>
+
+    <!-- Notes Modal -->
     <div id="modal-admin-notes" class="fixed inset-0 bg-slate-900/95 z-[600] hidden items-center justify-center p-6" style="transform: translateZ(0);">
         <div class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] w-full max-w-sm shadow-2xl relative border border-white/10">
             <button onclick="closeAdminModal('modal-admin-notes')" class="absolute top-4 left-4 w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center dark:text-white"><i class="fa-solid fa-times"></i></button>
@@ -805,6 +840,8 @@
             <button id="btn-save-admin-notes" class="w-full bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95">حفظ الملاحظات</button>
         </div>
     </div>
+
+    <!-- Photo Modal -->
     <div id="modal-admin-photo" class="fixed inset-0 bg-slate-900/80 z-[600] hidden items-center justify-center p-6 backdrop-blur-md">
         <div class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] w-full max-w-sm shadow-2xl relative border border-white/10">
             <button onclick="closeAdminModal('modal-admin-photo')" class="absolute top-4 left-4 w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center dark:text-white"><i class="fa-solid fa-times"></i></button>
@@ -817,10 +854,58 @@
             <button id="btn-save-admin-photo" class="w-full bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95">حفظ الصورة</button>
         </div>
     </div>
+
+    <!-- Price & Discount Modal -->
+    <div id="modal-admin-price" class="fixed inset-0 bg-slate-900/80 z-[600] hidden items-center justify-center p-6 backdrop-blur-md">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] w-full max-w-sm shadow-2xl relative border border-white/10">
+            <button onclick="closeAdminModal('modal-admin-price')" class="absolute top-4 left-4 w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center dark:text-white"><i class="fa-solid fa-times"></i></button>
+            <h3 class="text-lg font-black mb-4 dark:text-white text-center mt-2">السعر الأصلي والسعر بعد التخفيض</h3>
+            <div class="space-y-4 mb-5">
+                <div class="bg-gray-50 dark:bg-slate-900 p-4 rounded-2xl border border-gray-200 dark:border-slate-700 flex justify-between items-center">
+                    <span class="text-sm font-black text-gray-500 dark:text-gray-400">السعر الأصلي للخدمة:</span>
+                    <span id="admin-original-price-display" class="text-base font-black text-slate-800 dark:text-white">0 د.ع</span>
+                </div>
+                <div>
+                    <label class="block text-sm font-black text-slate-700 dark:text-gray-200 mb-2">السعر بعد التخفيض (د.ع):</label>
+                    <input type="number" id="admin-discounted-price-input" min="0" class="w-full p-4 rounded-2xl border-2 border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-900 dark:text-white outline-none focus:border-indigo-500 font-black text-center text-lg" placeholder="اكتب السعر بعد التخفيض...">
+                    <p class="text-[11px] font-bold text-gray-400 mt-2 text-center">يمكنك تعديل السعر لتخفيضه أو تركه كما هو</p>
+                </div>
+            </div>
+            <button id="btn-save-admin-price" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-transform">اعتماد السعر</button>
+        </div>
+    </div>
+
+    <!-- Follow-up Booking Modal (حجز مراجع) -->
+    <div id="modal-admin-followup" class="fixed inset-0 bg-slate-900/80 z-[600] hidden items-center justify-center p-6 backdrop-blur-md">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] w-full max-w-md shadow-2xl relative border border-purple-300 dark:border-purple-800 max-h-[90vh] overflow-y-auto hide-scrollbar">
+            <button onclick="closeAdminModal('modal-admin-followup')" class="absolute top-4 left-4 w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center dark:text-white"><i class="fa-solid fa-times"></i></button>
+            <div class="w-14 h-14 bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
+                <i class="fa-solid fa-calendar-plus"></i>
+            </div>
+            <h3 class="text-lg font-black mb-1 dark:text-white text-center">حجز موعد مراجع</h3>
+            <p id="followup-patient-info" class="text-xs font-bold text-purple-600 dark:text-purple-400 text-center mb-5"></p>
+
+            <h4 class="text-sm font-black mb-2 dark:text-white">اختر اليوم:</h4>
+            <div class="flex overflow-x-auto gap-2.5 pb-3 hide-scrollbar mb-4" id="followup-dates-container"></div>
+
+            <div id="followup-day-status" class="text-center py-3 text-red-500 font-bold hidden bg-red-50 dark:bg-red-900/20 rounded-xl mb-4 border border-red-100 dark:border-red-900 text-xs"></div>
+
+            <div id="followup-time-area" class="hidden mb-6">
+                <h4 class="text-sm font-black mb-2 dark:text-white">اختر الساعة:</h4>
+                <div id="followup-times-grid" class="grid grid-cols-3 gap-2.5"></div>
+            </div>
+
+            <button id="btn-confirm-followup" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-all opacity-50 cursor-not-allowed pointer-events-none">
+                تأكيد حجز المراجع
+            </button>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, doc, setDoc, getDoc, addDoc, deleteDoc, serverTimestamp, onSnapshot, query, where, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
         const firebaseConfig = {
             apiKey: "AIzaSyBM0B_u9LOMJIWUcwjRq3IlQHhkkp-8Wlg",
             authDomain: "doctor-915f7.firebaseapp.com",
@@ -829,16 +914,20 @@
             messagingSenderId: "197555106104",
             appId: "1:197555106104:web:4e30f661b0672999d291cd"
         };
+
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+
         const OWNER_EMAIL = 'mu2014murtazaa@gmail.com';
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'doctor-app-v2';
+
         let currentUser = null;
         let isOwner = false;
-        let isManager = false; // doctor with email registered
-        let currentManagerDoctorId = null; // doctor id linked to logged-in manager
-        let unsubscribes = []; 
+        let isManager = false;
+        let currentManagerDoctorId = null;
+        let unsubscribes = [];
+
         let globalState = {
             doctors: [],
             services: [],
@@ -846,12 +935,14 @@
             bookings: [],
             ratings: [],
             gallery: [],
-            managers: [], // {doctorId, email}
+            managers: [],
             settings: { addressText: '', addressUrl: '', toothImageBase64: '' },
             doctorSettings: {}
         };
+
         let newBooking = { doctorId: null, service: null, servicePrice: 0, date: null, time: null, toothName: null, jaw: null };
         let tempBefore = null, tempAfter = null, tempTooth = null;
+
         const ui = {
             loader: document.getElementById('loader'),
             welcome: document.getElementById('welcome-screen'),
@@ -865,6 +956,7 @@
                 'tab-settings': document.getElementById('tab-settings'),
             }
         };
+
         // ---- THEME ----
         const applyTheme = (isDark) => {
             const html = document.documentElement;
@@ -882,11 +974,13 @@
             }
         };
         applyTheme(localStorage.getItem('theme') === 'dark');
+
         document.getElementById('btn-toggle-theme').addEventListener('click', () => {
             const isDark = !document.documentElement.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             applyTheme(isDark);
         });
+
         // ---- HELPERS ----
         const showToast = (msg, isSuccess = true) => {
             const toast = document.getElementById('toast');
@@ -895,28 +989,34 @@
             toast.style.opacity = '1';
             setTimeout(() => { toast.style.opacity = '0'; }, 3000);
         };
+
         window.openFreePage = (id) => { document.getElementById(id).style.display = 'flex'; };
         window.closeFreePage = (id) => { document.getElementById(id).style.display = 'none'; };
         window.closeAdminLogin = () => { document.getElementById('modal-admin-login').style.display = 'none'; };
+
         window.closeSuccessModal = () => {
             const modal = document.getElementById('modal-booking-success');
             modal.classList.add('opacity-0');
             document.getElementById('modal-booking-content').classList.add('scale-95');
             setTimeout(() => { modal.classList.add('hidden'); modal.style.display = 'none'; }, 300);
         };
+
         window.closeRatingModal = () => {
             const modal = document.getElementById('modal-rating');
             modal.style.display = 'none'; modal.classList.add('hidden');
         };
+
         window.openDoctorGallery = () => {
             const modal = document.getElementById('modal-gallery');
             modal.style.display = 'flex'; modal.classList.remove('hidden');
             renderGalleryView();
         };
+
         window.closeDoctorGallery = () => {
             const modal = document.getElementById('modal-gallery');
             modal.style.display = 'none'; modal.classList.add('hidden');
         };
+
         window.selectJaw = (jaw) => {
             newBooking.jaw = jaw;
             document.querySelectorAll('.jaw-btn').forEach(b => {
@@ -926,46 +1026,51 @@
             const btn = jaw === 'علوي' ? document.getElementById('jaw-upper') : document.getElementById('jaw-lower');
             btn.classList.add('selected', 'bg-indigo-500', 'text-white', 'border-transparent');
         };
+
         const formatPrice = (n) => {
             const num = parseInt(n || 0);
             return num.toLocaleString('en-US') + ' د.ع';
         };
+
         const formatTime = (t) => {
             if(!t) return '';
             const hour = parseInt(t.split(':')[0]);
             return hour > 12 ? `${hour-12}:00 م` : (hour === 12 ? `12:00 م` : `${hour}:00 ص`);
         };
+
         // ---- AUTH ----
         document.getElementById('btn-patient-login').onclick = async () => {
             const btn = document.getElementById('btn-patient-login');
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الدخول...';
-            try { await signInAnonymously(auth); } 
+            try { await signInAnonymously(auth); }
             catch (error) { showToast("خطأ في الاتصال", false); btn.innerHTML = 'الدخول للحجز <i class="fa-solid fa-arrow-left"></i>'; }
         };
+
         document.getElementById('logo-trigger').addEventListener('click', () => {
             const settingsTab = document.getElementById('tab-settings');
             if (!settingsTab.classList.contains('hidden')) {
                 document.getElementById('modal-admin-login').style.display = 'flex';
             }
         });
+
         document.getElementById('btn-admin-signin').onclick = async () => {
             const email = document.getElementById('admin-email').value.trim().toLowerCase();
             const pass = document.getElementById('admin-password').value;
             const btn = document.getElementById('btn-admin-signin');
-            
+
             const isOwnerEmail = email === OWNER_EMAIL.toLowerCase();
             const isManagerEmail = globalState.managers.some(m => m.email && m.email.toLowerCase() === email);
-            
+
             if (!isOwnerEmail && !isManagerEmail) {
                 return showToast("هذا البريد غير مصرح له بالدخول", false);
             }
-            
+
             if(pass.length < 6) {
                 return showToast("كلمة المرور يجب أن لا تقل عن 6 أحرف", false);
             }
-            
+
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-            
+
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
                 closeAdminLogin();
@@ -983,7 +1088,9 @@
                 }
             }
         };
+
         document.getElementById('btn-logout').onclick = () => signOut(auth);
+
         onAuthStateChanged(auth, (user) => {
             ui.loader.style.opacity = '0';
             setTimeout(() => ui.loader.style.display = 'none', 700);
@@ -993,7 +1100,7 @@
                 isOwner = (user.email && user.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
                 isManager = false;
                 currentManagerDoctorId = null;
-                // First listen for managers to know if this is a manager
+
                 const managersUnsub = onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'managers'), (snap) => {
                     globalState.managers = snap.docs.map(d => ({id: d.id, ...d.data()}));
                     if (user.email) {
@@ -1010,6 +1117,7 @@
                     renderManagersList();
                 });
                 unsubscribes.push(managersUnsub);
+
                 ui.welcome.style.display = 'none';
                 ui.appContainer.style.display = 'flex';
                 initRealtimeListeners();
@@ -1020,27 +1128,29 @@
                 ui.appContainer.style.display = 'none';
             }
         });
+
         function updateAdminAccessUI() {
             const canAccessAdmin = isOwner || isManager;
             document.getElementById('btn-admin-panel').style.display = canAccessAdmin ? 'flex' : 'none';
             document.getElementById('admin-panel-label').innerText = isOwner ? 'لوحة الإدارة الشاملة' : 'لوحة تحكم الطبيب';
             document.getElementById('admin-panel-title').innerText = isOwner ? 'لوحة الإدارة' : 'لوحة الطبيب';
-            // Hide owner-only tiles from managers
             document.getElementById('tile-managers').style.display = isOwner ? 'flex' : 'none';
             document.getElementById('tile-doctors').style.display = isOwner ? 'flex' : 'none';
-            // Toggle wrappers for manager
+
             const wrappers = ['gallery-doctor-wrapper', 'service-doctor-wrapper', 'time-doctor-wrapper', 'holiday-doctor-wrapper', 'rating-doctor-wrapper', 'today-doctor-filter-wrapper', 'all-doctor-filter-wrapper', 'finance-owner-filter'];
             wrappers.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = isOwner ? 'block' : 'none';
             });
         }
+
         // ---- REALTIME LISTENERS ----
         function initRealtimeListeners() {
             unsubscribes.push(onSnapshot(doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'general'), (docSnap) => {
                 globalState.settings = docSnap.exists() ? docSnap.data() : { addressText: '', addressUrl: '', toothImageBase64: '' };
                 updateGlobalSettingsUI();
             }));
+
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'doctors'), (snapshot) => {
                 globalState.doctors = snapshot.docs.map(d => ({id: d.id, ...d.data()}));
                 renderDoctorsList();
@@ -1048,21 +1158,24 @@
                 updateAdminSelects();
                 renderManagersList();
             }));
+
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'services'), (snapshot) => {
                 globalState.services = snapshot.docs.map(d => ({id: d.id, ...d.data()}));
                 if(newBooking.doctorId) renderPatientServices();
                 if(isOwner || isManager) renderAdminServicesList();
             }));
+
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'holidays'), (snapshot) => {
                 globalState.holidays = snapshot.docs.map(d => ({id: d.id, ...d.data()}));
                 if(isOwner || isManager) renderAdminHolidaysList();
                 if(newBooking.date) renderTimes();
             }));
+
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'doctorSettings'), (snapshot) => {
                 snapshot.docs.forEach(d => globalState.doctorSettings[d.id] = d.data());
                 if(newBooking.date) renderTimes();
             }));
-            // Bookings: owner sees all, manager sees own doctor, patient sees own
+
             let bQuery;
             if (isOwner) {
                 bQuery = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
@@ -1071,21 +1184,25 @@
             } else {
                 bQuery = query(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), where("userId", "==", currentUser.uid));
             }
+
             unsubscribes.push(onSnapshot(bQuery, (snapshot) => {
                 globalState.bookings = snapshot.docs.map(d => ({id: d.id, ...d.data(), createdAt: d.data().createdAt || {seconds: Date.now()/1000}}));
                 renderMyBookings();
                 if(newBooking.date) renderTimes();
                 if(isOwner || isManager) { renderAdminTodayBookings(); renderAdminAllPatients(); updateAdminStats(); renderFinance(); }
             }));
+
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'ratings'), (snap) => {
                 globalState.ratings = snap.docs.map(d => ({id: d.id, ...d.data()}));
                 if(isOwner || isManager) renderAdminRatingsList();
             }));
+
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'gallery'), (snap) => {
                 globalState.gallery = snap.docs.map(d => ({id: d.id, ...d.data()}));
                 if(isOwner || isManager) renderAdminGalleryList();
             }));
         }
+
         function updateGlobalSettingsUI() {
             if(globalState.settings.addressText) {
                 document.getElementById('clinic-address-text').innerText = globalState.settings.addressText;
@@ -1098,6 +1215,7 @@
             } else {
                 document.getElementById('clinic-address-display').classList.add('hidden');
             }
+
             const img = document.getElementById('global-tooth-img');
             const placeholder = document.getElementById('global-tooth-placeholder');
             if(globalState.settings.toothImageBase64) {
@@ -1106,11 +1224,13 @@
             } else {
                 img.classList.add('hidden'); placeholder.classList.remove('hidden');
             }
+
             if(isOwner) {
                 document.getElementById('setting-address-text').value = globalState.settings.addressText || '';
                 document.getElementById('setting-address-url').value = globalState.settings.addressUrl || '';
             }
         }
+
         // ---- TABS ----
         ui.tabs.forEach(tab => {
             tab.addEventListener('click', () => {
@@ -1127,7 +1247,7 @@
                     'tab-settings': {t: 'الإعدادات', s: 'التحكم والتخصيص'}
                 };
                 ui.headerTitle.innerText = titles[target].t;
-                ui.headerSubtitle.innerText = titles[target].s; 
+                ui.headerSubtitle.innerText = titles[target].s;
                 if(target === 'tab-book') {
                     document.getElementById('step-0-doctors').classList.remove('hidden');
                     document.getElementById('step-1-and-2').classList.add('hidden');
@@ -1136,6 +1256,7 @@
                 }
             });
         });
+
         // ---- DOCTORS LIST ----
         function renderDoctorsList() {
             const list = document.getElementById('patient-doctors-list');
@@ -1162,12 +1283,14 @@
                 list.appendChild(btn);
             });
         }
+
         document.getElementById('btn-back-to-doctors').onclick = () => {
             document.getElementById('step-1-and-2').classList.add('hidden');
             document.getElementById('step-0-doctors').classList.remove('hidden');
             ui.headerTitle.innerText = 'الأطباء'; ui.headerSubtitle.innerText = 'اختر طبيبك المفضل';
             newBooking = { doctorId: null, service: null, servicePrice: 0, date: null, time: null, toothName: null, jaw: null };
         };
+
         // ---- SERVICES (patient view with prices) ----
         function renderPatientServices() {
             const grid = document.getElementById('services-grid');
@@ -1185,11 +1308,12 @@
                     btn.classList.add('selected');
                     newBooking.service = srv.name;
                     newBooking.servicePrice = parseInt(srv.price || 0);
-                    checkSelectionComplete(); 
+                    checkSelectionComplete();
                 };
                 grid.appendChild(btn);
             });
         }
+
         // ---- DATES ----
         function renderDates() {
             const container = document.getElementById('dates-container');
@@ -1209,12 +1333,13 @@
                 btn.onclick = () => {
                     document.querySelectorAll('#dates-container .btn-select').forEach(b => b.classList.remove('selected'));
                     btn.classList.add('selected');
-                    newBooking.date = dateStr; newBooking.time = null; 
+                    newBooking.date = dateStr; newBooking.time = null;
                     checkSelectionComplete(); renderTimes();
                 };
                 container.appendChild(btn);
             }
         }
+
         function renderTimes() {
             if(!newBooking.date || !newBooking.doctorId) return;
             const timeArea = document.getElementById('time-selection-area');
@@ -1238,7 +1363,7 @@
                 const btn = document.createElement('button');
                 btn.className = `time-btn p-3 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white font-black transition-all text-sm ${!isFull ? 'active:scale-95' : ''}`;
                 btn.innerText = displayTime;
-                if(isFull) { btn.disabled = true; btn.innerHTML = `<span>${displayTime}</span><div class="text-[10px] text-red-500 mt-1">ممتلئ</div>`; } 
+                if(isFull) { btn.disabled = true; btn.innerHTML = `<span>${displayTime}</span><div class="text-[10px] text-red-500 mt-1">ممتلئ</div>`; }
                 else {
                     btn.onclick = () => {
                         document.querySelectorAll('.time-btn').forEach(b => {
@@ -1248,7 +1373,7 @@
                         btn.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-800', 'dark:text-white');
                         btn.classList.add('selected', 'bg-indigo-500', 'text-white', 'border-transparent');
                         newBooking.time = timeStr;
-                        checkSelectionComplete(); 
+                        checkSelectionComplete();
                     };
                 }
                 grid.appendChild(btn);
@@ -1258,6 +1383,7 @@
                 statusMsg.classList.remove('hidden'); timeArea.classList.add('hidden');
             }
         }
+
         function checkSelectionComplete() {
             const btnNext = document.getElementById('btn-next-step3');
             if(newBooking.service && newBooking.date && newBooking.time) {
@@ -1266,14 +1392,17 @@
                 btnNext.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
             }
         }
+
         document.getElementById('btn-next-step3').onclick = () => {
             document.getElementById('step-1-and-2').classList.add('hidden');
             document.getElementById('step-3').classList.remove('hidden');
         };
+
         document.getElementById('btn-back-tooth').onclick = () => {
             document.getElementById('step-3').classList.add('hidden');
             document.getElementById('step-1-and-2').classList.remove('hidden');
         };
+
         document.getElementById('btn-confirm-book').onclick = async () => {
             const name = document.getElementById('patient-name').value.trim();
             const phone = document.getElementById('patient-phone').value.trim();
@@ -1288,18 +1417,21 @@
                     userId: currentUser.uid,
                     doctorId: newBooking.doctorId,
                     service: newBooking.service,
+                    originalPrice: newBooking.servicePrice,
                     servicePrice: newBooking.servicePrice,
                     date: newBooking.date,
                     time: newBooking.time,
-                    toothName: "", 
-                    notes: "", 
-                    patientPhotoBase64: "", 
+                    toothName: "",
+                    teethList: [],
+                    notes: "",
+                    patientPhotoBase64: "",
                     name: name,
                     phone: phone,
                     age: age,
                     address: address,
                     status: 'قيد الانتظار',
                     paymentMethod: 'نقدي',
+                    isFollowUp: false,
                     createdAt: serverTimestamp()
                 });
                 document.getElementById('patient-name').value = '';
@@ -1313,9 +1445,10 @@
                 const modal = document.getElementById('modal-booking-success');
                 modal.classList.remove('hidden'); modal.style.display = 'flex';
                 setTimeout(() => { modal.classList.remove('opacity-0'); document.getElementById('modal-booking-content').classList.remove('scale-95'); }, 10);
-            } catch (e) { showToast("حدث خطأ", false); } 
+            } catch (e) { showToast("حدث خطأ", false); }
             finally { btn.innerHTML = '<span>تأكيد الحجز النهائي (دفع نقدي)</span><i class="fa-solid fa-check-circle"></i>'; btn.disabled = false; }
         };
+
         // ---- MY BOOKINGS ----
         function renderMyBookings() {
             if(!currentUser) return;
@@ -1341,8 +1474,8 @@
                             <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-1"><i class="fa-solid fa-user-doctor ml-1 text-indigo-400"></i> ${docName}</p>
                             <p class="text-xs font-bold text-gray-500 dark:text-gray-400"><i class="fa-regular fa-clock ml-1 text-indigo-400"></i> ${b.date} - ${formatTime(b.time)}</p>
                         </div>
-                        <div class="bg-indigo-50 dark:bg-slate-800 px-3 py-1 rounded-lg border border-indigo-100 dark:border-slate-700 text-[10px] font-black text-indigo-500 text-center leading-tight max-w-[90px]">
-                            السن<br>${b.toothName}
+                        <div class="bg-indigo-50 dark:bg-slate-800 px-3 py-1 rounded-lg border border-indigo-100 dark:border-slate-700 text-[10px] font-black text-indigo-500 text-center leading-tight max-w-[110px]">
+                            السن<br>${b.toothName || '-'}
                         </div>
                     </div>
                     <div class="flex gap-2 pl-2 pr-3">
@@ -1355,19 +1488,23 @@
                 container.appendChild(card);
             });
         }
+
         window.cancelBooking = async (id) => {
             if(confirm("هل أنت متأكد من إلغاء الحجز؟")) {
-                try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', id)); showToast("تم الإلغاء"); } 
+                try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', id)); showToast("تم الإلغاء"); }
                 catch(e) { showToast("خطأ", false); }
             }
         };
+
         window.markArrived = async (id) => {
             try { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', id), { status: 'arrived' }, { merge: true }); showToast("تم تأكيد حضورك"); }
             catch(e) { showToast("خطأ", false); }
         };
+
         // ---- RATING ----
         let currentRatingDocId = null;
         let currentRatingVal = 0;
+
         setInterval(() => {
             if(!currentUser || globalState.bookings.length === 0) return;
             const now = new Date();
@@ -1383,19 +1520,21 @@
                     currentRatingDocId = b.doctorId;
                     const modal = document.getElementById('modal-rating');
                     modal.style.display = 'flex'; modal.classList.remove('hidden');
-                    localStorage.setItem(`rated_${b.id}`, 'true'); 
+                    localStorage.setItem(`rated_${b.id}`, 'true');
                 }
             });
         }, 60000);
+
         document.querySelectorAll('#star-rating-container i').forEach(star => {
             star.addEventListener('click', (e) => {
                 currentRatingVal = parseInt(e.currentTarget.dataset.val);
                 document.querySelectorAll('#star-rating-container i').forEach(s => {
-                    if(parseInt(s.dataset.val) <= currentRatingVal) { s.classList.remove('text-gray-200', 'dark:text-slate-600'); s.classList.add('text-yellow-400'); } 
+                    if(parseInt(s.dataset.val) <= currentRatingVal) { s.classList.remove('text-gray-200', 'dark:text-slate-600'); s.classList.add('text-yellow-400'); }
                     else { s.classList.remove('text-yellow-400'); s.classList.add('text-gray-200', 'dark:text-slate-600'); }
                 });
             });
         });
+
         document.getElementById('btn-submit-rating').onclick = async () => {
             if(currentRatingVal === 0) return showToast("اختر التقييم بالنجوم", false);
             if(!currentUser || !currentRatingDocId) return;
@@ -1409,6 +1548,7 @@
                 document.querySelectorAll('#star-rating-container i').forEach(s => s.classList.replace('text-yellow-400', 'text-gray-200'));
             } catch(e) { showToast("خطأ", false); }
         };
+
         // ---- GALLERY VIEW ----
         function renderGalleryView() {
             const container = document.getElementById('gallery-container');
@@ -1435,6 +1575,7 @@
                 `;
             });
         }
+
         // ---- ADMIN SELECTS ----
         function updateAdminSelects() {
             const selects = ['filter-today-doctor', 'filter-all-doctor', 'service-doctor-select', 'time-doctor-select', 'holiday-doctor-select', 'filter-rating-doctor', 'gallery-doctor-select', 'manager-doctor-select', 'finance-doctor-select'];
@@ -1449,7 +1590,6 @@
                     if(currentVal && globalState.doctors.find(d=>d.id===currentVal)) el.value = currentVal;
                 }
             });
-            // For manager: pre-select their doctor
             if(isManager && currentManagerDoctorId) {
                 ['service-doctor-select', 'time-doctor-select', 'holiday-doctor-select', 'gallery-doctor-select'].forEach(id => {
                     const el = document.getElementById(id);
@@ -1457,6 +1597,7 @@
                 });
             }
         }
+
         // ---- MANAGERS ----
         function renderManagersList() {
             const list = document.getElementById('managers-list');
@@ -1478,15 +1619,14 @@
                 `;
             });
         }
+
         document.getElementById('btn-save-manager').onclick = async () => {
             const docId = document.getElementById('manager-doctor-select').value;
             const email = document.getElementById('manager-email-input').value.trim().toLowerCase();
             if(!docId) return showToast("اختر الطبيب", false);
             if(!email) return showToast("اكتب البريد الإلكتروني", false);
-            // Check duplicate
             const exists = globalState.managers.find(m => m.email && m.email.toLowerCase() === email);
             if(exists) return showToast("هذا البريد مستخدم بالفعل", false);
-            // Check not owner
             if(email === OWNER_EMAIL.toLowerCase()) return showToast("لا يمكن استخدام بريد المالك", false);
             try {
                 await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'managers'), { doctorId: docId, email: email, createdAt: serverTimestamp() });
@@ -1494,11 +1634,13 @@
                 showToast("تم رفع المشرف");
             } catch(e) { showToast("خطأ", false); }
         };
+
         window.deleteManager = async (id) => {
             if(!confirm("حذف المشرف؟")) return;
             try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'managers', id)); showToast("تم الحذف"); }
             catch(e) { showToast("خطأ", false); }
         };
+
         // ---- DOCTORS ADMIN ----
         function renderAdminDoctorsList() {
             const list = document.getElementById('admin-doctors-list');
@@ -1519,6 +1661,7 @@
                 `;
             });
         }
+
         document.getElementById('btn-add-doctor').onclick = async () => {
             const name = document.getElementById('new-doctor-name').value.trim();
             if(!name) return;
@@ -1527,11 +1670,13 @@
                 document.getElementById('new-doctor-name').value = ''; showToast("تم إضافة الطبيب");
             } catch(e) { showToast("خطأ", false); }
         };
+
         window.deleteDoctor = async (id) => {
             if(!confirm("حذف الطبيب؟")) return;
             try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'doctors', id)); showToast("تم الحذف"); }
             catch(e){ showToast("خطأ", false); }
         };
+
         // ---- ADDRESS ----
         document.getElementById('btn-save-address').onclick = async () => {
             const txt = document.getElementById('setting-address-text').value;
@@ -1541,6 +1686,7 @@
                 showToast("تم حفظ الموقع");
             } catch(e) { showToast("خطأ", false); }
         };
+
         document.getElementById('btn-delete-address').onclick = async () => {
             if(!confirm("حذف الموقع؟")) return;
             try {
@@ -1550,6 +1696,7 @@
                 showToast("تم الحذف");
             } catch(e) { showToast("خطأ", false); }
         };
+
         // ---- STATS ----
         function updateAdminStats() {
             const uniqueUsers = new Set(globalState.bookings.map(b => b.userId)).size;
@@ -1572,89 +1719,141 @@
                 `;
             });
         }
+
         // ---- TODAY BOOKINGS ----
         document.getElementById('filter-today-doctor').onchange = renderAdminTodayBookings;
-function renderAdminTodayBookings() {
-    const docId = document.getElementById('filter-today-doctor').value;
-    const list = document.getElementById('admin-today-list');
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('today-date-display').innerText = today;
-    let filtered = globalState.bookings.filter(b => b.date === today);
-    if(isManager && currentManagerDoctorId) filtered = filtered.filter(b => b.doctorId === currentManagerDoctorId);
-    else if(docId) filtered = filtered.filter(b => b.doctorId === docId);
-    filtered.sort((a,b) => b.createdAt.seconds - a.createdAt.seconds);
-    const totalMoney = filtered.reduce((s, b) => s + parseInt(b.servicePrice || 0), 0);
-    document.getElementById('today-total-money').innerText = formatPrice(totalMoney);
-    if(filtered.length === 0) { list.innerHTML = '<div class="text-center py-10 font-bold text-gray-400">لا توجد حجوزات.</div>'; return; }
-    list.innerHTML = '';
-    filtered.forEach(b => {
-        const docName = globalState.doctors.find(d => d.id === b.doctorId)?.name || 'غير معروف';
-        list.innerHTML += `
-            <div class="glass-card p-5 rounded-3xl border-2 border-indigo-50 dark:border-slate-700 relative overflow-hidden">
-                ${b.status === 'arrived' ? '<div class="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-black px-4 py-1 rounded-bl-xl shadow-sm">متواجد</div>' : ''}
-                <div class="flex justify-between items-start mb-3 mt-2">
-                    <div>
-                        <h4 class="font-black text-lg text-indigo-700 dark:text-indigo-400 mb-1">${b.name}</h4>
-                        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 dir-ltr text-left">${b.phone}</p>
-                        <p class="text-xs font-bold text-gray-400 dark:text-gray-500 mt-1">العمر: ${b.age || '-'} - العنوان: ${b.address || '-'}</p>
+
+        function renderAdminTodayBookings() {
+            const docId = document.getElementById('filter-today-doctor').value;
+            const list = document.getElementById('admin-today-list');
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('today-date-display').innerText = today;
+
+            let filtered = globalState.bookings.filter(b => b.date === today);
+            if(isManager && currentManagerDoctorId) filtered = filtered.filter(b => b.doctorId === currentManagerDoctorId);
+            else if(docId) filtered = filtered.filter(b => b.doctorId === docId);
+
+            filtered.sort((a,b) => b.createdAt.seconds - a.createdAt.seconds);
+
+            const totalMoney = filtered.reduce((s, b) => s + parseInt(b.servicePrice || 0), 0);
+            document.getElementById('today-total-money').innerText = formatPrice(totalMoney);
+
+            if(filtered.length === 0) {
+                list.innerHTML = '<div class="text-center py-10 font-bold text-gray-400">لا توجد حجوزات.</div>';
+                return;
+            }
+
+            list.innerHTML = '';
+            filtered.forEach(b => {
+                const docName = globalState.doctors.find(d => d.id === b.doctorId)?.name || 'غير معروف';
+                const origPrice = b.originalPrice !== undefined ? parseInt(b.originalPrice) : parseInt(b.servicePrice || 0);
+                const finalPrice = parseInt(b.servicePrice || 0);
+                const hasDiscount = origPrice !== finalPrice;
+                const isFollowUp = b.isFollowUp === true;
+
+                const cardClasses = isFollowUp
+                    ? 'bg-purple-100 dark:bg-purple-950/80 p-5 rounded-3xl border-2 border-purple-400 dark:border-purple-500 relative overflow-hidden shadow-lg shadow-purple-500/10'
+                    : 'glass-card p-5 rounded-3xl border-2 border-indigo-50 dark:border-slate-700 relative overflow-hidden';
+
+                list.innerHTML += `
+                    <div class="${cardClasses}">
+                        ${b.status === 'arrived' ? '<div class="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-black px-4 py-1 rounded-bl-xl shadow-sm z-10">متواجد</div>' : ''}
+                        ${isFollowUp ? '<div class="absolute top-0 left-0 bg-purple-600 text-white text-[11px] font-black px-4 py-1 rounded-br-xl shadow-sm z-10 flex items-center gap-1"><i class="fa-solid fa-rotate"></i> مراجع</div>' : ''}
+
+                        <div class="flex justify-between items-start mb-3 mt-4">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h4 class="font-black text-lg ${isFollowUp ? 'text-purple-900 dark:text-purple-200' : 'text-indigo-700 dark:text-indigo-400'}">${b.name}</h4>
+                                    ${isFollowUp ? '<span class="bg-purple-600 text-white text-[10px] font-black px-2 py-0.5 rounded-lg">مراجع</span>' : ''}
+                                </div>
+                                <p class="text-xs font-bold ${isFollowUp ? 'text-purple-700 dark:text-purple-300' : 'text-gray-500 dark:text-gray-400'} dir-ltr text-left">${b.phone}</p>
+                                <p class="text-xs font-bold ${isFollowUp ? 'text-purple-600 dark:text-purple-300' : 'text-gray-400 dark:text-gray-500'} mt-1">العمر: ${b.age || '-'} - العنوان: ${b.address || '-'}</p>
+                                ${b.toothName ? `<p class="text-xs font-black text-indigo-600 dark:text-indigo-300 mt-1"><i class="fa-solid fa-tooth ml-1"></i> الأسنان: ${b.toothName}</p>` : ''}
+                            </div>
+                            <div class="text-left ${isFollowUp ? 'bg-purple-200/80 dark:bg-purple-900/60' : 'bg-gray-50 dark:bg-slate-800'} p-2 rounded-xl text-center min-w-[70px]">
+                                <div class="font-black text-slate-800 dark:text-white">${formatTime(b.time)}</div>
+                                <div class="text-[9px] font-bold ${isFollowUp ? 'text-purple-700 dark:text-purple-300' : 'text-gray-400'}">الوقت</div>
+                            </div>
+                        </div>
+
+                        <div class="${isFollowUp ? 'bg-purple-200/70 dark:bg-purple-900/40 border-purple-300 dark:border-purple-700' : 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-100 dark:border-indigo-900/50'} p-3 rounded-2xl flex justify-between items-center text-sm font-bold border mb-4">
+                            <span class="${isFollowUp ? 'text-purple-900 dark:text-purple-200' : 'text-indigo-600 dark:text-indigo-300'}">${b.service}</span>
+                            <div class="flex flex-col items-end">
+                                ${hasDiscount ? `<span class="text-[10px] text-gray-400 line-through">الأصلي: ${formatPrice(origPrice)}</span>` : ''}
+                                <span class="text-green-600 dark:text-green-400 font-black">${hasDiscount ? 'بعد التخفيض: ' : ''}${formatPrice(finalPrice)}</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-2 mb-3 border-t ${isFollowUp ? 'border-purple-300 dark:border-purple-800' : 'border-gray-100 dark:border-slate-700'} pt-3">
+                            <button onclick="openActionModal('tooth', '${b.id}')" class="flex flex-col items-center justify-center p-2 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 active:scale-95 transition-all text-indigo-500">
+                                <i class="fa-solid fa-tooth mb-1 text-lg"></i>
+                                <span class="text-[10px] font-black">تحديد السن</span>
+                            </button>
+                            <button onclick="openActionModal('notes', '${b.id}')" class="flex flex-col items-center justify-center p-2 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 active:scale-95 transition-all text-amber-500">
+                                <i class="fa-solid fa-file-pen mb-1 text-lg"></i>
+                                <span class="text-[10px] font-black">ملاحظات</span>
+                            </button>
+                            <button onclick="openActionModal('photo', '${b.id}')" class="flex flex-col items-center justify-center p-2 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 active:scale-95 transition-all text-emerald-500">
+                                <i class="fa-solid fa-camera mb-1 text-lg"></i>
+                                <span class="text-[10px] font-black">صورة المريض</span>
+                            </button>
+                            <button onclick="openActionModal('price', '${b.id}')" class="flex flex-col items-center justify-center p-2 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 active:scale-95 transition-all text-rose-500">
+                                <i class="fa-solid fa-tags mb-1 text-lg"></i>
+                                <span class="text-[9px] font-black leading-tight">السعر والتخفيض</span>
+                            </button>
+                        </div>
+
+                        ${(!docId && isOwner) ? `<div class="mt-2 text-[10px] ${isFollowUp ? 'text-purple-700 dark:text-purple-300' : 'text-gray-400'} font-bold text-center"><i class="fa-solid fa-user-doctor"></i> ${docName}</div>` : ''}
+                        <div class="mt-2 flex justify-end">
+                            <button onclick="deleteBooking('${b.id}')" class="text-red-500 bg-red-50 dark:bg-red-900/20 text-xs font-black px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-trash ml-1"></i> حذف</button>
+                        </div>
                     </div>
-                    <div class="text-left bg-gray-50 dark:bg-slate-800 p-2 rounded-xl text-center min-w-[70px]">
-                        <div class="font-black text-slate-800 dark:text-white">${b.time}</div>
-                        <div class="text-[9px] font-bold text-gray-400">الوقت</div>
-                    </div>
-                </div>
-                <div class="bg-indigo-50 dark:bg-indigo-900/20 p-3 rounded-2xl flex justify-between items-center text-sm font-bold border border-indigo-100 dark:border-indigo-900/50 mb-4">
-                    <span class="text-indigo-600 dark:text-indigo-300">${b.service}</span>
-                    <span class="text-green-600">${formatPrice(b.servicePrice)}</span>
-                </div>
-                <div class="grid grid-cols-3 gap-2 mb-3 border-t border-gray-100 dark:border-slate-700 pt-3">
-                    <button onclick="openActionModal('tooth', '${b.id}')" class="flex flex-col items-center justify-center p-2 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-600 active:scale-95 transition-all text-indigo-500">
-                        <i class="fa-solid fa-tooth mb-1 text-lg"></i>
-                        <span class="text-[10px] font-black">تحديد السن</span>
-                    </button>
-                    <button onclick="openActionModal('notes', '${b.id}')" class="flex flex-col items-center justify-center p-2 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-600 active:scale-95 transition-all text-amber-500">
-                        <i class="fa-solid fa-file-pen mb-1 text-lg"></i>
-                        <span class="text-[10px] font-black">ملاحظات</span>
-                    </button>
-                    <button onclick="openActionModal('photo', '${b.id}')" class="flex flex-col items-center justify-center p-2 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-600 active:scale-95 transition-all text-emerald-500">
-                        <i class="fa-solid fa-camera mb-1 text-lg"></i>
-                        <span class="text-[10px] font-black">صورة المريض</span>
-                    </button>
-                </div>
-                ${(!docId && isOwner) ? `<div class="mt-2 text-[10px] text-gray-400 font-bold text-center"><i class="fa-solid fa-user-doctor"></i> ${docName}</div>` : ''}
-                <div class="mt-2 flex justify-end">
-                    <button onclick="deleteBooking('${b.id}')" class="text-red-500 bg-red-50 dark:bg-red-900/20 text-xs font-black px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-trash ml-1"></i> حذف</button>
-                </div>
-            </div>
-        `;
-    });
-}
+                `;
+            });
+        }
+
         window.deleteBooking = async (id) => {
             if(!confirm("حذف هذا الحجز؟")) return;
             try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', id)); showToast("تم الحذف"); }
             catch(e){ showToast("خطأ", false); }
         };
+
         // ---- ALL PATIENTS ----
         document.getElementById('filter-all-doctor').onchange = renderAdminAllPatients;
         document.getElementById('search-patient').onkeyup = renderAdminAllPatients;
+
         function renderAdminAllPatients() {
             const docId = document.getElementById('filter-all-doctor').value;
             const search = document.getElementById('search-patient').value.toLowerCase();
             const list = document.getElementById('admin-all-patients-list');
+
             let filtered = [...globalState.bookings];
             if(isManager && currentManagerDoctorId) filtered = filtered.filter(b => b.doctorId === currentManagerDoctorId);
             else if(docId) filtered = filtered.filter(b => b.doctorId === docId);
+
             if(search) filtered = filtered.filter(b => b.name.toLowerCase().includes(search) || b.phone.includes(search));
             filtered.sort((a,b) => b.createdAt.seconds - a.createdAt.seconds);
+
             document.getElementById('all-patients-count').innerText = filtered.length;
-            if(filtered.length === 0) { list.innerHTML = '<div class="text-center py-10 font-bold text-gray-400">لا توجد نتائج.</div>'; return; }
+            if(filtered.length === 0) {
+                list.innerHTML = '<div class="text-center py-10 font-bold text-gray-400">لا توجد نتائج.</div>';
+                return;
+            }
+
             list.innerHTML = '';
             filtered.forEach(b => {
                 const docName = globalState.doctors.find(d => d.id === b.doctorId)?.name || 'غير معروف';
+                const origPrice = b.originalPrice !== undefined ? parseInt(b.originalPrice) : parseInt(b.servicePrice || 0);
+                const finalPrice = parseInt(b.servicePrice || 0);
+                const hasDiscount = origPrice !== finalPrice;
+
                 list.innerHTML += `
                     <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 text-sm">
                         <div class="flex justify-between items-center mb-2 border-b border-gray-100 dark:border-slate-700 pb-2">
-                            <span class="font-black text-emerald-600">${b.name}</span>
+                            <div class="flex items-center gap-2">
+                                <span class="font-black text-emerald-600">${b.name}</span>
+                                ${b.isFollowUp ? '<span class="bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 text-[10px] font-black px-2 py-0.5 rounded-md">مراجع</span>' : ''}
+                            </div>
                             <span class="text-[10px] text-gray-400 font-bold dir-ltr">${new Date(b.createdAt.seconds * 1000).toLocaleDateString()}</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2 text-xs font-bold text-gray-600 dark:text-gray-300 mb-3">
@@ -1662,7 +1861,7 @@ function renderAdminTodayBookings() {
                             <div><i class="fa-solid fa-user-clock text-gray-400 ml-1"></i> العمر: ${b.age || '-'}</div>
                             <div class="col-span-2"><i class="fa-solid fa-map-location text-gray-400 ml-1"></i> ${b.address || '-'}</div>
                             <div class="col-span-2"><i class="fa-solid fa-tooth text-gray-400 ml-1"></i> ${b.service}</div>
-                            <div class="col-span-2 text-green-600"><i class="fa-solid fa-money-bill text-green-400 ml-1"></i> السعر: ${formatPrice(b.servicePrice)}</div>
+                            <div class="col-span-2 text-green-600"><i class="fa-solid fa-money-bill text-green-400 ml-1"></i> السعر: ${hasDiscount ? `<span class="line-through text-gray-400 ml-1">${formatPrice(origPrice)}</span>` : ''} ${formatPrice(finalPrice)}</div>
                             <div class="col-span-2"><i class="fa-solid fa-user-doctor text-gray-400 ml-1"></i> الطبيب: ${docName}</div>
                         </div>
                         <div class="bg-gray-50 dark:bg-slate-900 rounded-xl p-3 space-y-2 text-xs font-bold border border-gray-100 dark:border-slate-600">
@@ -1670,17 +1869,181 @@ function renderAdminTodayBookings() {
                             <div class="text-amber-500"><i class="fa-solid fa-file-pen ml-1"></i> ملاحظات: <span class="text-gray-600 dark:text-gray-300">${b.notes || 'لا توجد'}</span></div>
                             ${b.patientPhotoBase64 ? `<div class="mt-2"><img src="${b.patientPhotoBase64}" class="w-16 h-16 object-cover rounded-lg border border-gray-200"></div>` : ''}
                         </div>
-                        <div class="mt-3 flex justify-end">
-                            <button onclick="deleteBooking('${b.id}')" class="text-red-500 bg-red-50 dark:bg-red-900/20 text-xs font-black px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-trash ml-1"></i> حذف</button>
+                        <div class="mt-3 flex justify-between items-center gap-2">
+                            <button onclick="openFollowUpModal('${b.id}')" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-black px-4 py-2 rounded-xl shadow-sm active:scale-95 transition-all flex items-center gap-1.5">
+                                <i class="fa-solid fa-calendar-plus"></i> حجز مراجع
+                            </button>
+                            <button onclick="deleteBooking('${b.id}')" class="text-red-500 bg-red-50 dark:bg-red-900/20 text-xs font-black px-3 py-2 rounded-lg active:scale-95"><i class="fa-solid fa-trash ml-1"></i> حذف</button>
                         </div>
                     </div>
                 `;
             });
         }
+
+        // ---- FOLLOW-UP BOOKING (حجز مراجع) ----
+        let followUpSourceBooking = null;
+        let followUpSelectedDate = null;
+        let followUpSelectedTime = null;
+
+        window.openFollowUpModal = (bookingId) => {
+            const b = globalState.bookings.find(x => x.id === bookingId);
+            if(!b) return;
+            followUpSourceBooking = b;
+            followUpSelectedDate = null;
+            followUpSelectedTime = null;
+
+            const docName = globalState.doctors.find(d => d.id === b.doctorId)?.name || 'الطبيب';
+            document.getElementById('followup-patient-info').innerText = `المريض: ${b.name} | الطبيب: ${docName}`;
+            document.getElementById('followup-time-area').classList.add('hidden');
+            document.getElementById('followup-day-status').classList.add('hidden');
+
+            const btnConfirm = document.getElementById('btn-confirm-followup');
+            btnConfirm.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+
+            renderFollowUpDates();
+            document.getElementById('modal-admin-followup').style.display = 'flex';
+        };
+
+        function renderFollowUpDates() {
+            const container = document.getElementById('followup-dates-container');
+            container.innerHTML = '';
+            const today = new Date();
+            for(let i = 0; i < 30; i++) {
+                const date = new Date(today); date.setDate(today.getDate() + i);
+                const y = date.getFullYear();
+                const m = String(date.getMonth()+1).padStart(2,'0');
+                const d = String(date.getDate()).padStart(2,'0');
+                const dateStr = `${y}-${m}-${d}`;
+                const dayName = date.toLocaleDateString('ar-EG', { weekday: 'short' });
+                const dayNum = date.getDate();
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'followup-date-btn btn-select min-w-[65px] h-[75px] flex flex-col items-center justify-center rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-900 transition-all active:scale-95 shrink-0';
+                btn.innerHTML = `<span class="text-[11px] font-bold text-gray-500 dark:text-gray-400 mb-1">${dayName}</span><span class="text-lg font-black dark:text-white">${dayNum}</span>`;
+                btn.onclick = () => {
+                    document.querySelectorAll('.followup-date-btn').forEach(el => el.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    followUpSelectedDate = dateStr;
+                    followUpSelectedTime = null;
+                    updateFollowUpConfirmBtn();
+                    renderFollowUpTimes();
+                };
+                container.appendChild(btn);
+            }
+        }
+
+        function renderFollowUpTimes() {
+            if(!followUpSelectedDate || !followUpSourceBooking) return;
+            const docId = followUpSourceBooking.doctorId;
+            const timeArea = document.getElementById('followup-time-area');
+            const grid = document.getElementById('followup-times-grid');
+            const statusMsg = document.getElementById('followup-day-status');
+
+            const isHoliday = globalState.holidays.find(h => h.doctorId === docId && h.date === followUpSelectedDate);
+            if(isHoliday) {
+                statusMsg.innerText = `عطلة: ${isHoliday.note}`;
+                statusMsg.classList.remove('hidden');
+                timeArea.classList.add('hidden');
+                return;
+            }
+
+            statusMsg.classList.add('hidden');
+            timeArea.classList.remove('hidden');
+            grid.innerHTML = '';
+
+            const docSet = globalState.doctorSettings[docId] || { startTime: 16, endTime: 21, maxPerSlot: 6 };
+            let allBooked = true;
+
+            for(let i = parseInt(docSet.startTime); i <= parseInt(docSet.endTime); i++) {
+                const timeStr = `${i}:00`;
+                const displayTime = formatTime(timeStr);
+                const bookedCount = globalState.bookings.filter(b => b.doctorId === docId && b.date === followUpSelectedDate && b.time === timeStr).length;
+                const isFull = bookedCount >= parseInt(docSet.maxPerSlot);
+                if(!isFull) allBooked = false;
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `followup-time-btn time-btn p-3 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-white font-black transition-all text-xs ${!isFull ? 'active:scale-95' : ''}`;
+                btn.innerText = displayTime;
+
+                if(isFull) {
+                    btn.disabled = true;
+                    btn.innerHTML = `<span>${displayTime}</span><div class="text-[9px] text-red-500 mt-0.5">ممتلئ</div>`;
+                } else {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.followup-time-btn').forEach(b => {
+                            b.classList.remove('selected', 'bg-purple-600', 'text-white', 'border-transparent');
+                            if(!b.disabled) b.classList.add('bg-white', 'dark:bg-slate-900', 'text-slate-800', 'dark:text-white');
+                        });
+                        btn.classList.remove('bg-white', 'dark:bg-slate-900', 'text-slate-800', 'dark:text-white');
+                        btn.classList.add('selected', 'bg-purple-600', 'text-white', 'border-transparent');
+                        followUpSelectedTime = timeStr;
+                        updateFollowUpConfirmBtn();
+                    };
+                }
+                grid.appendChild(btn);
+            }
+
+            if(allBooked) {
+                statusMsg.innerText = "اكتمل الحجز لهذا اليوم";
+                statusMsg.classList.remove('hidden');
+                timeArea.classList.add('hidden');
+            }
+        }
+
+        function updateFollowUpConfirmBtn() {
+            const btn = document.getElementById('btn-confirm-followup');
+            if(followUpSelectedDate && followUpSelectedTime) {
+                btn.classList.remove('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+            } else {
+                btn.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+            }
+        }
+
+        document.getElementById('btn-confirm-followup').onclick = async () => {
+            if(!followUpSourceBooking || !followUpSelectedDate || !followUpSelectedTime) return;
+            const btn = document.getElementById('btn-confirm-followup');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحجز...';
+            btn.disabled = true;
+            try {
+                const origPrice = followUpSourceBooking.originalPrice !== undefined ? followUpSourceBooking.originalPrice : (followUpSourceBooking.servicePrice || 0);
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), {
+                    userId: followUpSourceBooking.userId || currentUser.uid,
+                    doctorId: followUpSourceBooking.doctorId,
+                    service: followUpSourceBooking.service,
+                    originalPrice: origPrice,
+                    servicePrice: followUpSourceBooking.servicePrice || 0,
+                    date: followUpSelectedDate,
+                    time: followUpSelectedTime,
+                    toothName: followUpSourceBooking.toothName || "",
+                    teethList: followUpSourceBooking.teethList || [],
+                    notes: followUpSourceBooking.notes || "",
+                    patientPhotoBase64: followUpSourceBooking.patientPhotoBase64 || "",
+                    name: followUpSourceBooking.name,
+                    phone: followUpSourceBooking.phone,
+                    age: followUpSourceBooking.age || "",
+                    address: followUpSourceBooking.address || "",
+                    status: 'قيد الانتظار',
+                    paymentMethod: 'نقدي',
+                    isFollowUp: true,
+                    createdAt: serverTimestamp()
+                });
+                showToast("تم حجز موعد المراجع بنجاح");
+                closeAdminModal('modal-admin-followup');
+            } catch(e) {
+                showToast("حدث خطأ أثناء الحجز", false);
+            } finally {
+                btn.innerHTML = 'تأكيد حجز المراجع';
+                btn.disabled = false;
+            }
+        };
+
         // ---- FINANCE ----
         document.getElementById('finance-doctor-select').onchange = renderFinance;
         document.getElementById('finance-date').onchange = renderFinance;
         document.getElementById('finance-date').value = new Date().toISOString().split('T')[0];
+
         function renderFinance() {
             if(!isOwner && !isManager) return;
             const dateVal = document.getElementById('finance-date').value || new Date().toISOString().split('T')[0];
@@ -1700,7 +2063,10 @@ function renderAdminTodayBookings() {
                 list.innerHTML += `
                     <div class="glass-card p-4 rounded-2xl flex justify-between items-center">
                         <div>
-                            <div class="font-black dark:text-white">${b.name}</div>
+                            <div class="font-black dark:text-white flex items-center gap-2">
+                                <span>${b.name}</span>
+                                ${b.isFollowUp ? '<span class="bg-purple-100 text-purple-700 text-[10px] font-black px-2 py-0.5 rounded-md">مراجع</span>' : ''}
+                            </div>
                             <div class="text-xs font-bold text-gray-500 mt-1">${b.service}</div>
                             ${isOwner ? `<div class="text-[10px] font-bold text-indigo-500 mt-1">${docName}</div>` : ''}
                         </div>
@@ -1709,6 +2075,7 @@ function renderAdminTodayBookings() {
                 `;
             });
         }
+
         // ---- SERVICES ADMIN ----
         document.getElementById('service-doctor-select').onchange = renderAdminServicesList;
         function renderAdminServicesList() {
@@ -1734,6 +2101,7 @@ function renderAdminTodayBookings() {
                 `;
             });
         }
+
         document.getElementById('btn-add-service').onclick = async () => {
             let docId = document.getElementById('service-doctor-select').value;
             if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
@@ -1741,14 +2109,15 @@ function renderAdminTodayBookings() {
             const price = parseInt(document.getElementById('new-service-price').value || 0);
             if(!docId || !name) return showToast("اختر الطبيب واكتب اسم الخدمة", false);
             if(!price || price < 0) return showToast("اكتب سعر صحيح", false);
-            try { 
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'services'), { doctorId: docId, name, price }); 
+            try {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'services'), { doctorId: docId, name, price });
                 document.getElementById('new-service-input').value = '';
                 document.getElementById('new-service-price').value = '';
                 showToast("تم الإضافة");
-            } 
+            }
             catch(e) {showToast("خطأ", false);}
         };
+
         window.editService = async (id) => {
             const srv = globalState.services.find(s => s.id === id);
             if(!srv) return;
@@ -1763,10 +2132,12 @@ function renderAdminTodayBookings() {
                 showToast("تم التعديل");
             } catch(e) { showToast("خطأ", false); }
         };
-        window.deleteService = async (id) => { 
+
+        window.deleteService = async (id) => {
             if(!confirm("حذف الخدمة؟")) return;
             try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'services', id)); showToast("تم الحذف"); } catch(e){ showToast("خطأ", false); }
         };
+
         // ---- TIMES ADMIN ----
         document.getElementById('time-doctor-select').onchange = () => {
             const docId = document.getElementById('time-doctor-select').value;
@@ -1778,6 +2149,7 @@ function renderAdminTodayBookings() {
             document.getElementById('setting-end-time').value = set.endTime > 12 ? set.endTime - 12 : (set.endTime === 0 ? 12 : set.endTime);
             document.getElementById('setting-max-per-slot').value = set.maxPerSlot;
         };
+
         document.getElementById('btn-save-times').onclick = async () => {
             let docId = document.getElementById('time-doctor-select').value;
             if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
@@ -1792,6 +2164,7 @@ function renderAdminTodayBookings() {
                 showToast("تم الحفظ");
             } catch(e) {showToast("خطأ", false);}
         };
+
         // ---- HOLIDAYS ADMIN ----
         document.getElementById('holiday-doctor-select').onchange = renderAdminHolidaysList;
         function renderAdminHolidaysList() {
@@ -1806,6 +2179,7 @@ function renderAdminTodayBookings() {
                 list.innerHTML += `<div class="flex justify-between items-center p-4 glass-card rounded-2xl"><div class="flex flex-col"><span class="font-black text-red-500 dir-ltr text-left">${h.date}</span><span class="text-xs text-gray-500 font-bold">${h.note}</span></div><button onclick="deleteHoliday('${h.id}')" class="text-red-500 bg-red-50 dark:bg-red-900/20 w-9 h-9 rounded-full flex items-center justify-center active:scale-95"><i class="fa-solid fa-trash"></i></button></div>`;
             });
         }
+
         document.getElementById('btn-add-holiday').onclick = async () => {
             let docId = document.getElementById('holiday-doctor-select').value;
             if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
@@ -1814,10 +2188,12 @@ function renderAdminTodayBookings() {
             if(!docId || !date) return showToast("اختر الطبيب والتاريخ", false);
             try { await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'holidays'), { doctorId: docId, date, note }); document.getElementById('holiday-note').value=''; showToast("تم الإضافة"); } catch(e){ showToast("خطأ", false); }
         };
-        window.deleteHoliday = async (id) => { 
+
+        window.deleteHoliday = async (id) => {
             if(!confirm("حذف العطلة؟")) return;
             try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'holidays', id)); showToast("تم الحذف"); } catch(e){ showToast("خطأ", false); }
         };
+
         // ---- RATINGS ADMIN ----
         document.getElementById('filter-rating-doctor').onchange = renderAdminRatingsList;
         function renderAdminRatingsList() {
@@ -1848,6 +2224,7 @@ function renderAdminTodayBookings() {
             });
             document.getElementById('avg-rating-text').innerText = (sum / filtered.length).toFixed(1);
         }
+
         // ---- IMAGE COMPRESS ----
         function compressImage(file, callback, maxWidth = 800) {
             if(!file) return;
@@ -1867,6 +2244,7 @@ function renderAdminTodayBookings() {
             };
             reader.readAsDataURL(file);
         }
+
         // ---- GALLERY ADMIN ----
         document.getElementById('tab-btn-results').onclick = () => {
             document.getElementById('gallery-results-tab').classList.remove('hidden');
@@ -1874,6 +2252,7 @@ function renderAdminTodayBookings() {
             document.getElementById('tab-btn-results').className = "flex-1 py-3 text-sm font-black rounded-xl bg-white dark:bg-slate-700 text-indigo-600 dark:text-white shadow-sm transition-all";
             document.getElementById('tab-btn-tooth').className = "flex-1 py-3 text-sm font-black rounded-xl text-gray-500 dark:text-gray-400 transition-all";
         };
+
         document.getElementById('tab-btn-tooth').onclick = () => {
             if(isManager) return showToast("هذا الخيار للمالك فقط", false);
             document.getElementById('gallery-results-tab').classList.add('hidden');
@@ -1886,6 +2265,7 @@ function renderAdminTodayBookings() {
                 document.getElementById('placeholder-tooth-img').classList.add('hidden');
             }
         };
+
         ['before', 'after'].forEach(type => {
             document.getElementById(`upload-${type}`).onchange = (e) => {
                 compressImage(e.target.files[0], (base64) => {
@@ -1896,6 +2276,7 @@ function renderAdminTodayBookings() {
                 }, 600);
             };
         });
+
         document.getElementById('btn-save-gallery').onclick = async () => {
             let docId = document.getElementById('gallery-doctor-select').value;
             if(isManager && currentManagerDoctorId) docId = currentManagerDoctorId;
@@ -1914,6 +2295,7 @@ function renderAdminTodayBookings() {
             } catch(e) { showToast("خطأ", false); }
             finally { btn.innerHTML = 'نشر الحالة'; }
         };
+
         document.getElementById('gallery-doctor-select').onchange = renderAdminGalleryList;
         function renderAdminGalleryList() {
             let docId = document.getElementById('gallery-doctor-select').value;
@@ -1935,10 +2317,12 @@ function renderAdminTodayBookings() {
                 `;
             });
         }
-        window.deleteGalleryItem = async (id) => { 
+
+        window.deleteGalleryItem = async (id) => {
             if(!confirm("حذف الحالة؟")) return;
             try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'gallery', id)); showToast("تم الحذف"); } catch(e){ showToast("خطأ", false); }
         };
+
         // ---- TOOTH IMAGE ----
         document.getElementById('upload-tooth-img').onchange = (e) => {
             compressImage(e.target.files[0], (base64) => {
@@ -1948,6 +2332,7 @@ function renderAdminTodayBookings() {
                 document.getElementById('placeholder-tooth-img').classList.add('hidden');
             }, 800);
         };
+
         document.getElementById('btn-save-tooth-img').onclick = async () => {
             if(!tempTooth) return showToast("ارفع الصورة أولاً", false);
             const btn = document.getElementById('btn-save-tooth-img');
@@ -1958,6 +2343,7 @@ function renderAdminTodayBookings() {
             } catch(e) { showToast("خطأ", false); }
             finally { btn.innerHTML = 'اعتماد الصورة'; }
         };
+
         document.getElementById('btn-delete-tooth-img').onclick = async () => {
             if(!confirm("حذف صورة الأسنان؟")) return;
             try {
@@ -1968,34 +2354,86 @@ function renderAdminTodayBookings() {
                 showToast("تم الحذف");
             } catch(e) { showToast("خطأ", false); }
         };
+
+        // ---- ADMIN ACTION MODALS (Tooth Multiple, Notes, Photo, Price/Discount) ----
         let currentAdminBookingId = null;
-        let adminTempJaw = null;
+        let adminTeethEntries = [{ name: '', jaw: null }];
         let adminTempPhoto = null;
+
         window.closeAdminModal = (id) => {
             document.getElementById(id).style.display = 'none';
         };
+
+        function renderAdminTeethInputs() {
+            const container = document.getElementById('admin-teeth-list-container');
+            container.innerHTML = '';
+            adminTeethEntries.forEach((entry, index) => {
+                const upperSelected = entry.jaw === 'علوي';
+                const lowerSelected = entry.jaw === 'سفلي';
+                const wrapper = document.createElement('div');
+                wrapper.className = index > 0 ? 'pt-4 border-t border-gray-200 dark:border-slate-700 relative' : 'relative';
+
+                wrapper.innerHTML = `
+                    ${index > 0 ? `
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-black text-indigo-500">سن إضافي (${index + 1})</span>
+                            <button type="button" onclick="removeAdminToothEntry(${index})" class="text-red-500 text-xs font-black bg-red-50 dark:bg-red-900/20 px-2.5 py-1 rounded-lg active:scale-95">حذف</button>
+                        </div>
+                    ` : ''}
+                    <input type="text" oninput="updateAdminToothName(${index}, this.value)" value="${entry.name || ''}" class="w-full p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white outline-none font-bold mb-3" placeholder="رمز السن...">
+                    <div class="grid grid-cols-2 gap-3">
+                        <button type="button" onclick="selectAdminJawEntry(${index}, 'علوي')" class="p-4 rounded-2xl border-2 font-black active:scale-95 transition-all ${upperSelected ? 'bg-indigo-500 text-white border-transparent' : 'border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white'}"><i class="fa-solid fa-arrow-up"></i> علوي</button>
+                        <button type="button" onclick="selectAdminJawEntry(${index}, 'سفلي')" class="p-4 rounded-2xl border-2 font-black active:scale-95 transition-all ${lowerSelected ? 'bg-indigo-500 text-white border-transparent' : 'border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white'}"><i class="fa-solid fa-arrow-down"></i> سفلي</button>
+                    </div>
+                `;
+                container.appendChild(wrapper);
+            });
+        }
+
+        window.updateAdminToothName = (index, val) => {
+            if(adminTeethEntries[index]) {
+                adminTeethEntries[index].name = val;
+            }
+        };
+
+        window.selectAdminJawEntry = (index, jaw) => {
+            if(adminTeethEntries[index]) {
+                adminTeethEntries[index].jaw = jaw;
+                renderAdminTeethInputs();
+            }
+        };
+
+        window.removeAdminToothEntry = (index) => {
+            adminTeethEntries.splice(index, 1);
+            if(adminTeethEntries.length === 0) adminTeethEntries.push({ name: '', jaw: null });
+            renderAdminTeethInputs();
+        };
+
+        document.getElementById('btn-add-another-tooth').onclick = () => {
+            adminTeethEntries.push({ name: '', jaw: null });
+            renderAdminTeethInputs();
+        };
+
         window.openActionModal = (type, bookingId) => {
             currentAdminBookingId = bookingId;
             const b = globalState.bookings.find(x => x.id === bookingId);
             if(!b) return;
+
             if(type === 'tooth') {
                 document.getElementById('modal-admin-tooth').style.display = 'flex';
-                document.getElementById('admin-tooth-name').value = b.toothName ? b.toothName.split(' - ')[0] : '';
-                adminTempJaw = b.toothName && b.toothName.includes(' - ') ? b.toothName.split(' - ')[1] : null;
-                document.querySelectorAll('.admin-jaw-btn').forEach(btn => {
-                    btn.classList.remove('bg-indigo-500', 'text-white', 'border-transparent');
-                    btn.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-800', 'dark:text-white');
-                });
-                if(adminTempJaw === 'علوي') {
-                    const u = document.getElementById('admin-jaw-upper');
-                    u.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-800', 'dark:text-white');
-                    u.classList.add('bg-indigo-500', 'text-white', 'border-transparent');
+                if(Array.isArray(b.teethList) && b.teethList.length > 0) {
+                    adminTeethEntries = b.teethList.map(item => ({ name: item.name || '', jaw: item.jaw || null }));
+                } else if(b.toothName && b.toothName.trim() !== '') {
+                    const parts = b.toothName.split(' ، ');
+                    adminTeethEntries = parts.map(p => {
+                        const segs = p.split(' - ');
+                        return { name: segs[0] || '', jaw: segs[1] || null };
+                    });
+                } else {
+                    adminTeethEntries = [{ name: '', jaw: null }];
                 }
-                if(adminTempJaw === 'سفلي') {
-                    const l = document.getElementById('admin-jaw-lower');
-                    l.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-800', 'dark:text-white');
-                    l.classList.add('bg-indigo-500', 'text-white', 'border-transparent');
-                }
+                renderAdminTeethInputs();
+
                 const img = document.getElementById('admin-global-tooth-img');
                 const placeholder = document.getElementById('admin-global-tooth-placeholder');
                 if(globalState.settings.toothImageBase64) {
@@ -2004,11 +2442,11 @@ function renderAdminTodayBookings() {
                 } else {
                     img.classList.add('hidden'); placeholder.classList.remove('hidden');
                 }
-            } 
+            }
             else if(type === 'notes') {
                 document.getElementById('modal-admin-notes').style.display = 'flex';
                 document.getElementById('admin-notes-text').value = b.notes || '';
-            } 
+            }
             else if(type === 'photo') {
                 document.getElementById('modal-admin-photo').style.display = 'flex';
                 adminTempPhoto = b.patientPhotoBase64 || null;
@@ -2020,28 +2458,33 @@ function renderAdminTodayBookings() {
                     prev.classList.add('hidden'); place.classList.remove('hidden');
                 }
             }
+            else if(type === 'price') {
+                document.getElementById('modal-admin-price').style.display = 'flex';
+                const origPrice = b.originalPrice !== undefined ? parseInt(b.originalPrice) : parseInt(b.servicePrice || 0);
+                const currentPrice = parseInt(b.servicePrice || 0);
+                document.getElementById('admin-original-price-display').innerText = formatPrice(origPrice);
+                document.getElementById('admin-discounted-price-input').value = currentPrice;
+            }
         };
-        window.selectAdminJaw = (jaw) => {
-            adminTempJaw = jaw;
-            document.querySelectorAll('.admin-jaw-btn').forEach(b => {
-                b.classList.remove('bg-indigo-500', 'text-white', 'border-transparent');
-                b.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-800', 'dark:text-white');
-            });
-            const btn = jaw === 'علوي' ? document.getElementById('admin-jaw-upper') : document.getElementById('admin-jaw-lower');
-            btn.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-800', 'dark:text-white');
-            btn.classList.add('bg-indigo-500', 'text-white', 'border-transparent');
-        };
+
         document.getElementById('btn-save-admin-tooth').onclick = async () => {
-            const name = document.getElementById('admin-tooth-name').value.trim();
-            if(!name || !adminTempJaw) return showToast("أدخل الرمز واختر الفك", false);
+            const validEntries = adminTeethEntries
+                .map(e => ({ name: (e.name || '').trim(), jaw: e.jaw }))
+                .filter(e => e.name !== '' && e.jaw);
+
+            if(validEntries.length === 0) return showToast("أدخل رمز السن واختر الفك", false);
+
+            const formattedString = validEntries.map(e => `${e.name} - ${e.jaw}`).join(' ، ');
             try {
                 await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', currentAdminBookingId), {
-                    toothName: `${name} - ${adminTempJaw}`
+                    toothName: formattedString,
+                    teethList: validEntries
                 });
-                showToast("تم الحفظ");
+                showToast("تم حفظ الأسنان");
                 closeAdminModal('modal-admin-tooth');
             } catch(e) { showToast("خطأ", false); }
         };
+
         document.getElementById('btn-save-admin-notes').onclick = async () => {
             const notes = document.getElementById('admin-notes-text').value.trim();
             try {
@@ -2050,6 +2493,7 @@ function renderAdminTodayBookings() {
                 closeAdminModal('modal-admin-notes');
             } catch(e) { showToast("خطأ", false); }
         };
+
         document.getElementById('admin-upload-photo').onchange = (e) => {
             compressImage(e.target.files[0], (base64) => {
                 adminTempPhoto = base64;
@@ -2058,12 +2502,32 @@ function renderAdminTodayBookings() {
                 document.getElementById('admin-placeholder-photo').classList.add('hidden');
             }, 600);
         };
+
         document.getElementById('btn-save-admin-photo').onclick = async () => {
             if(!adminTempPhoto) return showToast("ارفع الصورة أولاً", false);
             try {
                 await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', currentAdminBookingId), { patientPhotoBase64: adminTempPhoto });
                 showToast("تم الحفظ");
                 closeAdminModal('modal-admin-photo');
+            } catch(e) { showToast("خطأ", false); }
+        };
+
+        document.getElementById('btn-save-admin-price').onclick = async () => {
+            const b = globalState.bookings.find(x => x.id === currentAdminBookingId);
+            if(!b) return;
+            const origPrice = b.originalPrice !== undefined ? parseInt(b.originalPrice) : parseInt(b.servicePrice || 0);
+            const newPriceVal = document.getElementById('admin-discounted-price-input').value;
+            const newPrice = parseInt(newPriceVal);
+
+            if(isNaN(newPrice) || newPrice < 0) return showToast("يرجى إدخال سعر صحيح", false);
+
+            try {
+                await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'bookings', currentAdminBookingId), {
+                    originalPrice: origPrice,
+                    servicePrice: newPrice
+                });
+                showToast("تم حفظ السعر بنجاح");
+                closeAdminModal('modal-admin-price');
             } catch(e) { showToast("خطأ", false); }
         };
     </script>
