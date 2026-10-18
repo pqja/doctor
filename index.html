@@ -90,11 +90,17 @@
             color: white; border-color: transparent; transform: scale(1.02);
             box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
         }
+        .btn-select.selected span, .btn-select.selected i {
+            color: white !important;
+        }
         .time-btn:disabled {
             opacity: 0.4; background-color: #e2e8f0; color: #94a3b8;
             border-color: transparent; cursor: not-allowed; text-decoration: line-through;
         }
         .dark .time-btn:disabled { background-color: #1e293b; color: #475569; }
+        .date-btn-holiday:disabled {
+            opacity: 0.55; cursor: not-allowed; pointer-events: none;
+        }
         .free-page {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: #f8fafc; z-index: 100; display: none; flex-direction: column;
@@ -238,7 +244,7 @@
                         <div id="times-grid" class="grid grid-cols-3 gap-3"></div>
                     </div>
                     <button id="btn-next-step3" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-black py-4 rounded-2xl mt-8 shadow-lg active:scale-95 transition-all opacity-50 cursor-not-allowed pointer-events-none">
-                        التالي (تحديد السن)
+                        التالي (إدخال المعلومات)
                     </button>
                 </div>
 
@@ -443,6 +449,10 @@
                     <div class="icon-box bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600"><i class="fa-solid fa-calendar-day"></i></div>
                     <span class="label dark:text-white">حجوزات اليوم</span>
                 </button>
+                <button onclick="openFreePage('admin-direct-book')" class="admin-tile glass-card active:scale-95 transition-transform border-2 border-violet-300 dark:border-violet-700">
+                    <div class="icon-box bg-violet-100 dark:bg-violet-900/30 text-violet-600"><i class="fa-solid fa-user-plus"></i></div>
+                    <span class="label dark:text-white" id="tile-direct-book-label">حجز مباشر لمريض</span>
+                </button>
                 <button onclick="openFreePage('admin-all-patients')" class="admin-tile glass-card active:scale-95 transition-transform">
                     <div class="icon-box bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600"><i class="fa-solid fa-users-viewfinder"></i></div>
                     <span class="label dark:text-white">المرضى الدائمين</span>
@@ -487,6 +497,82 @@
                     <div class="icon-box bg-teal-100 dark:bg-teal-900/30 text-teal-600"><i class="fa-solid fa-map-location-dot"></i></div>
                     <span class="label dark:text-white">الموقع</span>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direct Walk-in Booking Page (حجز مباشر لمريض من العيادة) -->
+    <div id="admin-direct-book" class="free-page">
+        <header class="admin-header flex items-center justify-between bg-slate-900 text-white rounded-b-2xl shadow-md z-10 sticky top-0">
+            <div class="flex items-center gap-3">
+                <button onclick="closeFreePage('admin-direct-book')" class="back-btn bg-white/10 active:scale-95"><i class="fa-solid fa-arrow-right"></i></button>
+                <h2 id="direct-book-header-title">حجز مباشر للمريض</h2>
+            </div>
+            <i class="fa-solid fa-user-plus text-violet-400"></i>
+        </header>
+        <div class="p-6 flex-1 overflow-y-auto bg-gray-50 dark:bg-slate-900">
+            <!-- Doctor selection for Owner only -->
+            <div id="direct-book-doctor-wrapper" class="glass-card p-5 rounded-3xl mb-6 border border-violet-100 dark:border-slate-700">
+                <label class="block text-sm font-black mb-2 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-user-doctor text-violet-500"></i> اختر الطبيب المراد الحجز عنده:
+                </label>
+                <select id="direct-book-doctor-select" class="w-full p-4 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white font-bold outline-none focus:border-violet-500"></select>
+            </div>
+
+            <!-- Booking Steps Container -->
+            <div id="direct-book-steps-container" class="hidden space-y-6">
+                <!-- Services -->
+                <div class="glass-card p-5 rounded-3xl">
+                    <h3 class="text-base font-black mb-3 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-tooth text-indigo-500"></i> اختر الخدمة العلاجية
+                    </h3>
+                    <div id="direct-services-grid" class="services-grid"></div>
+                </div>
+
+                <!-- Date & Time -->
+                <div class="glass-card p-5 rounded-3xl">
+                    <h3 class="text-base font-black mb-3 dark:text-white flex items-center gap-2">
+                        <i class="fa-regular fa-calendar-days text-indigo-500"></i> اختر التاريخ
+                    </h3>
+                    <div class="flex overflow-x-auto gap-3 pb-3 hide-scrollbar" id="direct-dates-container"></div>
+                    <div id="direct-day-status-msg" class="text-center py-3 text-red-500 font-bold hidden bg-red-50 dark:bg-red-900/20 rounded-xl mt-3 border border-red-100 dark:border-red-900 text-sm"></div>
+                    <div id="direct-time-selection-area" class="hidden mt-4 pt-4 border-t border-gray-100 dark:border-slate-700">
+                        <h3 class="text-base font-black mb-3 dark:text-white flex items-center gap-2">
+                            <i class="fa-regular fa-clock text-indigo-500"></i> اختر الوقت
+                        </h3>
+                        <div id="direct-times-grid" class="grid grid-cols-3 gap-3"></div>
+                    </div>
+                </div>
+
+                <!-- Patient Info -->
+                <div class="glass-card p-5 rounded-3xl space-y-4">
+                    <h3 class="text-base font-black mb-2 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-id-card text-indigo-500"></i> بيانات المريض
+                    </h3>
+                    <div>
+                        <label class="block text-sm font-black text-slate-700 dark:text-gray-200 mb-2">اسم المريض الكامل</label>
+                        <input type="text" id="direct-patient-name" class="w-full p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-indigo-500 outline-none transition-all font-bold" placeholder="اكتب اسم المريض الثلاثي...">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-slate-700 dark:text-gray-200 mb-2">رقم الهاتف</label>
+                        <input type="tel" id="direct-patient-phone" class="w-full p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-indigo-500 outline-none transition-all font-bold" placeholder="07...">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm font-black text-slate-700 dark:text-gray-200 mb-2">عمر المريض</label>
+                            <input type="number" id="direct-patient-age" class="w-full p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-indigo-500 outline-none transition-all font-bold" placeholder="مثال: 25" min="1" max="100">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-black text-slate-700 dark:text-gray-200 mb-2">عنوان المريض</label>
+                            <input type="text" id="direct-patient-address" class="w-full p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-indigo-500 outline-none transition-all font-bold" placeholder="المنطقة / المحلة...">
+                        </div>
+                    </div>
+
+                    <button id="btn-confirm-direct-book" class="w-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-black py-4 rounded-2xl mt-4 shadow-lg active:scale-95 transition-all flex justify-center items-center gap-2 text-lg opacity-50 cursor-not-allowed pointer-events-none">
+                        <span>تأكيد وإضافة الحجز</span>
+                        <i class="fa-solid fa-check-circle"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -927,6 +1013,7 @@
         let isManager = false;
         let currentManagerDoctorId = null;
         let unsubscribes = [];
+        let bookingsUnsub = null;
 
         let globalState = {
             doctors: [],
@@ -941,6 +1028,7 @@
         };
 
         let newBooking = { doctorId: null, service: null, servicePrice: 0, date: null, time: null, toothName: null, jaw: null };
+        let directBooking = { doctorId: null, service: null, servicePrice: 0, date: null, time: null };
         let tempBefore = null, tempAfter = null, tempTooth = null;
 
         const ui = {
@@ -990,7 +1078,31 @@
             setTimeout(() => { toast.style.opacity = '0'; }, 3000);
         };
 
-        window.openFreePage = (id) => { document.getElementById(id).style.display = 'flex'; };
+        window.openFreePage = (id) => {
+            document.getElementById(id).style.display = 'flex';
+            if (id === 'admin-direct-book') {
+                initDirectBookingPage();
+            } else if (id === 'admin-times' && isManager && currentManagerDoctorId) {
+                loadDoctorTimesIntoInputs(currentManagerDoctorId);
+            } else if (id === 'admin-services') {
+                renderAdminServicesList();
+            } else if (id === 'admin-holidays') {
+                renderAdminHolidaysList();
+            } else if (id === 'admin-gallery') {
+                renderAdminGalleryList();
+            } else if (id === 'admin-ratings') {
+                renderAdminRatingsList();
+            } else if (id === 'admin-today') {
+                renderAdminTodayBookings();
+            } else if (id === 'admin-all-patients') {
+                renderAdminAllPatients();
+            } else if (id === 'admin-finance') {
+                renderFinance();
+            } else if (id === 'admin-stats') {
+                updateAdminStats();
+            }
+        };
+
         window.closeFreePage = (id) => { document.getElementById(id).style.display = 'none'; };
         window.closeAdminLogin = () => { document.getElementById('modal-admin-login').style.display = 'none'; };
 
@@ -1095,6 +1207,8 @@
             ui.loader.style.opacity = '0';
             setTimeout(() => ui.loader.style.display = 'none', 700);
             unsubscribes.forEach(unsub => unsub()); unsubscribes = [];
+            if (bookingsUnsub) { bookingsUnsub(); bookingsUnsub = null; }
+
             if (user) {
                 currentUser = user;
                 isOwner = (user.email && user.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
@@ -1114,7 +1228,9 @@
                         }
                     }
                     updateAdminAccessUI();
+                    updateAdminSelects();
                     renderManagersList();
+                    setupBookingsListener();
                 });
                 unsubscribes.push(managersUnsub);
 
@@ -1136,11 +1252,50 @@
             document.getElementById('admin-panel-title').innerText = isOwner ? 'لوحة الإدارة' : 'لوحة الطبيب';
             document.getElementById('tile-managers').style.display = isOwner ? 'flex' : 'none';
             document.getElementById('tile-doctors').style.display = isOwner ? 'flex' : 'none';
+            document.getElementById('tile-direct-book-label').innerText = isOwner ? 'حجز مباشر لمريض' : 'إضافة مريض مباشر';
 
-            const wrappers = ['gallery-doctor-wrapper', 'service-doctor-wrapper', 'time-doctor-wrapper', 'holiday-doctor-wrapper', 'rating-doctor-wrapper', 'today-doctor-filter-wrapper', 'all-doctor-filter-wrapper', 'finance-owner-filter'];
+            const wrappers = [
+                'gallery-doctor-wrapper',
+                'service-doctor-wrapper',
+                'time-doctor-wrapper',
+                'holiday-doctor-wrapper',
+                'rating-doctor-wrapper',
+                'today-doctor-filter-wrapper',
+                'all-doctor-filter-wrapper',
+                'finance-owner-filter',
+                'direct-book-doctor-wrapper'
+            ];
             wrappers.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = isOwner ? 'block' : 'none';
+            });
+        }
+
+        function setupBookingsListener() {
+            if (!currentUser) return;
+            if (bookingsUnsub) { bookingsUnsub(); bookingsUnsub = null; }
+
+            let bQuery;
+            if (isOwner) {
+                bQuery = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
+            } else if (isManager && currentManagerDoctorId) {
+                bQuery = query(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), where("doctorId", "==", currentManagerDoctorId));
+            } else {
+                bQuery = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
+            }
+
+            bookingsUnsub = onSnapshot(bQuery, (snapshot) => {
+                globalState.bookings = snapshot.docs.map(d => ({id: d.id, ...d.data(), createdAt: d.data().createdAt || {seconds: Date.now()/1000}}));
+                renderMyBookings();
+                if(newBooking.date) renderTimes();
+                if(directBooking.date) renderDirectTimes();
+                if(followUpSelectedDate) renderFollowUpTimes();
+                if(isOwner || isManager) {
+                    renderAdminTodayBookings();
+                    renderAdminAllPatients();
+                    updateAdminStats();
+                    renderFinance();
+                }
             });
         }
 
@@ -1162,35 +1317,60 @@
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'services'), (snapshot) => {
                 globalState.services = snapshot.docs.map(d => ({id: d.id, ...d.data()}));
                 if(newBooking.doctorId) renderPatientServices();
+                if(directBooking.doctorId) renderDirectServices();
                 if(isOwner || isManager) renderAdminServicesList();
             }));
 
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'holidays'), (snapshot) => {
                 globalState.holidays = snapshot.docs.map(d => ({id: d.id, ...d.data()}));
                 if(isOwner || isManager) renderAdminHolidaysList();
-                if(newBooking.date) renderTimes();
+
+                // Refresh dates when holidays change so holiday dates are immediately disabled
+                if(newBooking.doctorId) {
+                    const isNowHoliday = globalState.holidays.find(h => h.doctorId === newBooking.doctorId && h.date === newBooking.date);
+                    if(isNowHoliday) {
+                        newBooking.date = null;
+                        newBooking.time = null;
+                        document.getElementById('time-selection-area').classList.add('hidden');
+                        checkSelectionComplete();
+                    }
+                    renderDates();
+                    if(newBooking.date) renderTimes();
+                }
+
+                if(directBooking.doctorId) {
+                    const isNowDirectHoliday = globalState.holidays.find(h => h.doctorId === directBooking.doctorId && h.date === directBooking.date);
+                    if(isNowDirectHoliday) {
+                        directBooking.date = null;
+                        directBooking.time = null;
+                        document.getElementById('direct-time-selection-area').classList.add('hidden');
+                        checkDirectSelectionComplete();
+                    }
+                    renderDirectDates();
+                    if(directBooking.date) renderDirectTimes();
+                }
+
+                if(followUpSourceBooking) {
+                    const isNowFollowHoliday = globalState.holidays.find(h => h.doctorId === followUpSourceBooking.doctorId && h.date === followUpSelectedDate);
+                    if(isNowFollowHoliday) {
+                        followUpSelectedDate = null;
+                        followUpSelectedTime = null;
+                        document.getElementById('followup-time-area').classList.add('hidden');
+                        updateFollowUpConfirmBtn();
+                    }
+                    renderFollowUpDates();
+                    if(followUpSelectedDate) renderFollowUpTimes();
+                }
             }));
 
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'doctorSettings'), (snapshot) => {
                 snapshot.docs.forEach(d => globalState.doctorSettings[d.id] = d.data());
                 if(newBooking.date) renderTimes();
+                if(directBooking.date) renderDirectTimes();
+                if(followUpSelectedDate) renderFollowUpTimes();
             }));
 
-            let bQuery;
-            if (isOwner) {
-                bQuery = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
-            } else if (isManager && currentManagerDoctorId) {
-                bQuery = query(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), where("doctorId", "==", currentManagerDoctorId));
-            } else {
-                bQuery = query(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), where("userId", "==", currentUser.uid));
-            }
-
-            unsubscribes.push(onSnapshot(bQuery, (snapshot) => {
-                globalState.bookings = snapshot.docs.map(d => ({id: d.id, ...d.data(), createdAt: d.data().createdAt || {seconds: Date.now()/1000}}));
-                renderMyBookings();
-                if(newBooking.date) renderTimes();
-                if(isOwner || isManager) { renderAdminTodayBookings(); renderAdminAllPatients(); updateAdminStats(); renderFinance(); }
-            }));
+            setupBookingsListener();
 
             unsubscribes.push(onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'ratings'), (snap) => {
                 globalState.ratings = snap.docs.map(d => ({id: d.id, ...d.data()}));
@@ -1273,6 +1453,13 @@
                 `;
                 btn.onclick = () => {
                     newBooking.doctorId = doc.id;
+                    newBooking.service = null;
+                    newBooking.servicePrice = 0;
+                    newBooking.date = null;
+                    newBooking.time = null;
+                    document.getElementById('time-selection-area').classList.add('hidden');
+                    document.getElementById('day-status-msg').classList.add('hidden');
+                    checkSelectionComplete();
                     document.getElementById('step-0-doctors').classList.add('hidden');
                     document.getElementById('step-1-and-2').classList.remove('hidden');
                     ui.headerTitle.innerText = doc.name;
@@ -1301,7 +1488,8 @@
             }
             docServices.forEach(srv => {
                 const btn = document.createElement('button');
-                btn.className = 'btn-select service-tile border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold active:scale-95 transition-all';
+                const isSelected = newBooking.service === srv.name;
+                btn.className = `btn-select service-tile border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold active:scale-95 transition-all ${isSelected ? 'selected' : ''}`;
                 btn.innerHTML = `<i class="fa-solid fa-tooth text-base text-indigo-400"></i><span class="dark:text-white">${srv.name}</span><span class="text-[9px] text-green-600 font-black">${formatPrice(srv.price)}</span>`;
                 btn.onclick = () => {
                     document.querySelectorAll('#services-grid .btn-select').forEach(b => b.classList.remove('selected'));
@@ -1314,7 +1502,7 @@
             });
         }
 
-        // ---- DATES ----
+        // ---- DATES (With Holiday Disabling) ----
         function renderDates() {
             const container = document.getElementById('dates-container');
             container.innerHTML = '';
@@ -1327,15 +1515,30 @@
                 const dateStr = `${y}-${m}-${d}`;
                 const dayName = date.toLocaleDateString('ar-EG', { weekday: 'short' });
                 const dayNum = date.getDate();
+
+                const isHoliday = globalState.holidays.find(h => h.doctorId === newBooking.doctorId && h.date === dateStr);
                 const btn = document.createElement('button');
-                btn.className = 'btn-select min-w-[70px] h-[80px] flex flex-col items-center justify-center rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all active:scale-95 shrink-0';
-                btn.innerHTML = `<span class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-1">${dayName}</span><span class="text-xl font-black dark:text-white">${dayNum}</span>`;
-                btn.onclick = () => {
-                    document.querySelectorAll('#dates-container .btn-select').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    newBooking.date = dateStr; newBooking.time = null;
-                    checkSelectionComplete(); renderTimes();
-                };
+                btn.type = 'button';
+
+                if (isHoliday) {
+                    btn.disabled = true;
+                    btn.className = 'date-btn-holiday min-w-[70px] h-[80px] flex flex-col items-center justify-center rounded-2xl border-2 border-red-200 dark:border-red-900/50 bg-red-50/70 dark:bg-red-950/30 shrink-0';
+                    btn.innerHTML = `
+                        <span class="text-[10px] font-bold text-red-400">${dayName}</span>
+                        <span class="text-lg font-black text-red-400 line-through leading-tight">${dayNum}</span>
+                        <span class="text-[9px] font-black text-red-500 bg-red-100 dark:bg-red-900/50 px-1.5 py-0.2 rounded mt-0.5">عطلة</span>
+                    `;
+                } else {
+                    const isSelected = newBooking.date === dateStr;
+                    btn.className = `btn-select min-w-[70px] h-[80px] flex flex-col items-center justify-center rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all active:scale-95 shrink-0 ${isSelected ? 'selected' : ''}`;
+                    btn.innerHTML = `<span class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-1">${dayName}</span><span class="text-xl font-black dark:text-white">${dayNum}</span>`;
+                    btn.onclick = () => {
+                        document.querySelectorAll('#dates-container .btn-select').forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        newBooking.date = dateStr; newBooking.time = null;
+                        checkSelectionComplete(); renderTimes();
+                    };
+                }
                 container.appendChild(btn);
             }
         }
@@ -1361,12 +1564,19 @@
                 const isFull = bookedCount >= parseInt(docSet.maxPerSlot);
                 if(!isFull) allBooked = false;
                 const btn = document.createElement('button');
-                btn.className = `time-btn p-3 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white font-black transition-all text-sm ${!isFull ? 'active:scale-95' : ''}`;
+                const isSelected = newBooking.time === timeStr && !isFull;
+                btn.className = `time-btn p-3 rounded-2xl border-2 ${isSelected ? 'selected bg-indigo-500 text-white border-transparent' : 'border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white'} font-black transition-all text-sm ${!isFull ? 'active:scale-95' : ''}`;
                 btn.innerText = displayTime;
-                if(isFull) { btn.disabled = true; btn.innerHTML = `<span>${displayTime}</span><div class="text-[10px] text-red-500 mt-1">ممتلئ</div>`; }
-                else {
+                if(isFull) {
+                    btn.disabled = true;
+                    btn.innerHTML = `<span>${displayTime}</span><div class="text-[10px] text-red-500 mt-1">ممتلئ</div>`;
+                    if (newBooking.time === timeStr) {
+                        newBooking.time = null;
+                        checkSelectionComplete();
+                    }
+                } else {
                     btn.onclick = () => {
-                        document.querySelectorAll('.time-btn').forEach(b => {
+                        document.querySelectorAll('#times-grid .time-btn').forEach(b => {
                             b.classList.remove('selected', 'bg-indigo-500', 'text-white', 'border-transparent');
                             if(!b.disabled) b.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-800', 'dark:text-white');
                         });
@@ -1447,6 +1657,241 @@
                 setTimeout(() => { modal.classList.remove('opacity-0'); document.getElementById('modal-booking-content').classList.remove('scale-95'); }, 10);
             } catch (e) { showToast("حدث خطأ", false); }
             finally { btn.innerHTML = '<span>تأكيد الحجز النهائي (دفع نقدي)</span><i class="fa-solid fa-check-circle"></i>'; btn.disabled = false; }
+        };
+
+        // ---- DIRECT WALK-IN BOOKING (حجز مباشر من لوحة التحكم) ----
+        function initDirectBookingPage() {
+            directBooking = { doctorId: null, service: null, servicePrice: 0, date: null, time: null };
+            document.getElementById('direct-patient-name').value = '';
+            document.getElementById('direct-patient-phone').value = '';
+            document.getElementById('direct-patient-age').value = '';
+            document.getElementById('direct-patient-address').value = '';
+            document.getElementById('direct-time-selection-area').classList.add('hidden');
+            document.getElementById('direct-day-status-msg').classList.add('hidden');
+
+            const doctorWrapper = document.getElementById('direct-book-doctor-wrapper');
+            const stepsContainer = document.getElementById('direct-book-steps-container');
+            const docSelect = document.getElementById('direct-book-doctor-select');
+
+            if (isManager && currentManagerDoctorId) {
+                doctorWrapper.style.display = 'none';
+                directBooking.doctorId = currentManagerDoctorId;
+                const docObj = globalState.doctors.find(d => d.id === currentManagerDoctorId);
+                document.getElementById('direct-book-header-title').innerText = docObj ? `حجز مباشر (${docObj.name})` : 'حجز مباشر للمريض';
+                stepsContainer.classList.remove('hidden');
+                renderDirectServices();
+                renderDirectDates();
+            } else if (isOwner) {
+                doctorWrapper.style.display = 'block';
+                document.getElementById('direct-book-header-title').innerText = 'حجز مباشر للمريض';
+                docSelect.value = '';
+                stepsContainer.classList.add('hidden');
+            }
+            checkDirectSelectionComplete();
+        }
+
+        document.getElementById('direct-book-doctor-select').onchange = (e) => {
+            const val = e.target.value;
+            const stepsContainer = document.getElementById('direct-book-steps-container');
+            directBooking = { doctorId: val || null, service: null, servicePrice: 0, date: null, time: null };
+            document.getElementById('direct-time-selection-area').classList.add('hidden');
+            document.getElementById('direct-day-status-msg').classList.add('hidden');
+            if (val) {
+                stepsContainer.classList.remove('hidden');
+                renderDirectServices();
+                renderDirectDates();
+            } else {
+                stepsContainer.classList.add('hidden');
+            }
+            checkDirectSelectionComplete();
+        };
+
+        function renderDirectServices() {
+            const grid = document.getElementById('direct-services-grid');
+            grid.innerHTML = '';
+            if (!directBooking.doctorId) return;
+            const docServices = globalState.services.filter(s => s.doctorId === directBooking.doctorId);
+            if(docServices.length === 0) {
+                grid.innerHTML = '<div class="col-span-4 text-center text-xs text-gray-400 py-3">لا توجد خدمات مضافة لهذا الطبيب.</div>';
+                return;
+            }
+            docServices.forEach(srv => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                const isSelected = directBooking.service === srv.name;
+                btn.className = `btn-select service-tile border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold active:scale-95 transition-all ${isSelected ? 'selected' : ''}`;
+                btn.innerHTML = `<i class="fa-solid fa-tooth text-base text-indigo-400"></i><span class="dark:text-white">${srv.name}</span><span class="text-[9px] text-green-600 font-black">${formatPrice(srv.price)}</span>`;
+                btn.onclick = () => {
+                    document.querySelectorAll('#direct-services-grid .btn-select').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    directBooking.service = srv.name;
+                    directBooking.servicePrice = parseInt(srv.price || 0);
+                    checkDirectSelectionComplete();
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function renderDirectDates() {
+            const container = document.getElementById('direct-dates-container');
+            container.innerHTML = '';
+            if (!directBooking.doctorId) return;
+            const today = new Date();
+            for(let i = 0; i < 30; i++) {
+                const date = new Date(today); date.setDate(today.getDate() + i);
+                const y = date.getFullYear();
+                const m = String(date.getMonth()+1).padStart(2,'0');
+                const d = String(date.getDate()).padStart(2,'0');
+                const dateStr = `${y}-${m}-${d}`;
+                const dayName = date.toLocaleDateString('ar-EG', { weekday: 'short' });
+                const dayNum = date.getDate();
+
+                const isHoliday = globalState.holidays.find(h => h.doctorId === directBooking.doctorId && h.date === dateStr);
+                const btn = document.createElement('button');
+                btn.type = 'button';
+
+                if (isHoliday) {
+                    btn.disabled = true;
+                    btn.className = 'date-btn-holiday min-w-[70px] h-[80px] flex flex-col items-center justify-center rounded-2xl border-2 border-red-200 dark:border-red-900/50 bg-red-50/70 dark:bg-red-950/30 shrink-0';
+                    btn.innerHTML = `
+                        <span class="text-[10px] font-bold text-red-400">${dayName}</span>
+                        <span class="text-lg font-black text-red-400 line-through leading-tight">${dayNum}</span>
+                        <span class="text-[9px] font-black text-red-500 bg-red-100 dark:bg-red-900/50 px-1.5 py-0.2 rounded mt-0.5">عطلة</span>
+                    `;
+                } else {
+                    const isSelected = directBooking.date === dateStr;
+                    btn.className = `btn-select min-w-[70px] h-[80px] flex flex-col items-center justify-center rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all active:scale-95 shrink-0 ${isSelected ? 'selected' : ''}`;
+                    btn.innerHTML = `<span class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-1">${dayName}</span><span class="text-xl font-black dark:text-white">${dayNum}</span>`;
+                    btn.onclick = () => {
+                        document.querySelectorAll('#direct-dates-container .btn-select').forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        directBooking.date = dateStr;
+                        directBooking.time = null;
+                        checkDirectSelectionComplete();
+                        renderDirectTimes();
+                    };
+                }
+                container.appendChild(btn);
+            }
+        }
+
+        function renderDirectTimes() {
+            if(!directBooking.date || !directBooking.doctorId) return;
+            const timeArea = document.getElementById('direct-time-selection-area');
+            const grid = document.getElementById('direct-times-grid');
+            const statusMsg = document.getElementById('direct-day-status-msg');
+            const isHoliday = globalState.holidays.find(h => h.doctorId === directBooking.doctorId && h.date === directBooking.date);
+            if(isHoliday) {
+                statusMsg.innerText = `عطلة: ${isHoliday.note}`;
+                statusMsg.classList.remove('hidden'); timeArea.classList.add('hidden'); return;
+            }
+            statusMsg.classList.add('hidden'); timeArea.classList.remove('hidden');
+            grid.innerHTML = '';
+            const docSet = globalState.doctorSettings[directBooking.doctorId] || { startTime: 16, endTime: 21, maxPerSlot: 6 };
+            let allBooked = true;
+            for(let i = parseInt(docSet.startTime); i <= parseInt(docSet.endTime); i++) {
+                const timeStr = `${i}:00`;
+                const displayTime = formatTime(timeStr);
+                const bookedCount = globalState.bookings.filter(b => b.doctorId === directBooking.doctorId && b.date === directBooking.date && b.time === timeStr).length;
+                const isFull = bookedCount >= parseInt(docSet.maxPerSlot);
+                if(!isFull) allBooked = false;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                const isSelected = directBooking.time === timeStr && !isFull;
+                btn.className = `time-btn p-3 rounded-2xl border-2 ${isSelected ? 'selected bg-indigo-500 text-white border-transparent' : 'border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white'} font-black transition-all text-sm ${!isFull ? 'active:scale-95' : ''}`;
+                btn.innerText = displayTime;
+                if(isFull) {
+                    btn.disabled = true;
+                    btn.innerHTML = `<span>${displayTime}</span><div class="text-[10px] text-red-500 mt-1">ممتلئ</div>`;
+                    if (directBooking.time === timeStr) {
+                        directBooking.time = null;
+                        checkDirectSelectionComplete();
+                    }
+                } else {
+                    btn.onclick = () => {
+                        document.querySelectorAll('#direct-times-grid .time-btn').forEach(b => {
+                            b.classList.remove('selected', 'bg-indigo-500', 'text-white', 'border-transparent');
+                            if(!b.disabled) b.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-800', 'dark:text-white');
+                        });
+                        btn.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-800', 'dark:text-white');
+                        btn.classList.add('selected', 'bg-indigo-500', 'text-white', 'border-transparent');
+                        directBooking.time = timeStr;
+                        checkDirectSelectionComplete();
+                    };
+                }
+                grid.appendChild(btn);
+            }
+            if(allBooked) {
+                statusMsg.innerText = "اكتمل الحجز لهذا اليوم";
+                statusMsg.classList.remove('hidden'); timeArea.classList.add('hidden');
+            }
+        }
+
+        function checkDirectSelectionComplete() {
+            const btn = document.getElementById('btn-confirm-direct-book');
+            if (directBooking.doctorId && directBooking.service && directBooking.date && directBooking.time) {
+                btn.classList.remove('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+            } else {
+                btn.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+            }
+        }
+
+        document.getElementById('btn-confirm-direct-book').onclick = async () => {
+            let targetDoctorId = directBooking.doctorId;
+            if (isManager && currentManagerDoctorId) {
+                targetDoctorId = currentManagerDoctorId;
+            }
+            if (!targetDoctorId) return showToast("يرجى اختيار الطبيب", false);
+            if (!directBooking.service || !directBooking.date || !directBooking.time) {
+                return showToast("يرجى اختيار الخدمة والتاريخ والوقت", false);
+            }
+
+            const name = document.getElementById('direct-patient-name').value.trim();
+            const phone = document.getElementById('direct-patient-phone').value.trim();
+            const age = document.getElementById('direct-patient-age').value.trim();
+            const address = document.getElementById('direct-patient-address').value.trim();
+
+            if (!name || !phone || !age || !address) {
+                return showToast("يرجى إدخال جميع بيانات المريض", false);
+            }
+
+            const btn = document.getElementById('btn-confirm-direct-book');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xl"></i> جاري الحفظ...';
+            btn.disabled = true;
+
+            try {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'bookings'), {
+                    userId: 'walkin_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7),
+                    doctorId: targetDoctorId,
+                    service: directBooking.service,
+                    originalPrice: directBooking.servicePrice,
+                    servicePrice: directBooking.servicePrice,
+                    date: directBooking.date,
+                    time: directBooking.time,
+                    toothName: "",
+                    teethList: [],
+                    notes: "",
+                    patientPhotoBase64: "",
+                    name: name,
+                    phone: phone,
+                    age: age,
+                    address: address,
+                    status: 'arrived',
+                    paymentMethod: 'نقدي',
+                    isFollowUp: false,
+                    isDirectWalkIn: true,
+                    createdAt: serverTimestamp()
+                });
+
+                showToast("تم تسجيل حجز المريض بنجاح");
+                initDirectBookingPage();
+                closeFreePage('admin-direct-book');
+            } catch (e) {
+                showToast("حدث خطأ أثناء الحجز", false);
+            } finally {
+                btn.innerHTML = '<span>تأكيد وإضافة الحجز</span><i class="fa-solid fa-check-circle"></i>';
+                btn.disabled = false;
+            }
         };
 
         // ---- MY BOOKINGS ----
@@ -1578,7 +2023,18 @@
 
         // ---- ADMIN SELECTS ----
         function updateAdminSelects() {
-            const selects = ['filter-today-doctor', 'filter-all-doctor', 'service-doctor-select', 'time-doctor-select', 'holiday-doctor-select', 'filter-rating-doctor', 'gallery-doctor-select', 'manager-doctor-select', 'finance-doctor-select'];
+            const selects = [
+                'filter-today-doctor',
+                'filter-all-doctor',
+                'service-doctor-select',
+                'time-doctor-select',
+                'holiday-doctor-select',
+                'filter-rating-doctor',
+                'gallery-doctor-select',
+                'manager-doctor-select',
+                'finance-doctor-select',
+                'direct-book-doctor-select'
+            ];
             selects.forEach(id => {
                 const el = document.getElementById(id);
                 if(el) {
@@ -1591,7 +2047,7 @@
                 }
             });
             if(isManager && currentManagerDoctorId) {
-                ['service-doctor-select', 'time-doctor-select', 'holiday-doctor-select', 'gallery-doctor-select'].forEach(id => {
+                ['service-doctor-select', 'time-doctor-select', 'holiday-doctor-select', 'gallery-doctor-select', 'direct-book-doctor-select'].forEach(id => {
                     const el = document.getElementById(id);
                     if(el) el.value = currentManagerDoctorId;
                 });
@@ -1699,9 +2155,13 @@
 
         // ---- STATS ----
         function updateAdminStats() {
-            const uniqueUsers = new Set(globalState.bookings.map(b => b.userId)).size;
+            let relevantBookings = globalState.bookings;
+            if (isManager && currentManagerDoctorId) {
+                relevantBookings = relevantBookings.filter(b => b.doctorId === currentManagerDoctorId);
+            }
+            const uniqueUsers = new Set(relevantBookings.map(b => b.userId)).size;
             document.getElementById('stat-total-users').innerText = uniqueUsers;
-            document.getElementById('stat-total-bookings').innerText = globalState.bookings.length;
+            document.getElementById('stat-total-bookings').innerText = relevantBookings.length;
             const list = document.getElementById('stat-doctors-list');
             list.innerHTML = '';
             const doctorsToShow = isOwner ? globalState.doctors : globalState.doctors.filter(d => d.id === currentManagerDoctorId);
@@ -1765,6 +2225,7 @@
                                 <div class="flex items-center gap-2 mb-1">
                                     <h4 class="font-black text-lg ${isFollowUp ? 'text-purple-900 dark:text-purple-200' : 'text-indigo-700 dark:text-indigo-400'}">${b.name}</h4>
                                     ${isFollowUp ? '<span class="bg-purple-600 text-white text-[10px] font-black px-2 py-0.5 rounded-lg">مراجع</span>' : ''}
+                                    ${b.isDirectWalkIn ? '<span class="bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-300 text-[10px] font-black px-2 py-0.5 rounded-lg">حجز مباشر</span>' : ''}
                                 </div>
                                 <p class="text-xs font-bold ${isFollowUp ? 'text-purple-700 dark:text-purple-300' : 'text-gray-500 dark:text-gray-400'} dir-ltr text-left">${b.phone}</p>
                                 <p class="text-xs font-bold ${isFollowUp ? 'text-purple-600 dark:text-purple-300' : 'text-gray-400 dark:text-gray-500'} mt-1">العمر: ${b.age || '-'} - العنوان: ${b.address || '-'}</p>
@@ -1803,7 +2264,7 @@
                             </button>
                         </div>
 
-                        ${(!docId && isOwner) ? `<div class="mt-2 text-[10px] ${isFollowUp ? 'text-purple-700 dark:text-purple-300' : 'text-gray-400'} font-bold text-center"><i class="fa-solid fa-user-doctor"></i> ${docName}</div>` : ''}
+                        <div class="mt-2 text-[11px] ${isFollowUp ? 'text-purple-700 dark:text-purple-300' : 'text-indigo-500 dark:text-indigo-400'} font-black text-center"><i class="fa-solid fa-user-doctor ml-1"></i> الطبيب: ${docName}</div>
                         <div class="mt-2 flex justify-end">
                             <button onclick="deleteBooking('${b.id}')" class="text-red-500 bg-red-50 dark:bg-red-900/20 text-xs font-black px-3 py-1.5 rounded-lg active:scale-95"><i class="fa-solid fa-trash ml-1"></i> حذف</button>
                         </div>
@@ -1850,19 +2311,20 @@
                 list.innerHTML += `
                     <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 text-sm">
                         <div class="flex justify-between items-center mb-2 border-b border-gray-100 dark:border-slate-700 pb-2">
-                            <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-2 flex-wrap">
                                 <span class="font-black text-emerald-600">${b.name}</span>
                                 ${b.isFollowUp ? '<span class="bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 text-[10px] font-black px-2 py-0.5 rounded-md">مراجع</span>' : ''}
+                                ${b.isDirectWalkIn ? '<span class="bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-300 text-[10px] font-black px-2 py-0.5 rounded-md">حجز مباشر</span>' : ''}
                             </div>
-                            <span class="text-[10px] text-gray-400 font-bold dir-ltr">${new Date(b.createdAt.seconds * 1000).toLocaleDateString()}</span>
+                            <span class="text-[10px] text-gray-400 font-bold dir-ltr">${b.date || new Date(b.createdAt.seconds * 1000).toLocaleDateString()}</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2 text-xs font-bold text-gray-600 dark:text-gray-300 mb-3">
                             <div><i class="fa-solid fa-phone text-gray-400 ml-1"></i> <span class="dir-ltr inline-block">${b.phone}</span></div>
                             <div><i class="fa-solid fa-user-clock text-gray-400 ml-1"></i> العمر: ${b.age || '-'}</div>
                             <div class="col-span-2"><i class="fa-solid fa-map-location text-gray-400 ml-1"></i> ${b.address || '-'}</div>
-                            <div class="col-span-2"><i class="fa-solid fa-tooth text-gray-400 ml-1"></i> ${b.service}</div>
+                            <div class="col-span-2"><i class="fa-solid fa-tooth text-gray-400 ml-1"></i> ${b.service} (${formatTime(b.time)})</div>
                             <div class="col-span-2 text-green-600"><i class="fa-solid fa-money-bill text-green-400 ml-1"></i> السعر: ${hasDiscount ? `<span class="line-through text-gray-400 ml-1">${formatPrice(origPrice)}</span>` : ''} ${formatPrice(finalPrice)}</div>
-                            <div class="col-span-2"><i class="fa-solid fa-user-doctor text-gray-400 ml-1"></i> الطبيب: ${docName}</div>
+                            <div class="col-span-2 text-indigo-600 dark:text-indigo-400 font-black"><i class="fa-solid fa-user-doctor ml-1"></i> حجز عند الطبيب: ${docName}</div>
                         </div>
                         <div class="bg-gray-50 dark:bg-slate-900 rounded-xl p-3 space-y-2 text-xs font-bold border border-gray-100 dark:border-slate-600">
                             <div class="text-indigo-500"><i class="fa-solid fa-teeth ml-1"></i> السن: <span class="text-gray-600 dark:text-gray-300">${b.toothName || 'لم يتم التحديد'}</span></div>
@@ -1907,6 +2369,8 @@
         function renderFollowUpDates() {
             const container = document.getElementById('followup-dates-container');
             container.innerHTML = '';
+            if (!followUpSourceBooking) return;
+            const docId = followUpSourceBooking.doctorId;
             const today = new Date();
             for(let i = 0; i < 30; i++) {
                 const date = new Date(today); date.setDate(today.getDate() + i);
@@ -1917,18 +2381,31 @@
                 const dayName = date.toLocaleDateString('ar-EG', { weekday: 'short' });
                 const dayNum = date.getDate();
 
+                const isHoliday = globalState.holidays.find(h => h.doctorId === docId && h.date === dateStr);
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = 'followup-date-btn btn-select min-w-[65px] h-[75px] flex flex-col items-center justify-center rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-900 transition-all active:scale-95 shrink-0';
-                btn.innerHTML = `<span class="text-[11px] font-bold text-gray-500 dark:text-gray-400 mb-1">${dayName}</span><span class="text-lg font-black dark:text-white">${dayNum}</span>`;
-                btn.onclick = () => {
-                    document.querySelectorAll('.followup-date-btn').forEach(el => el.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    followUpSelectedDate = dateStr;
-                    followUpSelectedTime = null;
-                    updateFollowUpConfirmBtn();
-                    renderFollowUpTimes();
-                };
+
+                if (isHoliday) {
+                    btn.disabled = true;
+                    btn.className = 'date-btn-holiday min-w-[65px] h-[75px] flex flex-col items-center justify-center rounded-2xl border-2 border-red-200 dark:border-red-900/50 bg-red-50/70 dark:bg-red-950/30 shrink-0';
+                    btn.innerHTML = `
+                        <span class="text-[10px] font-bold text-red-400">${dayName}</span>
+                        <span class="text-base font-black text-red-400 line-through leading-tight">${dayNum}</span>
+                        <span class="text-[9px] font-black text-red-500">عطلة</span>
+                    `;
+                } else {
+                    const isSelected = followUpSelectedDate === dateStr;
+                    btn.className = `followup-date-btn btn-select min-w-[65px] h-[75px] flex flex-col items-center justify-center rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-900 transition-all active:scale-95 shrink-0 ${isSelected ? 'selected' : ''}`;
+                    btn.innerHTML = `<span class="text-[11px] font-bold text-gray-500 dark:text-gray-400 mb-1">${dayName}</span><span class="text-lg font-black dark:text-white">${dayNum}</span>`;
+                    btn.onclick = () => {
+                        document.querySelectorAll('.followup-date-btn').forEach(el => el.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        followUpSelectedDate = dateStr;
+                        followUpSelectedTime = null;
+                        updateFollowUpConfirmBtn();
+                        renderFollowUpTimes();
+                    };
+                }
                 container.appendChild(btn);
             }
         }
@@ -1964,12 +2441,17 @@
 
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = `followup-time-btn time-btn p-3 rounded-2xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-white font-black transition-all text-xs ${!isFull ? 'active:scale-95' : ''}`;
+                const isSelected = followUpSelectedTime === timeStr && !isFull;
+                btn.className = `followup-time-btn time-btn p-3 rounded-2xl border-2 ${isSelected ? 'selected bg-purple-600 text-white border-transparent' : 'border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-white'} font-black transition-all text-xs ${!isFull ? 'active:scale-95' : ''}`;
                 btn.innerText = displayTime;
 
                 if(isFull) {
                     btn.disabled = true;
                     btn.innerHTML = `<span>${displayTime}</span><div class="text-[9px] text-red-500 mt-0.5">ممتلئ</div>`;
+                    if (followUpSelectedTime === timeStr) {
+                        followUpSelectedTime = null;
+                        updateFollowUpConfirmBtn();
+                    }
                 } else {
                     btn.onclick = () => {
                         document.querySelectorAll('.followup-time-btn').forEach(b => {
@@ -2066,6 +2548,7 @@
                             <div class="font-black dark:text-white flex items-center gap-2">
                                 <span>${b.name}</span>
                                 ${b.isFollowUp ? '<span class="bg-purple-100 text-purple-700 text-[10px] font-black px-2 py-0.5 rounded-md">مراجع</span>' : ''}
+                                ${b.isDirectWalkIn ? '<span class="bg-violet-100 text-violet-700 text-[10px] font-black px-2 py-0.5 rounded-md">مباشر</span>' : ''}
                             </div>
                             <div class="text-xs font-bold text-gray-500 mt-1">${b.service}</div>
                             ${isOwner ? `<div class="text-[10px] font-bold text-indigo-500 mt-1">${docName}</div>` : ''}
@@ -2139,8 +2622,7 @@
         };
 
         // ---- TIMES ADMIN ----
-        document.getElementById('time-doctor-select').onchange = () => {
-            const docId = document.getElementById('time-doctor-select').value;
+        function loadDoctorTimesIntoInputs(docId) {
             if(!docId) return;
             const set = globalState.doctorSettings[docId] || { startTime: 16, endTime: 21, maxPerSlot: 6 };
             document.getElementById('setting-start-ampm').value = set.startTime >= 12 ? 'PM' : 'AM';
@@ -2148,6 +2630,11 @@
             document.getElementById('setting-end-ampm').value = set.endTime >= 12 ? 'PM' : 'AM';
             document.getElementById('setting-end-time').value = set.endTime > 12 ? set.endTime - 12 : (set.endTime === 0 ? 12 : set.endTime);
             document.getElementById('setting-max-per-slot').value = set.maxPerSlot;
+        }
+
+        document.getElementById('time-doctor-select').onchange = () => {
+            const docId = document.getElementById('time-doctor-select').value;
+            loadDoctorTimesIntoInputs(docId);
         };
 
         document.getElementById('btn-save-times').onclick = async () => {
@@ -2186,12 +2673,12 @@
             const date = document.getElementById('holiday-date').value;
             const note = document.getElementById('holiday-note').value.trim() || 'عطلة';
             if(!docId || !date) return showToast("اختر الطبيب والتاريخ", false);
-            try { await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'holidays'), { doctorId: docId, date, note }); document.getElementById('holiday-note').value=''; showToast("تم الإضافة"); } catch(e){ showToast("خطأ", false); }
+            try { await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'holidays'), { doctorId: docId, date, note }); document.getElementById('holiday-note').value=''; showToast("تم الإضافة وتعطيل اليوم"); } catch(e){ showToast("خطأ", false); }
         };
 
         window.deleteHoliday = async (id) => {
             if(!confirm("حذف العطلة؟")) return;
-            try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'holidays', id)); showToast("تم الحذف"); } catch(e){ showToast("خطأ", false); }
+            try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'holidays', id)); showToast("تم الحذف وتفعيل اليوم"); } catch(e){ showToast("خطأ", false); }
         };
 
         // ---- RATINGS ADMIN ----
